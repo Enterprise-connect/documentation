@@ -14,7 +14,7 @@
 * [Reference](#reference)
    * [Release Notes](#release-notes)
 
-##Vision
+## Vision
 - Create smarter Distributed Computing System through connectivity.
 - Provide manageable and scalable connectivity service for Internal/External GE customers and extend the Predix platform capability.
 
