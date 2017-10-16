@@ -1,4 +1,4 @@
-# ec-misc-docs
+# ec-misc-docs (Deprecated)
 Enterprise-Connect Misc. Documents
 
 [EC Cert Generation Flow](https://github.com/Enterprise-connect/ec-misc-docs/blob/master/README.cert.md)
