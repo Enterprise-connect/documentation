@@ -38,19 +38,26 @@ Navigate the JSON that is returned (later referred to as a 'VCAP') and find the 
 - The name of the UAA Client, as well as the UAA Client 'secret', will be needed in configuring EC agent scripts
 - Find 'oauth-scope' in the EC portion of the VCAP, and add this to the 'authorities' (not scope!) of the UAA Client 
 - Take note of the 'Token Validity' for your UAA Client, this will also be important in EC agent configuration
-## Script Templates 
-- Support Secured Websocket Connection (SSL/TLS).
-- Support Corporate Proxy Services.
-- Support Multi-tenancy (Multi-Servers/Clients).
-- Support All Streaming/non-streaming TCP protocols. (ICMP, SSH, FTP, sFTP, etc.)
-- Supports Bi-Directional streaming provided by the Web Socket Protocol.
-- Support Client => Gateway <= Server model. (new)
-- Support Server-side Connectivity monitoring (wakeup request)
-- Support Basic/UAA/OAuth/OAuth2 Authentication.
-- Support Whitelist/Blocklist configuration.
-- IPv4/IPv6 IP filtering.
-- RFC 5766 (Turn Service) implemented.
-
+## Script Templates
+#### For best results please use the following templates to configure your EC agent scripts
+##### EC Gateway Agent
+```bash
+./ecagent_linux_sys -mod gateway -lpt ${PORT} -zon <Predix-Zone-ID> -sst <EC-Service-URI> -tkn <admin-token> -dbg
+```
+Agents running on Predix will always require the Linux agent binary, but other agents will require the appropriate binary based on the environment for your use case.
+##### EC Server Agent
+```bash
+./ecagent_OS_Version -mod server -aid <VCAP_provided> -cid <UAA_client_name> -csc <UAA_client_Secret> -dur 1200 -zon <Predix-Zone-ID> -sst <EC-Service-URI> -hst wss://<Predix_Gateway_App_URL>/agent -oa2 https://<predixUAA_URL>/oauth/token -rht <IP of data source> -rpt 5432 -dbg -hca ${PORT}
+```
+'${PORT}' will cause Predix to dynamically assign an available port. If ran elsewhere, '${PORT}' will need to be replaced with a port of your choice, which is not in use.
+##### EC Client Agent
+```bash
+./ecagent_OS_Version -mod client -aid <VCAP_provided> -tid <EC Server Agent '-aid'> -cid <UAA_client_name> -csc <UAA_client_Secret> -dur 1200 -hst wss://<Predix_Gateway_App_URL>/agent -oa2 https://<predixUAA_URL>/oauth/token -lpt <Defined_by_You> -dbg
+```
+Agents not running on Predix may require an additional proxy flag. You will need to identify what proxy is appropriate for your environment, and then add this flag to the end of the script:
+```bash
+-pxy <your proxy, no passwords allowed>
+```
 ## Pushing Agents
 - Client/Server CLI.
 - Gateway CLI.
