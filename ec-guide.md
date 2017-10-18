@@ -1,6 +1,7 @@
 # Comprehensive Guide to Enterprise Connect
 
-* [Service Creation](#service-creation) 
+* [Service Creation](#service-creation)
+* [UAA Client Update](#uaa-client-update)
 * [Script Templates](#script-templates) 
 * [Pushing Agents](#pushing-agents) 
 * [FAQs](#faqs) 
@@ -20,7 +21,20 @@ The format for the trustedIssuerId JSON should be as follows:
 ```javascript
 {"trustedIssuerIds":["https://<UAA URL>/oauth/token"]}
 ```
-For best results, save the JSON to a file, and perform the EC creation command from that directory. The raw JSON may require escape characters ('\') if entered directly to the command line. Using a .json file circumvents this issue.
+For best results, save the JSON to a file, and perform the EC creation command from that directory. The raw JSON may require escape characters if entered directly to the command line. Using a .json file circumvents this issue.</br></br>
+#### Bind the EC Service to an App
+To gain access to the important credentials related to your newly created service, EC must be bound to an app in your org/space. The app you choose is irrelevant. Using the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html), use the following command to bind the EC Service to an app of your choice:
+```
+cf bind-service <app name> <EC Service name>
+```
+Using the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html), use the following command to view the important credentials related to your service:
+```
+cf env <name of app you bound the EC Service to>
+```
+## UAA Client Update
+#### After the creation of the EC Service, a UAA Client must be provisioned and properly updated 
+- Authorized Grant Types must be updated to include 'client_credentials' and 'refresh_token'
+- 
 ## Script Templates 
 - Support Secured Websocket Connection (SSL/TLS).
 - Support Corporate Proxy Services.
