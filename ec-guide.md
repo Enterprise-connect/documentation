@@ -7,9 +7,20 @@
 * [Common Problems and Resolutions](#common-problems-and-resolutions) 
 
 ## Service Creation
-- Create smarter Distributed Computing System through connectivity.
-- Provide manageable and scalable connectivity service for Internal/External GE customers and extend the Predix platform capability.
-
+### The Enterprise Connect Service requires a valid UAA Instance on Predix
+Using the CloudFoundry CLI, use the following command to view Services and Plans in CloudFoundry Marketplace:
+```
+cf m
+```
+Using the CloudFoundry CLI, use the following command to create an EC Service Instance in your org and space:
+```
+cf create-service enterprise-connect <plan> <service instance name> -c <trusted issuer as a json or path to a json file>
+```
+The format for the trustedIssuerId JSON should be as follows:
+```javascript
+{"trustedIssuerIds":["https://<UAA URL>/oauth/token"]}
+```
+For best results, save the JSON to a file, and perform the EC creation command from that directory. The raw JSON may require escape characters ('\') if entered directly to the command line. Using a .json file circumvents this issue.
 ## Script Templates 
 - Support Secured Websocket Connection (SSL/TLS).
 - Support Corporate Proxy Services.
