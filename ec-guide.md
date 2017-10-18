@@ -1,6 +1,6 @@
 # Comprehensive Guide to Enterprise Connect
 
-* [Service_Creation](#Service_Creation) 
+* [Service Creation](#service-creation) 
 * [Features Implemented](#features-implemented) 
 * [Work in progress](#work-in-progress) 
 * [Installation](#installation) 
@@ -14,7 +14,7 @@
 * [Reference](#reference)
    * [Release Notes](#release-notes)
 
-## Service_Creation
+## Service Creation
 - Create smarter Distributed Computing System through connectivity.
 - Provide manageable and scalable connectivity service for Internal/External GE customers and extend the Predix platform capability.
 
