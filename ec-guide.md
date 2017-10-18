@@ -31,10 +31,13 @@ Using the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli
 ```
 cf env <name of app you bound the EC Service to>
 ```
+Navigate the JSON that is returned (later referred to as a 'VCAP') and find the portion reflecting the name of your EC Service. It is recommended that you copy everything starting from the word "credentials", and then paste this in a text document for reference, which will prove to be an invaluable time-saver while configuring your EC Agent scripts. Documenting this information is also crucial in regards to knowledge transfers.</br></br>
 ## UAA Client Update
 #### After the creation of the EC Service, a UAA Client must be provisioned and properly updated 
-- Authorized Grant Types must be updated to include 'client_credentials' and 'refresh_token'
-- 
+- 'Authorized Grant Types' must be updated to include 'client_credentials' and 'refresh_token'
+- The name of the UAA Client, as well as the UAA Client 'secret', will be needed in configuring EC agent scripts
+- Find 'oauth-scope' in the EC portion of the VCAP, and add this to the 'authorities' (not scope!) of the UAA Client 
+- Take note of the 'Token Validity' for your UAA Client, this will also be important in EC agent configuration
 ## Script Templates 
 - Support Secured Websocket Connection (SSL/TLS).
 - Support Corporate Proxy Services.
