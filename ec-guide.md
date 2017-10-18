@@ -7,12 +7,12 @@
 * [Common Problems and Resolutions](#common-problems-and-resolutions) 
 
 ## Service Creation
-### The Enterprise Connect Service requires a valid UAA Instance on Predix
-Using the CloudFoundry CLI, use the following command to view Services and Plans in CloudFoundry Marketplace:
+#### The Enterprise Connect Service requires a valid UAA Instance on Predix
+Using the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html), use the following command to view Services and Plans in CloudFoundry Marketplace:
 ```
 cf m
 ```
-Using the CloudFoundry CLI, use the following command to create an EC Service Instance in your org and space:
+Using the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html), use the following command to create an EC Service Instance in your org and space:
 ```
 cf create-service enterprise-connect <plan> <service instance name> -c <trusted issuer as a json or path to a json file>
 ```
