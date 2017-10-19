@@ -59,7 +59,8 @@ Agents not running on Predix may require an additional proxy flag. You will need
 ```bash
 -pxy <your proxy, no passwords allowed>
 ```
- </br> 
+</br>
+
 ## Pushing Agents to Predix
 ### The following instructions are absolutely critical to overall connectivity and behavior of the agents on Predix:
 - You will need at least [three items present](https://github.com/Enterprise-connect/ec-agent-cf-push-sample/tree/dist) to properly push an EC agent to Predix:
