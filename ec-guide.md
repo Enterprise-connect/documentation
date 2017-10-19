@@ -3,7 +3,7 @@
 * [Service Creation](#service-creation)
 * [UAA Client Update](#uaa-client-update)
 * [Script Templates](#script-templates) 
-* [Pushing Agents](#pushing-agents) 
+* [Pushing Agents to Predix](#pushing-agents-to-predix) 
 * [FAQs](#faqs) 
 * [Common Problems and Resolutions](#common-problems-and-resolutions) 
 
