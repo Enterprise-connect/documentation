@@ -92,7 +92,7 @@ cf scale <Gateway app name> -i 2
 No. The EC Service facilitates the generation and usage of EC Agent apps. The apps use a binary file whose behavior and function is controlled by a corresponding script. The EC Service "doesn't care" how many EC Agent apps you configure and run, with some caveats. The Gateway, Server, and Client are all Agents apps running the same binary files, distinguished by the flags used in the scripts, specifically the *-mod* flag.
 #### Q: How much data and traffic can my EC Instance manage?
 The EC Service instance is not concerned with the amount of data transferred. While we do recommend a separate EC instance for your 'prod' and 'non-prod' environments for the sake of isolation, there are tools and features that let one Service manage virtually "any" amount of traffic.
-- You can scale your agents on Predix (including Gateways) with *cf scale <app name> -i <number of instances you want>*
+- You can scale your agents on Predix (including Gateways) with *cf scale app_name -i number_of_instances_desired*
     - Each Gateway instance can handle up to 50 concurrent sessions (Client-Server interactions)
 - You can use the APIs in your Service URI to generate additional IDs beyond the two produced by default
     - You will need one ID per datasource IP, *-rht* flag on the Server. (1:1 ID:Servers)
