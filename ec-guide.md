@@ -6,9 +6,10 @@
 * [Pushing Agents to Predix](#pushing-agents-to-predix) 
 * [FAQs](#faqs) 
 * [Common Problems and Resolutions](#common-problems-and-resolutions) 
+* [References and Further Resources](#references-and-further-resources)
 
 ## Service Creation
-#### The Enterprise Connect Service requires a valid UAA Instance on Predix
+#### The Enterprise Connect Service requires a valid [UAA Instance](https://www.predix.io/services/service.html?id=1172) on Predix
 Using the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html), use the following command to view Services and Plans in CloudFoundry Marketplace:
 ```
 cf m
@@ -32,8 +33,8 @@ Using the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli
 cf env <name of app you bound the EC Service to>
 ```
 Navigate the JSON that is returned (later referred to as a 'VCAP') and find the portion reflecting the name of your EC Service. It is recommended that you copy everything starting from the word "credentials", and then paste this in a text document for reference, which will prove to be an invaluable time-saver while configuring your EC Agent scripts. Documenting this information is also crucial in regards to knowledge transfers.</br></br>
-## UAA Client Update
-#### After the creation of the EC Service, a UAA Client must be provisioned and properly updated 
+## [UAA Client](https://predix-toolkit.run.aws-usw02-pr.ice.predix.io/) Update
+#### After the creation of the EC Service, a [UAA Client](https://predix-toolkit.run.aws-usw02-pr.ice.predix.io/) must be provisioned and properly updated 
 - 'Authorized Grant Types' must be updated to include 'client_credentials' and 'refresh_token'
 - The name of the UAA Client, as well as the UAA Client 'secret', will be needed in configuring EC agent scripts
 - Find 'oauth-scope' in the EC portion of the VCAP, and add this to the 'authorities' (not scope!) of the UAA Client 
@@ -63,14 +64,14 @@ Agents not running on Predix may require an additional proxy flag. You will need
 
 ## Pushing Agents to Predix
 ### The following instructions are absolutely critical to overall connectivity and behavior of the agents on Predix:
-- You will need at least [three items present](https://github.com/Enterprise-connect/ec-agent-cf-push-sample/tree/dist) to properly push an EC agent to Predix:
+- You will need at least <a href="https://github.com/Enterprise-connect/ec-agent-cf-push-sample/tree/dist" target="_blank">three items present</a> to properly push an EC agent to Predix:
     1. a [file](https://github.com/Enterprise-connect/ec-agent-cf-push-sample/blob/dist/ec.sh) to start the agent binary with agent-mode specific flags, commonly named 'ec.sh'
     2. the Linux [binary](https://github.com/Enterprise-connect/ec-sdk/blob/dist/dist/ecagent_linux_sys.tar.gz)
     3. a [manifest.yml](https://github.com/Enterprise-connect/ec-agent-cf-push-sample/blob/dist/manifest.yml)
         - you will need to update the 'name:' field of the manifest to push your app, unless you choose to override that via command line
 - You will need to [add and install the Diego CF CLI plug-in](https://github.com/cloudfoundry-incubator/Diego-Enabler) with the commands found under installation
     - Run both commands, regardless of any perceived error after the first
-##### Copy, paste, update, and utilize the following commands from the directory of your ec.sh, agent binary, and manifest.yml to push your app to predix
+#### Copy, paste, update, and utilize the following commands from the directory of your ec.sh, agent binary, and manifest.yml to push your app to predix
 ***Caution!*** If you are re-pushing an existing EC agent app, it is advised you begin with this command:
 ```bash
 cf d -r -f <app name>
@@ -90,3 +91,5 @@ cf scale <Gateway app name> -i 2
 
 
 ## Common Problems and Resolutions
+
+## References and Further Resources
