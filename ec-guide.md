@@ -59,7 +59,8 @@ Agents not running on Predix may require an additional proxy flag. You will need
 ```bash
 -pxy <your proxy, no passwords allowed>
 ```
- </br> 
+</br>
+
 ## Pushing Agents to Predix
 ### The following instructions are absolutely critical to overall connectivity and behavior of the agents on Predix:
 - You will need at least [three items present](https://github.com/Enterprise-connect/ec-agent-cf-push-sample/tree/dist) to properly push an EC agent to Predix:
@@ -70,7 +71,7 @@ Agents not running on Predix may require an additional proxy flag. You will need
 - You will need to [add and install the Diego CF CLI plug-in](https://github.com/cloudfoundry-incubator/Diego-Enabler) with the commands found under installation
     - Run both commands, regardless of any perceived error after the first
 ##### Copy, paste, update, and utilize the following commands from the directory of your ec.sh, agent binary, and manifest.yml to push your app to predix
-Caution! If you are re-pushing an existing EC agent app, it is advised you begin with this command:
+***Caution!*** If you are re-pushing an existing EC agent app, it is advised you begin with this command:
 ```bash
 cf d -r -f <app name>
 ```
