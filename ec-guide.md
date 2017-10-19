@@ -4,6 +4,7 @@
 * [UAA Client Update](#uaa-client-update)
 * [Script Templates](#script-templates) 
 * [Pushing Agents to Predix](#pushing-agents-to-predix) 
+* [Diego, Scaling, and Managing Complex Use Cases](#diego-scaling-and-managing-complex-use-cases)
 * [FAQs](#faqs) 
 * [Common Problems and Resolutions](#common-problems-and-resolutions) 
 * [References and Further Resources](#references-and-further-resources)
@@ -86,7 +87,7 @@ You now have access to powerful features such as scaling, allowing you to push a
 ```bash
 cf scale <Gateway app name> -i 2
 ```
-    
+## Diego, Scaling, and Managing Complex Use Cases    
 ## FAQs
 #### Q: Does each Gateway require an EC subscription?
 No. The EC Service facilitates the generation and usage of EC Agent apps. The apps use a binary file whose behavior and function is controlled by a corresponding script. The EC Service "doesn't care" how many EC Agent apps you configure and run, with some caveats. The Gateway, Server, and Client are all Agents apps running the same binary files, distinguished by the flags used in the scripts, specifically the *-mod* flag.
