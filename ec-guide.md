@@ -70,7 +70,7 @@ Agents not running on Predix may require an additional proxy flag. You will need
         - you will need to update the 'name:' field of the manifest to push your app, unless you choose to override that via command line
 - You will need to [add and install the Diego CF CLI plug-in](https://github.com/cloudfoundry-incubator/Diego-Enabler) with the commands found under installation
     - Run both commands, regardless of any perceived error after the first
-##### Copy, paste, update, and utilize the following commands from the directory of your ec.sh, agent binary, and manifest.yml to push your app to predix
+#### Copy, paste, update, and utilize the following commands from the directory of your ec.sh, agent binary, and manifest.yml to push your app to predix
 ***Caution!*** If you are re-pushing an existing EC agent app, it is advised you begin with this command:
 ```bash
 cf d -r -f <app name>
