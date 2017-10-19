@@ -4,6 +4,7 @@
 * [UAA Client Update](#uaa-client-update)
 * [Script Templates](#script-templates) 
 * [Pushing Agents to Predix](#pushing-agents-to-predix) 
+* [Diego, Scaling, and Managing Complex Use Cases](#diego-scaling-and-managing-complex-use-cases)
 * [FAQs](#faqs) 
 * [Common Problems and Resolutions](#common-problems-and-resolutions) 
 * [References and Further Resources](#references-and-further-resources)
@@ -86,10 +87,41 @@ You now have access to powerful features such as scaling, allowing you to push a
 ```bash
 cf scale <Gateway app name> -i 2
 ```
-    
+## Diego, Scaling, and Managing Complex Use Cases
+### Diego-enabled Agent Apps on Predix and Scaling
+With the introduction, and requirement, of the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) [Diego plugin](https://github.com/cloudfoundry-incubator/Diego-Enabler) for all EC Agents running on Predix, a powerful feature has been established. This update has provided our users the ability to *scale* their EC Agents running on Predix (this can also be mimicked locally and manually) with a simple command:
+```bash
+cf scale <app name> -i <number of instances you want to scale to>
+```
+Users no longer need to be concerned with traffic to a Gateway requiring additional Gateways, Servers, Clients, etc. Each Gateway instance will provide *load-balanced* support for up to 50 concurrent sessions! The Gateway will employ machine learning to ensure that the traffic will be normalized across all instances of the Gateway. In other words, if you were to see 10 sessions on one instance of the Gateway, you should also see a number of sessions quite near that on the others.
+### EC Usage with Multiple Data Sources and Client-side Applications
+When you create an EC Service instance, you are provided with two IDs by default. These IDs are used to configure your Server and Client scripts, as discussed previously. This is only going to be adequate for very basic use cases and POCs. Many users new to EC are unaware of the expansive toolkit available at the Service URI. If you navigate to your Service URI, you can click 'API Docs' on the left nav-bar, at which point you will be prompted for a username and password. To obtain your credentials, find your admin token(*adm_tkn*) on your Service's VCAP, and [decode](https://www.base64decode.org/) this to view your credentials. For example:
+> dXNlcm5hbWU6cGFzc3dvcmQ= </br>
+
+... should decode to: </br>
+
+> username:password </br>
+
+#### GET admin/accounts/{group-id}
+After obtaining your credentials and logging in, you will find a variety of APIs available to monitor and explore your Service. For the sake of this discussion, we will primarily focus on the *Accounts* family of APIs, which all require authorization in form of 'basic <adm_tkn>'. To view the current credentials for a Service, you can use the GET to /admin/accounts/{group-id}. By default, your 'group-id' will be the zone-id of the Service, which is conveniently located in the Service URI.
+#### POST admin/accounts/{group-id}/add
+The most empowering API in the *Accounts* family is the POST to admin/accounts/{group-id}/add. By providing the required authorization ('basic <adm_tkn>') and the 'group-id' (Service zone-id by default), you can use this API to generate additional IDs which can then be used to configure additional EC Agent scripts.
+#### Reusability of IDs
+The IDs are capable of being reused, with some exceptions and limitations.
+- When running multiple EC Servers simultaneously, there needs to be a 1:1 relationship between an ID used for the Server's *-aid* flag and the IP found in the Server's *-rht*
+    - Running two identical Server scripts "locally" (or on a VM, etc) will mimick *scaling* as previously mentioned, and this is OK
+- A single ID can be used for the *-aid* flag on multiple Clients simultaneously, provided each Client is assigned a different port (*-lpt*) to listen on, and the Client's *-tid* configuration is accurate
+    - The Client uses the *-tid* flag to determine which Server, and ultimately which remote datasource, to access
 ## FAQs
-
-
+#### Q: Does each Gateway require an EC subscription?
+No. The EC Service facilitates the generation and usage of EC Agent apps. The apps use a binary file whose behavior and function is controlled by a corresponding script. The EC Service "doesn't care" how many EC Agent apps you configure and run, with some caveats. The Gateway, Server, and Client are all Agents apps running the same binary files, distinguished by the flags used in the scripts, specifically the *-mod* flag.
+#### Q: How much data and traffic can my EC Instance manage?
+The EC Service instance is not concerned with the amount of data transferred. While we do recommend a separate EC instance for your 'prod' and 'non-prod' environments for the sake of isolation, there are tools and features that let one Service manage virtually "any" amount of traffic.
+- You can scale your agents on Predix (including Gateways) with *cf scale app_name -i number_of_instances_desired*
+    - Each Gateway instance can handle up to 50 concurrent sessions (Client-Server interactions)
+- You can use the APIs in your Service URI to generate additional IDs beyond the two produced by default
+    - You will need one ID per datasource IP, *-rht* flag on the Server. (1:1 ID:Servers)
+    - You can use the same ID for all Client *-aid* flags, as long as you use different *-lpt* values and the *-tid* is configured for the correct Server (data source IP)
 ## Common Problems and Resolutions
 
 ## References and Further Resources
