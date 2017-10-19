@@ -87,7 +87,18 @@ You now have access to powerful features such as scaling, allowing you to push a
 ```bash
 cf scale <Gateway app name> -i 2
 ```
-## Diego, Scaling, and Managing Complex Use Cases    
+## Diego, Scaling, and Managing Complex Use Cases
+### Diego-enabled Agent Apps on Predix and Scaling
+With the introduction, and requirement, of the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) [Diego plugin](https://github.com/cloudfoundry-incubator/Diego-Enabler) for all EC Agents running on Predix, a powerful feature has been established. This update has provided our users the ability to *scale* their EC Agents running on Predix (this can also be mimicked locally and manually) with a simple command:
+```bash
+cf scale <app name> -i <number of instances you want to scale to>
+```
+Users no longer need to be concerned with traffic to a Gateway requiring additional Gateways, Servers, Clients, etc. Each Gateway instance will provide *load-balanced* support for up to 50 concurrent sessions! The Gateway will employ machine learning to ensure that the traffic will be normalized across all instances of the Gateway. In other words, if you were to see 10 sessions on one instance of the Gateway, you should also see a number of sessions quite near that on the others.
+### EC Usage with Multiple Data Sources and Client-side Applications
+When you create an EC Service instance, you are provided with two IDs by default. These IDs are used to configure your Server and Client scripts, as discussed previously. This is only going to be adequate for very basic use cases and POCs. Many users new to EC are unaware of the expansive toolkit available at the Service URI. If you navigate to your Service URI, you can click 'API Docs' on the left nav-bar, at which point you will be prompted for a username and password. To obtain your credentials, find your admin token(*adm_tkn*) on your Service's VCAP, and [decode](https://www.base64decode.org/) this to view your credentials. For example:
+> dXNlcm5hbWU6cGFzc3dvcmQ=
+... should decode to:
+> username:password
 ## FAQs
 #### Q: Does each Gateway require an EC subscription?
 No. The EC Service facilitates the generation and usage of EC Agent apps. The apps use a binary file whose behavior and function is controlled by a corresponding script. The EC Service "doesn't care" how many EC Agent apps you configure and run, with some caveats. The Gateway, Server, and Client are all Agents apps running the same binary files, distinguished by the flags used in the scripts, specifically the *-mod* flag.
