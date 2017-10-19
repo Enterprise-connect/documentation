@@ -88,8 +88,8 @@ cf scale <Gateway app name> -i 2
 ```
     
 ## FAQs
-
-
+#### Q: Does each Gateway require an EC subscription?
+No. The EC Service facilitates the generation and usage of EC Agent apps. The apps use a binary file whose behavior and function is controlled by a corresponding script. The EC Service "doesn't care" how many EC Agent apps you configure and run, with some caveats. The Gateway, Server, and Client are all Agents apps running the same binary files, distinguished by the flags used in the scripts, specifically the *-mod* flag.
 ## Common Problems and Resolutions
 
 ## References and Further Resources
