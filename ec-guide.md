@@ -6,9 +6,10 @@
 * [Pushing Agents to Predix](#pushing-agents-to-predix) 
 * [FAQs](#faqs) 
 * [Common Problems and Resolutions](#common-problems-and-resolutions) 
+* [References and Further Resources](#references-and-further-resources)
 
 ## Service Creation
-#### The Enterprise Connect Service requires a valid UAA Instance on Predix
+#### The Enterprise Connect Service requires a valid [UAA Instance](https://www.predix.io/services/service.html?id=1172) on Predix
 Using the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html), use the following command to view Services and Plans in CloudFoundry Marketplace:
 ```
 cf m
@@ -90,3 +91,5 @@ cf scale <Gateway app name> -i 2
 
 
 ## Common Problems and Resolutions
+
+## Reference and Further Resources
