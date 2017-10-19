@@ -39,7 +39,7 @@ Navigate the JSON that is returned (later referred to as a 'VCAP') and find the 
 - Find 'oauth-scope' in the EC portion of the VCAP, and add this to the 'authorities' (not scope!) of the UAA Client 
 - Take note of the 'Token Validity' for your UAA Client, this will also be important in EC agent configuration
 ## Script Templates
-#### For best results please use the following templates to configure your EC agent scripts
+#### For best results please use the following templates to configure your EC agent scripts:
 ##### EC Gateway Agent
 ```bash
 ./ecagent_linux_sys -mod gateway -lpt ${PORT} -zon <Predix-Zone-ID> -sst <EC-Service-URI> -tkn <admin-token> -dbg
@@ -58,14 +58,31 @@ Agents not running on Predix may require an additional proxy flag. You will need
 ```bash
 -pxy <your proxy, no passwords allowed>
 ```
-## Pushing Agents
-- Client/Server CLI.
-- Gateway CLI.
-- [Java RS Client Library](https://github.build.ge.com/212359746/phConnectivityJavaClientLib)
-- Gateway as a Service/Tile in Predix CF.
-- UDP/Datagram Socket implementation.
-- RAAS Load-Balancer module.
-
+## Pushing Agents to Predix
+### The following instructions are absolutely critical to overall connectivity and behavior of the agents on Predix:
+- You will need at least [three items present](https://github.com/Enterprise-connect/ec-agent-cf-push-sample/tree/dist) to properly push an EC agent to Predix:
+    1. a [file](https://github.com/Enterprise-connect/ec-agent-cf-push-sample/blob/dist/ec.sh) to start the agent binary with agent-mode specific flags, commonly named 'ec.sh'
+    2. the Linux [binary](https://github.com/Enterprise-connect/ec-sdk/blob/dist/dist/ecagent_linux_sys.tar.gz)
+    3. a [manifest.yml](https://github.com/Enterprise-connect/ec-agent-cf-push-sample/blob/dist/manifest.yml)
+        - you will need to update the 'name:' field of the manifest to push your app, unless you choose to override that via command line
+- You will need to [add and install the Diego CF CLI plug-in](https://github.com/cloudfoundry-incubator/Diego-Enabler) with the commands found under installation
+    - Run both commands, regardless of any perceived error after the first
+##### Copy, paste, update, and utilize the following commands from the directory of your ec.sh, agent binary, and manifest.yml to push your app to predix
+Caution! If you are re-pushing an existing EC agent app, it is advised you begin with this command:
+```bash
+cf d -r -f <app name>
+```
+For a fresh app, or after you have deleted the previous app, use the following:
+```bash
+cf push --no-route 
+cf enable-diego <app name>
+cf map-route <app name> <run.your.domain.predix.io> -n <app/route name>
+```
+You now have access to powerful features such as scaling, allowing you to push a single Gateway app, and then scale it up - each Gateway instance able to handle 50 concurrent sessions! In fact, the EC team considers it best practice to scale your Gateway up to at least two instances:
+```bash
+cf scale <Gateway app name> -i 2
+```
+    
 ## FAQs
 
 
