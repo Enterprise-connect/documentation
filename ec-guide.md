@@ -97,7 +97,9 @@ Users no longer need to be concerned with traffic to a Gateway requiring additio
 ### EC Usage with Multiple Data Sources and Client-side Applications
 When you create an EC Service instance, you are provided with two IDs by default. These IDs are used to configure your Server and Client scripts, as discussed previously. This is only going to be adequate for very basic use cases and POCs. Many users new to EC are unaware of the expansive toolkit available at the Service URI. If you navigate to your Service URI, you can click 'API Docs' on the left nav-bar, at which point you will be prompted for a username and password. To obtain your credentials, find your admin token(*adm_tkn*) on your Service's VCAP, and [decode](https://www.base64decode.org/) this to view your credentials. For example:
 > dXNlcm5hbWU6cGFzc3dvcmQ= </br>
+
 ... should decode to: </br>
+
 > username:password </br>
 ## FAQs
 #### Q: Does each Gateway require an EC subscription?
