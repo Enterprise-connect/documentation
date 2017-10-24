@@ -114,7 +114,7 @@ The IDs are capable of being reused, with some exceptions and limitations.
     - The Client uses the *-tid* flag to determine which Server, and ultimately which remote datasource, to access
 
 ##### ID Usage Examples
-
+Figure 1-a: EC Clients on prem reusing the same ID, this will be valid and functional
 ![valid configuration with multiple IDs](docs/properConfigLocalClients.png)
     
 ## FAQs
