@@ -135,5 +135,11 @@ The EC Service instance is not concerned with the amount of data transferred. Wh
     - You will need one ID per datasource IP, *-rht* flag on the Server. (1:1 ID:Servers)
     - You can use the same ID for all Client *-aid* flags, as long as you use different *-lpt* values and the *-tid* is configured for the correct Server (data source IP)
 ## Common Problems and Resolutions
+#### Problem: General connectivity (SuperConnection, etc) can be established but deteriorates immediately on end-to-end usage
+While there are a variety of potential causes for this symptom, the most likely causes are:
+- The EC Agents running on Predix were not pushed properly, please see: [Pushing Agents to Predix](#pushing-agents-to-predix) 
+- The EC Agents are not running the same version of the binary, or outdated versions of the binary
+    - While some old binary may work, the EC Service and the Agents are not developed with backwards compatibility in mind, because this is a relatively new product, and there are countless improvements and features we plan on adding.
+    - Because the Agents all use the same core binary, regardless of their behavior based on the *-mod* flag, if one of the Agents is using an older or newer version than the others, the interaction between them may become fundamentally flawed.
 
 ## References and Further Resources
