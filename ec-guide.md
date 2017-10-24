@@ -116,6 +116,9 @@ The IDs are capable of being reused, with some exceptions and limitations.
 #### ID Usage Example Diagrams
 > Figure 1-a: EC Clients on prem reusing the same ID, this will be valid and functional
 ![valid configuration with multiple IDs](docs/properConfigLocalClients.png)
+
+> Figure 1-b: EC Clients on prem needlessly using individual IDs, this will function but complicates things
+![superfluous IDs](docs/moreIdsThanNeeded.png)
     
 ## FAQs
 #### Q: Does each Gateway require an EC subscription?
