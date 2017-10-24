@@ -119,6 +119,9 @@ The IDs are capable of being reused, with some exceptions and limitations.
 
 > Figure 1-b: EC Clients on prem needlessly using individual IDs, this will function but complicates things
 ![superfluous IDs](docs/moreIdsThanNeeded.png)
+
+> Figure 2-a: EC Servers are using duplicate IDs for different resources, this will not work
+![dupilicate IDs on Servers](docs/improperIdUsage.png)
     
 ## FAQs
 #### Q: Does each Gateway require an EC subscription?
