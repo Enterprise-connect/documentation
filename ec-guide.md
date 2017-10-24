@@ -5,6 +5,7 @@
 * [Script Templates](#script-templates) 
 * [Pushing Agents to Predix](#pushing-agents-to-predix) 
 * [Diego, Scaling, and Managing Complex Use Cases](#diego-scaling-and-managing-complex-use-cases)
+    * [Reusability of IDs](#reusability-of-ids)
 * [FAQs](#faqs) 
 * [Common Problems and Resolutions](#common-problems-and-resolutions) 
 * [References and Further Resources](#references-and-further-resources)
@@ -112,9 +113,20 @@ The IDs are capable of being reused, with some exceptions and limitations.
     - Running two identical Server scripts "locally" (or on a VM, etc) will mimick *scaling* as previously mentioned, and this is OK
 - A single ID can be used for the *-aid* flag on multiple Clients simultaneously, provided each Client is assigned a different port (*-lpt*) to listen on, and the Client's *-tid* configuration is accurate
     - The Client uses the *-tid* flag to determine which Server, and ultimately which remote datasource, to access
+
+#### ID Usage Example Diagrams
+> Figure 1-a: EC Clients on prem reusing the same ID, this will be valid and functional
+![valid configuration with multiple IDs](docs/properConfigLocalClients.png)
+
+> Figure 1-b: EC Clients on prem needlessly using individual IDs, this will function but complicates things
+![superfluous IDs](docs/moreIdsThanNeeded.png)
+
+> Figure 2-a: EC Servers are using duplicate IDs for different resources, this will not work
+![dupilicate IDs on Servers](docs/improperIdUsage.png)
+    
 ## FAQs
 #### Q: Does each Gateway require an EC subscription?
-No. The EC Service facilitates the generation and usage of EC Agent apps. The apps use a binary file whose behavior and function is controlled by a corresponding script. The EC Service "doesn't care" how many EC Agent apps you configure and run, with some caveats. The Gateway, Server, and Client are all Agents apps running the same binary files, distinguished by the flags used in the scripts, specifically the *-mod* flag.
+Pending an upcoming update, only one Gateway can be deployed at this time, but it can be scaled with Diego to multiple instances, allowing for the management of increased traffic volumes.
 #### Q: How much data and traffic can my EC Instance manage?
 The EC Service instance is not concerned with the amount of data transferred. While we do recommend a separate EC instance for your 'prod' and 'non-prod' environments for the sake of isolation, there are tools and features that let one Service manage virtually "any" amount of traffic.
 - You can scale your agents on Predix (including Gateways) with *cf scale app_name -i number_of_instances_desired*
