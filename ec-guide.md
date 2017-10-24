@@ -126,7 +126,7 @@ The IDs are capable of being reused, with some exceptions and limitations.
     
 ## FAQs
 #### Q: Does each Gateway require an EC subscription?
-No. The EC Service facilitates the generation and usage of EC Agent apps. The apps use a binary file whose behavior and function is controlled by a corresponding script. The EC Service "doesn't care" how many EC Agent apps you configure and run, with some caveats. The Gateway, Server, and Client are all Agents apps running the same binary files, distinguished by the flags used in the scripts, specifically the *-mod* flag.
+Pending an upcoming update, only one Gateway can be deployed at this time, but it can be scaled with Diego to multiple instances, allowing for the management of traffic volumes.
 #### Q: How much data and traffic can my EC Instance manage?
 The EC Service instance is not concerned with the amount of data transferred. While we do recommend a separate EC instance for your 'prod' and 'non-prod' environments for the sake of isolation, there are tools and features that let one Service manage virtually "any" amount of traffic.
 - You can scale your agents on Predix (including Gateways) with *cf scale app_name -i number_of_instances_desired*
