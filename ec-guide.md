@@ -5,7 +5,7 @@
 * [Script Templates](#script-templates) 
 * [Pushing Agents to Predix](#pushing-agents-to-predix) 
 * [Diego, Scaling, and Managing Complex Use Cases](#diego-scaling-and-managing-complex-use-cases)
-    - * [Reusability of IDs](#reusability-of-ids)
+    * [Reusability of IDs](#reusability-of-ids)
 * [FAQs](#faqs) 
 * [Common Problems and Resolutions](#common-problems-and-resolutions) 
 * [References and Further Resources](#references-and-further-resources)
