@@ -134,6 +134,8 @@ The EC Service instance is not concerned with the amount of data transferred. Wh
 - You can use the APIs in your Service URI to generate additional IDs beyond the two produced by default
     - You will need one ID per datasource IP, *-rht* flag on the Server. (1:1 ID:Servers)
     - You can use the same ID for all Client *-aid* flags, as long as you use different *-lpt* values and the *-tid* is configured for the correct Server (data source IP)
+#### Q: Are there any data bandwidth restrictions over EC?
+No, Enterprise Connect does not set any limits on bandwidth usage.
 ## Common Problems and Resolutions
 #### Problem: General connectivity (SuperConnection, etc) can be established but deteriorates immediately on end-to-end usage
 > While there are a variety of potential causes for this symptom, the most likely causes are:
