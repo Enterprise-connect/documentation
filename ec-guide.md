@@ -71,6 +71,7 @@ Agents not running on Predix may require an additional proxy flag. You will need
     2. the Linux [binary](https://github.com/Enterprise-connect/ec-sdk/blob/dist/dist/ecagent_linux_sys.tar.gz)
     3. a [manifest.yml](https://github.com/Enterprise-connect/ec-agent-cf-push-sample/blob/dist/manifest.yml)
         - you will need to update the 'name:' field of the manifest to push your app, unless you choose to override that via command line
+        - be mindful of the 'command:' field, if you choose to name rename 'ec.sh', this will need to be reflected here
 - You will need to [add and install the Diego CF CLI plug-in](https://github.com/cloudfoundry-incubator/Diego-Enabler) with the commands found under installation
     - Run both commands, regardless of any perceived error after the first
 #### Copy, paste, update, and utilize the following commands from the directory of your ec.sh, agent binary, and manifest.yml to push your app to predix
