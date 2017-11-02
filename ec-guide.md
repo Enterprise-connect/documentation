@@ -138,6 +138,9 @@ The EC Service instance is not concerned with the amount of data transferred. Wh
 #### Q: Are there any data bandwidth restrictions over EC?
 No, Enterprise Connect does not set any limits on bandwidth usage.
 ## Common Problems and Resolutions
+#### Problem: '[EC Client] error while adding the client inst.'
+> This error occurs when the EC Client script is configured to connect to an invalid Gateway URL via the *-hst* flag, or when it tries to connect to through an EC Gateway with no active super connections.
+
 #### Problem: General connectivity (SuperConnection, etc) can be established but deteriorates immediately on end-to-end usage
 > While there are a variety of potential causes for this symptom, the most likely causes are:
 
