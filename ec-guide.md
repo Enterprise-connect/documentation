@@ -139,10 +139,10 @@ The EC Service instance is not concerned with the amount of data transferred. Wh
 No, Enterprise Connect does not set any limits on bandwidth usage.
 ## Common Problems and Resolutions
 #### Problem: '[EC Client] error while adding the client inst.'
-> This error occurs when the EC Client script is configured to connect to an invalid Gateway URL via the *-hst* flag, or when it tries to connect to through an EC Gateway with no active super connections.
+This error occurs when the EC Client script is configured to connect to an invalid Gateway URL via the *-hst* flag, or when it tries to connect to through an EC Gateway with no active super connections.
 
 #### Problem: General connectivity (SuperConnection, etc) can be established but deteriorates immediately on end-to-end usage
-> While there are a variety of potential causes for this symptom, the most likely causes are:
+While there are a variety of potential causes for this symptom, the most likely causes are:
 
 - The EC Agents running on Predix were not pushed properly, please see: [Pushing Agents to Predix](#pushing-agents-to-predix) 
 - The EC Agents are not running the same version of the binary, or outdated versions of the binary
@@ -150,6 +150,6 @@ No, Enterprise Connect does not set any limits on bandwidth usage.
     - Because the Agents all use the same core binary, regardless of their behavior based on the *-mod* flag, if one of the Agents is using an older or newer version than the others, the interaction between them may become fundamentally flawed.
     - The Service requires an update to be compatible with current/recommended Agents
 #### Problem: The Service is repeatedly crashing or failing in very consistent intervals (every 12 hours, every 2 days, etc)
-> This is likely an issue with the relationship between your UAA Client and how often the Server and Client are fetching/refreshing tokens. While this is a fairly common source of support tickets, this is easily solved on the user's end by examining the *-dur* flag on your Server and Client. Please be sure the value used for this flag is less-than-half of the *Token Validity* values of your UAA Client. If you are unfamiliar with UAA Client management, one easy solution is to just make sure the value of the *-dur* flag on your Server and Client are "low" (i.e. 300, 600, 1200). *Note: it can take up to 15-20 minutes for a crashed Service to come back up via automation*
+This is likely an issue with the relationship between your UAA Client and how often the Server and Client are fetching/refreshing tokens. While this is a fairly common source of support tickets, this is easily solved on the user's end by examining the *-dur* flag on your Server and Client. Please be sure the value used for this flag is less-than-half of the *Token Validity* values of your UAA Client. If you are unfamiliar with UAA Client management, one easy solution is to just make sure the value of the *-dur* flag on your Server and Client are "low" (i.e. 300, 600, 1200). *Note: it can take up to 15-20 minutes for a crashed Service to come back up via automation*
 
 ## References and Further Resources
