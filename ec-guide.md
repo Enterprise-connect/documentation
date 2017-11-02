@@ -149,7 +149,15 @@ While there are a variety of potential causes for this symptom, the most likely 
     - While some old binary may work, the EC Service and the Agents are not developed with backwards compatibility in mind, because this is a relatively new product, and there are countless improvements and features we plan on adding.
     - Because the Agents all use the same core binary, regardless of their behavior based on the *-mod* flag, if one of the Agents is using an older or newer version than the others, the interaction between them may become fundamentally flawed.
     - The Service requires an update to be compatible with current/recommended Agents
-#### Problem: The Service is repeatedly crashing or failing in very consistent intervals (every 12 hours, every 2 days, etc)
+#### Problem: The Service is repeatedly crashing or failing in very consistent intervals
 This is likely an issue with the relationship between your UAA Client and how often the Server and Client are fetching/refreshing tokens. While this is a fairly common source of support tickets, this is easily solved on the user's end by examining the *-dur* flag on your Server and Client. Please be sure the value used for this flag is less-than-half of the *Token Validity* values of your UAA Client. If you are unfamiliar with UAA Client management, one easy solution is to just make sure the value of the *-dur* flag on your Server and Client are "low" (i.e. 300, 600, 1200). *Note: it can take up to 15-20 minutes for a crashed Service to come back up via automation*
+
+**The easiest way to verify this:**
+
+Start up an EC Server or EC Client. After it starts up and reports the version, it will fetch a bearer token (which will be visible if the *-dbg* flag is enabled), and then it will print something out along these lines:
+
+> [EC Client] 2017/10/31 09:28:51 Token refreshed. The token will be expired in ***x*** minutes. Approx. ***y*** minutes to the next auto-refresh
+
+if (y >= x) { You are going to have issues };
 
 ## References and Further Resources
