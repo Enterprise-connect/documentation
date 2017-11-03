@@ -37,6 +37,7 @@ Using the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli
 cf env <name of app you bound the EC Service to>
 ```
 Navigate the JSON that is returned (later referred to as a 'VCAP') and find the portion reflecting the name of your EC Service. It is recommended that you copy everything starting from the word "credentials", and then paste this in a text document for reference, which will prove to be an invaluable time-saver while configuring your EC Agent scripts. Documenting this information is also crucial in regards to knowledge transfers.</br></br>
+<A HREF="#top">Back To Top</A>
 ## [UAA Client](https://predix-toolkit.run.aws-usw02-pr.ice.predix.io/) Update
 #### After the creation of the EC Service, a [UAA Client](https://predix-toolkit.run.aws-usw02-pr.ice.predix.io/) must be provisioned and properly updated 
 - 'Authorized Grant Types' must be updated to include 'client_credentials' and 'refresh_token'
@@ -44,6 +45,7 @@ Navigate the JSON that is returned (later referred to as a 'VCAP') and find the 
 - Find 'oauth-scope' in the EC portion of the VCAP, and add this to the 'authorities' (not scope!) of the UAA Client 
 - Take note of the 'Token Validity' for your UAA Client, this will also be important in EC agent configuration
 </br></br>
+<A HREF="#top">Back To Top</A>
 ## Script Templates
 #### For best results please use the following templates to configure your EC agent scripts:
 ##### EC Gateway Agent
