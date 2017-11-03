@@ -1,3 +1,5 @@
+<A NAME="top">
+    
 # Comprehensive Guide to Enterprise Connect
 
 * [Service Creation](#service-creation)
@@ -7,7 +9,7 @@
 * [Diego, Scaling, and Managing Complex Use Cases](#diego-scaling-and-managing-complex-use-cases)
     * [Reusability of IDs](#reusability-of-ids)
 * [FAQs](#faqs) 
-* [Common Problems and Resolutions](#common-problems-and-resolutions) 
+* [Observed Problems and Resolutions](#observed-problems-and-resolutions) 
 * [References and Further Resources](#references-and-further-resources)
 
 ## Service Creation
@@ -35,6 +37,7 @@ Using the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli
 cf env <name of app you bound the EC Service to>
 ```
 Navigate the JSON that is returned (later referred to as a 'VCAP') and find the portion reflecting the name of your EC Service. It is recommended that you copy everything starting from the word "credentials", and then paste this in a text document for reference, which will prove to be an invaluable time-saver while configuring your EC Agent scripts. Documenting this information is also crucial in regards to knowledge transfers.</br></br>
+<A HREF="#top">Back To Top</A>
 ## [UAA Client](https://predix-toolkit.run.aws-usw02-pr.ice.predix.io/) Update
 #### After the creation of the EC Service, a [UAA Client](https://predix-toolkit.run.aws-usw02-pr.ice.predix.io/) must be provisioned and properly updated 
 - 'Authorized Grant Types' must be updated to include 'client_credentials' and 'refresh_token'
@@ -42,6 +45,8 @@ Navigate the JSON that is returned (later referred to as a 'VCAP') and find the 
 - Find 'oauth-scope' in the EC portion of the VCAP, and add this to the 'authorities' (not scope!) of the UAA Client 
 - Take note of the 'Token Validity' for your UAA Client, this will also be important in EC agent configuration
 </br></br>
+
+<A HREF="#top">Back To Top</A>
 ## Script Templates
 #### For best results please use the following templates to configure your EC agent scripts:
 ##### EC Gateway Agent
@@ -64,6 +69,7 @@ Agents not running on Predix may require an additional proxy flag. You will need
 ```
 </br>
 
+<A HREF="#top">Back To Top</A>
 ## Pushing Agents to Predix
 ### The following instructions are absolutely critical to overall connectivity and behavior of the agents on Predix:
 - You will need at least <a href="https://github.com/Enterprise-connect/ec-agent-cf-push-sample/tree/dist" target="_blank">three items present</a> to properly push an EC agent to Predix:
@@ -89,6 +95,8 @@ You now have access to powerful features such as scaling, allowing you to push a
 ```bash
 cf scale <Gateway app name> -i 2
 ```
+
+<A HREF="#top">Back To Top</A>
 ## Diego, Scaling, and Managing Complex Use Cases
 ### Diego-enabled Agent Apps on Predix and Scaling
 With the introduction, and requirement, of the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) [Diego plugin](https://github.com/cloudfoundry-incubator/Diego-Enabler) for all EC Agents running on Predix, a powerful feature has been established. This update has provided our users the ability to *scale* their EC Agents running on Predix (this can also be mimicked locally and manually) with a simple command:
@@ -124,24 +132,31 @@ The IDs are capable of being reused, with some exceptions and limitations.
 
 > Figure 2-a: EC Servers are using duplicate IDs for different resources, this will not work
 ![dupilicate IDs on Servers](docs/improperIdUsage.png)
-    
+   
+<A HREF="#top">Back To Top</A>
 ## FAQs
-#### Q: Does each Gateway require an EC subscription?
+
+### Q: Does each Gateway require an EC subscription?
 Pending an upcoming update, only one Gateway can be deployed at this time, but it can be scaled with Diego to multiple instances, allowing for the management of increased traffic volumes.
-#### Q: How much data and traffic can my EC Instance manage?
+
+### Q: How much data and traffic can my EC Instance manage?
 The EC Service instance is not concerned with the amount of data transferred. While we do recommend a separate EC instance for your 'prod' and 'non-prod' environments for the sake of isolation, there are tools and features that let one Service manage virtually "any" amount of traffic.
 - You can scale your agents on Predix (including Gateways) with *cf scale app_name -i number_of_instances_desired*
     - Each Gateway instance can handle up to 50 concurrent sessions (Client-Server interactions)
 - You can use the APIs in your Service URI to generate additional IDs beyond the two produced by default
     - You will need one ID per datasource IP, *-rht* flag on the Server. (1:1 ID:Servers)
     - You can use the same ID for all Client *-aid* flags, as long as you use different *-lpt* values and the *-tid* is configured for the correct Server (data source IP)
-#### Q: Are there any data bandwidth restrictions over EC?
+    
+### Q: Are there any data bandwidth restrictions over EC?
 No, Enterprise Connect does not set any limits on bandwidth usage.
-## Common Problems and Resolutions
-#### Problem: '[EC Client] error while adding the client inst.'
+
+<A HREF="#top">Back To Top</A>
+## Observed Problems and Resolutions
+
+### Problem: '[EC Client] error while adding the client inst.'
 This error occurs when the EC Client script is configured to connect to an invalid Gateway URL via the *-hst* flag, or when it tries to connect to through an EC Gateway with no active super connections.
 
-#### Problem: General connectivity (SuperConnection, etc) can be established but deteriorates immediately on end-to-end usage
+### Problem: General connectivity (SuperConnection, etc) can be established but deteriorates immediately on end-to-end usage
 While there are a variety of potential causes for this symptom, the most likely causes are:
 
 - The EC Agents running on Predix were not pushed properly, please see: [Pushing Agents to Predix](#pushing-agents-to-predix) 
@@ -149,7 +164,9 @@ While there are a variety of potential causes for this symptom, the most likely 
     - While some old binary may work, the EC Service and the Agents are not developed with backwards compatibility in mind, because this is a relatively new product, and there are countless improvements and features we plan on adding.
     - Because the Agents all use the same core binary, regardless of their behavior based on the *-mod* flag, if one of the Agents is using an older or newer version than the others, the interaction between them may become fundamentally flawed.
     - The Service requires an update to be compatible with current/recommended Agents
-#### Problem: The Service is repeatedly crashing or failing in very consistent intervals
+- You have attempted to scale an EC Gateway in Predix Select, which is currently not supported due to the platform
+
+### Problem: The Service is repeatedly crashing or failing in very consistent intervals
 This is likely an issue with the relationship between your UAA Client and how often the Server and Client are fetching/refreshing tokens. While this is a fairly common source of support tickets, this is easily solved on the user's end by examining the *-dur* flag on your Server and Client. Please be sure the value used for this flag is less-than-half of the *Token Validity* values of your UAA Client. If you are unfamiliar with UAA Client management, one easy solution is to just make sure the value of the *-dur* flag on your Server and Client are "low" (i.e. 300, 600, 1200). *Note: it can take up to 15-20 minutes for a crashed Service to come back up via automation*
 
 **The easiest way to verify this:**
@@ -160,4 +177,15 @@ Start up an EC Server or EC Client. After it starts up and reports the version, 
 
 if (y >= x) { You are going to have issues };
 
+### Problem: EC Server Agent getting 404 trying to reach the EC Gateway
+The solutions to this problem range from "simple fix" to a Predix Support ticket. The easiest and most likely causes are:
+- Have you verified the EC Gateway is up and running?
+- Does the *-hst* flag properly reflect the EC Gateway URL in the correct format?
+    - *-hst wss://gateway-url/agent*
+    
+Beyond these simple fixes, if the 404 error is including the name of your current Gateway app/url, and you have pushed or updated this Gateway in the past, this could be due to the existence of "phantom" apps which were not properly deleted in Cloud Foundry. In such cases, only the Predix Support team has the tools and access to identify and correct such anomalies. In this event, they will need the 'gtwId's of the offending apps, which you can get from the Gateway list at the Service URI, or in the EC Server logs near the 404 message. They can use these Ids to find and properly destroy the bad Gateway apps.
+
+<A HREF="#top">Back To Top</A>
 ## References and Further Resources
+
+<A HREF="#top">Back To Top</A>
