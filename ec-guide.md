@@ -7,7 +7,7 @@
 * [Diego, Scaling, and Managing Complex Use Cases](#diego-scaling-and-managing-complex-use-cases)
     * [Reusability of IDs](#reusability-of-ids)
 * [FAQs](#faqs) 
-* [Common Problems and Resolutions](#common-problems-and-resolutions) 
+* [Observed Problems and Resolutions](#observed-problems-and-resolutions) 
 * [References and Further Resources](#references-and-further-resources)
 
 ## Service Creation
@@ -126,8 +126,10 @@ The IDs are capable of being reused, with some exceptions and limitations.
 ![dupilicate IDs on Servers](docs/improperIdUsage.png)
     
 ## FAQs
+
 #### Q: Does each Gateway require an EC subscription?
 Pending an upcoming update, only one Gateway can be deployed at this time, but it can be scaled with Diego to multiple instances, allowing for the management of increased traffic volumes.
+
 #### Q: How much data and traffic can my EC Instance manage?
 The EC Service instance is not concerned with the amount of data transferred. While we do recommend a separate EC instance for your 'prod' and 'non-prod' environments for the sake of isolation, there are tools and features that let one Service manage virtually "any" amount of traffic.
 - You can scale your agents on Predix (including Gateways) with *cf scale app_name -i number_of_instances_desired*
@@ -135,9 +137,12 @@ The EC Service instance is not concerned with the amount of data transferred. Wh
 - You can use the APIs in your Service URI to generate additional IDs beyond the two produced by default
     - You will need one ID per datasource IP, *-rht* flag on the Server. (1:1 ID:Servers)
     - You can use the same ID for all Client *-aid* flags, as long as you use different *-lpt* values and the *-tid* is configured for the correct Server (data source IP)
+    
 #### Q: Are there any data bandwidth restrictions over EC?
 No, Enterprise Connect does not set any limits on bandwidth usage.
-## Common Problems and Resolutions
+
+## Observed Problems and Resolutions
+
 #### Problem: '[EC Client] error while adding the client inst.'
 This error occurs when the EC Client script is configured to connect to an invalid Gateway URL via the *-hst* flag, or when it tries to connect to through an EC Gateway with no active super connections.
 
@@ -161,5 +166,13 @@ Start up an EC Server or EC Client. After it starts up and reports the version, 
 > [EC Client] 2017/10/31 09:28:51 Token refreshed. The token will be expired in ***x*** minutes. Approx. ***y*** minutes to the next auto-refresh
 
 if (y >= x) { You are going to have issues };
+
+#### Problem: EC Server Agent getting 404 trying to reach the EC Gateway
+The solutions to this problem range from "simple fix" to a Predix Support ticket. The easiest and most likely causes are:
+- Have you verified the EC Gateway is up and running?
+- Does the *-hst* flag properly reflect the EC Gateway URL in the correct format?
+    - *-hst wss://gateway-url/agent*
+    
+Beyond these simple fixes, if the 404 error is including the name of your current Gateway app/url, and you have pushed or updated this Gateway in the past, this could be due to the existence of "phantom" apps which were not properly deleted in Cloud Foundry. In such cases, only the Predix Support team has the tools and access to identify and correct such anomalies. In this event, they will need the 'gtwId's of the offending apps, which you can get from the Gateway list at the Service URI, or in the EC Server logs near the 404 message. They can use these Ids to find and properly destroy the bad Gateway apps.
 
 ## References and Further Resources
