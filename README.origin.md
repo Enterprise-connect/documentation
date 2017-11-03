@@ -18,7 +18,7 @@
 - Create smarter Distributed Computing System through connectivity.
 - Provide manageable and scalable connectivity service for Internal/External GE customers and extend the Predix platform capability.
 
-##Features Implemented 
+## Features Implemented 
 - Support Secured Websocket Connection (SSL/TLS).
 - Support Corporate Proxy Services.
 - Support Multi-tenancy (Multi-Servers/Clients).
@@ -31,7 +31,7 @@
 - IPv4/IPv6 IP filtering.
 - RFC 5766 (Turn Service) implemented.
 
-##Work in progress
+## Work in progress
 - Client/Server CLI.
 - Gateway CLI.
 - [Java RS Client Library](https://github.build.ge.com/212359746/phConnectivityJavaClientLib)
@@ -55,10 +55,10 @@ openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days XXX
 
 ## Usage
 
-###Usage Modeling
+### Usage Modeling
 ![alt tag](docs/reachback-usage-modeling.png)
 
-###Gateway
+### Gateway
 ```javascript
 var RSGateway=require('./../rs-gateway');
 
@@ -162,7 +162,7 @@ var phs=new RSGateway({
 
 ```
 
-###Client
+### Client
 ```javascript
 var RSClient=require('./../rs-client');
 
@@ -187,7 +187,7 @@ var phs=new RSClient({
 //command: DEBUG=rs:client node client
 ```
 
-###Server
+### Server
 ```javascript
 var RSServer=require('./../rs-server');
 //var http = require('http');
@@ -213,8 +213,8 @@ var phs=new RSServer({
 
 //command: DEBUG=rs:server node server
 ```
-###Event handling
-####gateway
+### Event handling
+#### gateway
 "connection_accepted"
 "session_create"
 "session_close"
@@ -222,47 +222,47 @@ var phs=new RSServer({
 "port_close"
 "session_join"
 
-###server
+### server
 to be cont.
 
-###client
+### client
 to be cont.
 
 
-###environment variables DEBUG
-####gateway
+### environment variables DEBUG
+#### gateway
 DEBUG=rs:gateway
 
-####client
+#### client
 DEBUG=rs:client
 
-####server
+#### server
 DEBUG=rs:server
 
-##Reference
+## Reference
 
-####Project Home:
+#### Project Home:
 https://github.build.ge.com/pages/212359746/ph-connectivity-node-service
 
-####Github:
+#### Github:
 https://github.build.ge.com/pages/212359746/ph-connectivity-node-service/
 
-####Design/Prototype:
+#### Design/Prototype:
 https://github.build.ge.com/212359746/ph-tcp-tunnel/blob/master/docs/poc-tcp-tunneling.pptx?raw=true
 
-####Demo:
+#### Demo:
 
-#####MongoDB
+##### MongoDB
 https://predix-cs-portal.run.asv-pr.ice.predix.io/mongo/listcats (List rows)
 
 https://predix-cs-portal.run.asv-pr.ice.predix.io/mongo/addcat/:name/:type (Add row)
 
-#####PostgresSQL
+##### PostgresSQL
 https://predix-cs-portal.run.asv-pr.ice.predix.io/pg/listbirds (List rows)
 
 https://predix-cs-portal.run.asv-pr.ice.predix.io/pg/addbird/:name/:type (Add row)
 
-####Release Notes:
+#### Release Notes:
 [v.0.6-alpha:](https://github.build.ge.com/Reachback-Services/rs-connectivity-service/releases/tag/v0.6-alpha)
  - Making the SSL/TLS the mandatory.
  - Enforce HTTPS over HTTP for Proxy.
