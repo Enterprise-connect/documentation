@@ -15,16 +15,16 @@
 * [RAAS Server CLI/library/Daemon](#raas-server-clilibrarydaemon)
 
  
-##Predix Composite Model
+## Predix Composite Model
 ![alt tag](docs/RAAS-Predix-Comp-Model-Simp.png)
 
-##Predix Sequence Diagram
+## Predix Sequence Diagram
 ![alt tag](docs/RAAS-Predix-Seq-Diagram.png)
 
-##Creating a RAAS Gateway Service Instance
+## Creating a RAAS Gateway Service Instance
 > Note: The following steps are performed using the Cloud Foundry CLI. To complete the steps in a web browser, follow the instructions on the service page in the Predix Catalog.
 
-####Use the Cloud Foundry CLI to log into Cloud Foundry
+#### Use the Cloud Foundry CLI to log into Cloud Foundry
 ```
 cf login -a <API_Endpoint>
 ```
@@ -37,7 +37,7 @@ https://api.system.aws-usw02-pr.ice.predix.io
 Predix Select
 https://api.system.asv-pr.ice.predix.io
 
-####List the services in the Cloud Foundry marketplace by entering
+#### List the services in the Cloud Foundry marketplace by entering
 ```
 cf marketplace
 ```
@@ -114,14 +114,14 @@ The command shows the environment variables, which contain your basic authorizat
 }
 ```
 
-##RAAS Gateway APIs
+## RAAS Gateway APIs
 
-####Service URL
+#### Service URL
 ```
 <predix_service_uri>/v1/setting
 ```
 
-####Configuration
+#### Configuration
 
 HTTP Request Method | Description
 --- | ---
@@ -130,14 +130,14 @@ PUT | Update the setting
 GET | Get the current setting
 DEL | Delete the setting
 
-####Header
+#### Header
 ```
 Authorization: Bearer <your UAA token>
 Predix-Zone-Id: <Predix-Zone-Id>
 Content-Type: application/json
 ```
 
-####Payload
+#### Payload
 ```javascript
 {
     "<client_id>":{
@@ -182,7 +182,7 @@ Content-Type: application/json
 }
 ```
 
-####HTTP Response
+#### HTTP Response
 ```
 HTTP Status Code: 200
 {
@@ -213,6 +213,6 @@ HTTP Status Code: 500
 
 ```
 
-##RAAS Client CLI/library/Daemon
+## RAAS Client CLI/library/Daemon
 
-##RAAS Server CLI/library/Daemon
+## RAAS Server CLI/library/Daemon
