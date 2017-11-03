@@ -45,6 +45,7 @@ Navigate the JSON that is returned (later referred to as a 'VCAP') and find the 
 - Find 'oauth-scope' in the EC portion of the VCAP, and add this to the 'authorities' (not scope!) of the UAA Client 
 - Take note of the 'Token Validity' for your UAA Client, this will also be important in EC agent configuration
 </br></br>
+
 <A HREF="#top">Back To Top</A>
 ## Script Templates
 #### For best results please use the following templates to configure your EC agent scripts:
