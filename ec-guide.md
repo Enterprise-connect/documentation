@@ -69,6 +69,7 @@ Agents not running on Predix may require an additional proxy flag. You will need
 ```
 </br>
 
+<A HREF="#top">Back To Top</A>
 ## Pushing Agents to Predix
 ### The following instructions are absolutely critical to overall connectivity and behavior of the agents on Predix:
 - You will need at least <a href="https://github.com/Enterprise-connect/ec-agent-cf-push-sample/tree/dist" target="_blank">three items present</a> to properly push an EC agent to Predix:
@@ -94,6 +95,8 @@ You now have access to powerful features such as scaling, allowing you to push a
 ```bash
 cf scale <Gateway app name> -i 2
 ```
+
+<A HREF="#top">Back To Top</A>
 ## Diego, Scaling, and Managing Complex Use Cases
 ### Diego-enabled Agent Apps on Predix and Scaling
 With the introduction, and requirement, of the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) [Diego plugin](https://github.com/cloudfoundry-incubator/Diego-Enabler) for all EC Agents running on Predix, a powerful feature has been established. This update has provided our users the ability to *scale* their EC Agents running on Predix (this can also be mimicked locally and manually) with a simple command:
@@ -129,7 +132,8 @@ The IDs are capable of being reused, with some exceptions and limitations.
 
 > Figure 2-a: EC Servers are using duplicate IDs for different resources, this will not work
 ![dupilicate IDs on Servers](docs/improperIdUsage.png)
-    
+   
+<A HREF="#top">Back To Top</A>
 ## FAQs
 
 #### Q: Does each Gateway require an EC subscription?
@@ -146,6 +150,7 @@ The EC Service instance is not concerned with the amount of data transferred. Wh
 #### Q: Are there any data bandwidth restrictions over EC?
 No, Enterprise Connect does not set any limits on bandwidth usage.
 
+<A HREF="#top">Back To Top</A>
 ## Observed Problems and Resolutions
 
 #### Problem: '[EC Client] error while adding the client inst.'
@@ -180,4 +185,7 @@ The solutions to this problem range from "simple fix" to a Predix Support ticket
     
 Beyond these simple fixes, if the 404 error is including the name of your current Gateway app/url, and you have pushed or updated this Gateway in the past, this could be due to the existence of "phantom" apps which were not properly deleted in Cloud Foundry. In such cases, only the Predix Support team has the tools and access to identify and correct such anomalies. In this event, they will need the 'gtwId's of the offending apps, which you can get from the Gateway list at the Service URI, or in the EC Server logs near the 404 message. They can use these Ids to find and properly destroy the bad Gateway apps.
 
+<A HREF="#top">Back To Top</A>
 ## References and Further Resources
+
+<A HREF="#top">Back To Top</A>
