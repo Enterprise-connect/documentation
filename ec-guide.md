@@ -136,10 +136,10 @@ The IDs are capable of being reused, with some exceptions and limitations.
 <A HREF="#top">Back To Top</A>
 ## FAQs
 
-#### Q: Does each Gateway require an EC subscription?
+### Q: Does each Gateway require an EC subscription?
 Pending an upcoming update, only one Gateway can be deployed at this time, but it can be scaled with Diego to multiple instances, allowing for the management of increased traffic volumes.
 
-#### Q: How much data and traffic can my EC Instance manage?
+### Q: How much data and traffic can my EC Instance manage?
 The EC Service instance is not concerned with the amount of data transferred. While we do recommend a separate EC instance for your 'prod' and 'non-prod' environments for the sake of isolation, there are tools and features that let one Service manage virtually "any" amount of traffic.
 - You can scale your agents on Predix (including Gateways) with *cf scale app_name -i number_of_instances_desired*
     - Each Gateway instance can handle up to 50 concurrent sessions (Client-Server interactions)
@@ -147,16 +147,16 @@ The EC Service instance is not concerned with the amount of data transferred. Wh
     - You will need one ID per datasource IP, *-rht* flag on the Server. (1:1 ID:Servers)
     - You can use the same ID for all Client *-aid* flags, as long as you use different *-lpt* values and the *-tid* is configured for the correct Server (data source IP)
     
-#### Q: Are there any data bandwidth restrictions over EC?
+### Q: Are there any data bandwidth restrictions over EC?
 No, Enterprise Connect does not set any limits on bandwidth usage.
 
 <A HREF="#top">Back To Top</A>
 ## Observed Problems and Resolutions
 
-#### Problem: '[EC Client] error while adding the client inst.'
+### Problem: '[EC Client] error while adding the client inst.'
 This error occurs when the EC Client script is configured to connect to an invalid Gateway URL via the *-hst* flag, or when it tries to connect to through an EC Gateway with no active super connections.
 
-#### Problem: General connectivity (SuperConnection, etc) can be established but deteriorates immediately on end-to-end usage
+### Problem: General connectivity (SuperConnection, etc) can be established but deteriorates immediately on end-to-end usage
 While there are a variety of potential causes for this symptom, the most likely causes are:
 
 - The EC Agents running on Predix were not pushed properly, please see: [Pushing Agents to Predix](#pushing-agents-to-predix) 
@@ -166,7 +166,7 @@ While there are a variety of potential causes for this symptom, the most likely 
     - The Service requires an update to be compatible with current/recommended Agents
 - You have attempted to scale an EC Gateway in Predix Select, which is currently not supported due to the platform
 
-#### Problem: The Service is repeatedly crashing or failing in very consistent intervals
+### Problem: The Service is repeatedly crashing or failing in very consistent intervals
 This is likely an issue with the relationship between your UAA Client and how often the Server and Client are fetching/refreshing tokens. While this is a fairly common source of support tickets, this is easily solved on the user's end by examining the *-dur* flag on your Server and Client. Please be sure the value used for this flag is less-than-half of the *Token Validity* values of your UAA Client. If you are unfamiliar with UAA Client management, one easy solution is to just make sure the value of the *-dur* flag on your Server and Client are "low" (i.e. 300, 600, 1200). *Note: it can take up to 15-20 minutes for a crashed Service to come back up via automation*
 
 **The easiest way to verify this:**
@@ -177,7 +177,7 @@ Start up an EC Server or EC Client. After it starts up and reports the version, 
 
 if (y >= x) { You are going to have issues };
 
-#### Problem: EC Server Agent getting 404 trying to reach the EC Gateway
+### Problem: EC Server Agent getting 404 trying to reach the EC Gateway
 The solutions to this problem range from "simple fix" to a Predix Support ticket. The easiest and most likely causes are:
 - Have you verified the EC Gateway is up and running?
 - Does the *-hst* flag properly reflect the EC Gateway URL in the correct format?
