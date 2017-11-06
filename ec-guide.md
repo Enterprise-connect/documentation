@@ -204,7 +204,7 @@ Beyond these simple fixes, if the 404 error is including the name of your curren
 <A HREF="#top">Back To Top</A>
 ## References and Further Resources
 
-[Enterprise Connect SKD](https://github.com/Enterprise-connect/ec-sdk)
+[Enterprise Connect SKD](https://github.com/Enterprise-connect/ec-sdk)</br>
 [Predix Tool Kit](https://predix-toolkit.run.aws-usw02-pr.ice.predix.io/)</br>
 [Diego Enabler Plugin for CF CLI](https://github.com/cloudfoundry-incubator/Diego-Enabler)</br>
 [Enterprise Connect page on Predix.io](https://www.predix.io/services/service.html?id=2184)</br>
