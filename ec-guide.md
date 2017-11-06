@@ -49,7 +49,7 @@ Navigate the JSON that is returned (later referred to as a 'VCAP') and find the 
 </br></br>
 
 #### Note about the UAA Dashboard:
-The UAA Dashboard can be accessed at https://uaa-dashboard.RUN.YOUR.DOMAIN.PREDIX.IO/ </br></br>
+The UAA Dashboard can be accessed at https://uaa-dashboard.run.YOUR.DOMAIN.predix.io/ </br></br>
 
 <A HREF="#top">Back To Top</A>
 ## Script Templates
@@ -59,7 +59,7 @@ The EC Gateway should be the first agent you push and run.
 ```bash
 ./ecagent_linux_sys -mod gateway -lpt ${PORT} -zon <Predix-Zone-ID> -sst <EC-Service-URI> -tkn <admin-token> -dbg
 ```
-Agents running on Predix will always require the Linux agent binary, but other agents will require the appropriate binary based on the environment for your use case.
+Agents running on Predix will always require the [Linux agent binary](https://github.com/Enterprise-connect/ec-sdk/blob/dist/dist/ecagent_linux_sys.tar.gz), but other agents will require the appropriate binary based on the environment for your use case.
 ##### EC Server Agent
 The EC Server should be the second agent you either push or run - and you will need the EC Gateway's URL to configure the EC Server and EC Client scripts. Once the EC Server agent is running, you will want to verify the 'super connection' with your Gateway, before moving onto pushing or running the EC Client.
 ```bash
@@ -76,6 +76,10 @@ To run an agent, simply configure the appropriate script, and [download the bina
 -pxy <your proxy, no passwords allowed>
 ```
 </br>
+CLI/shell command to extract agents:
+```bash
+tar -xvzf path/to/the/ecagent_OS_sys.tar.gz
+```
 
 <A HREF="#top">Back To Top</A>
 ## Pushing Agents to Predix
@@ -89,7 +93,7 @@ To run an agent, simply configure the appropriate script, and [download the bina
 - You will need to [add and install the Diego CF CLI plug-in](https://github.com/cloudfoundry-incubator/Diego-Enabler) with the commands found under installation
     - Run both commands, regardless of any perceived error after the first
 - Pushing the EC Gateway agent to Predix first is highly recommended
-    - Gateway, then push/run Server, then push/run Client
+    - Push the Gateway, then push/run Server, then push/run Client
     
 #### Copy, paste, update, and utilize the following commands from the directory of your ec.sh, agent binary, and manifest.yml to push your app to predix
 ***Caution!*** If you are re-pushing an existing EC agent app, it is advised you begin with this command:
