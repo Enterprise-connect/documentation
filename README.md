@@ -1,7 +1,7 @@
 # ec-misc-docs
 
 ## Current Documentation
-[EC Setup Guide](https://github.com/Enterprise-connect/ec-misc-docs/blob/pwof_maint/ec-guide.md)
+[EC Setup Guide](https://github.com/Enterprise-connect/ec-misc-docs/blob/master/ec-guide.md)
 
 [EC Cert Generation Flow](https://github.com/Enterprise-connect/ec-misc-docs/blob/master/README.cert.md)
 
