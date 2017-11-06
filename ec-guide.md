@@ -36,7 +36,7 @@ Using the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli
 ```
 cf env <name of app you bound the EC Service to>
 ```
-Navigate the JSON that is returned (later referred to as a 'VCAP') and find the portion reflecting the name of your EC Service. It is recommended that you copy everything starting from the word "credentials", and then paste this in a text document for reference, which will prove to be an invaluable time-saver while configuring your EC Agent scripts. Documenting this information is also crucial in regards to knowledge transfers.</br></br>
+Navigate the JSON that is returned (later referred to as a 'VCAP') and find the portion reflecting the name of your EC Service. It is recommended that you copy everything starting from the word "credentials", and then paste this in a text document for reference, which will prove to be an invaluable time-saver while configuring your EC agent scripts. Documenting this information is also crucial in regards to knowledge transfers.</br></br>
 <A HREF="#top">Back To Top</A>
 
 ## [UAA Client](https://predix-toolkit.run.aws-usw02-pr.ice.predix.io/) Update
@@ -49,26 +49,29 @@ Navigate the JSON that is returned (later referred to as a 'VCAP') and find the 
 </br></br>
 
 #### Note about the UAA Dashboard:
-The UAA Dashboard can be accessed at https://uaa-dashboard.run.your.domain.predix.io/#/login/your-uaa-zone-id </br></br>
+The UAA Dashboard can be accessed at https://uaa-dashboard.run.your.domain.predix.io/ </br></br>
 
 <A HREF="#top">Back To Top</A>
 ## Script Templates
-#### For best results please use the following templates to configure your EC agent scripts:
+#### In the next section, we will discuss pushing EC agents to Predix. The purpose of this portion is to take a look at the EC agent scripts and explain some aspects of their usage.
 ##### EC Gateway Agent
+The EC Gateway should be the first agent you push and run.
 ```bash
 ./ecagent_linux_sys -mod gateway -lpt ${PORT} -zon <Predix-Zone-ID> -sst <EC-Service-URI> -tkn <admin-token> -dbg
 ```
 Agents running on Predix will always require the Linux agent binary, but other agents will require the appropriate binary based on the environment for your use case.
 ##### EC Server Agent
+The EC Server should be the second agent you either push or run - and you will need the EC Gateway's URL to configure the EC Server and EC Client scripts. Once the EC Server agent is running, you will want to verify the 'super connection' with your Gateway, before moving onto pushing or running the EC Client.
 ```bash
-./ecagent_OS_Version -mod server -aid <VCAP_provided> -cid <UAA_client_name> -csc <UAA_client_Secret> -dur 1200 -zon <Predix-Zone-ID> -sst <EC-Service-URI> -hst wss://<Predix_Gateway_App_URL>/agent -oa2 https://<predixUAA_URL>/oauth/token -rht <IP of data source> -rpt 5432 -dbg -hca ${PORT}
+./ecagent_OS_Version -mod server -aid <VCAP_provided> -cid <UAA_client_name> -csc <UAA_client_Secret> -dur 1200 -hst wss://<Predix_Gateway_App_URL>/agent -oa2 https://<predixUAA_URL>/oauth/token -zon <Predix-Zone-ID> -sst <EC-Service-URI> -rht <IP of data source> -rpt 5432 -dbg -hca ${PORT}
 ```
 '${PORT}' will cause Predix to dynamically assign an available port. If ran elsewhere, '${PORT}' will need to be replaced with a port of your choice, which is not in use. Be sure the '-dur' flag used, which represents how often the agent will fetch a new token from the UAA in minutes, is lower/shorter than the 'Token Validity' values on your UAA Client (the agents need to refresh tokens before the UAA Client expires them).
 ##### EC Client Agent
+The EC Client should be the last agent your push or run, as it will have no functionality without the existence of a 'super connection' between the EC Gateway and EC Server agents.
 ```bash
 ./ecagent_OS_Version -mod client -aid <VCAP_provided> -tid <EC Server Agent '-aid'> -cid <UAA_client_name> -csc <UAA_client_Secret> -dur 1200 -hst wss://<Predix_Gateway_App_URL>/agent -oa2 https://<predixUAA_URL>/oauth/token -lpt <Defined_by_You> -dbg
 ```
-Agents not running on Predix may require an additional proxy flag. You will need to identify what proxy is appropriate for your environment, and then add this flag to the end of the script:
+To run an agent, simply configure the appropriate script, and [download the binary](https://github.com/Enterprise-connect/ec-sdk/tree/dist/dist) appropriate to the environment. After extracting the agent to your working directory, simply paste your configured script in your CLI/shell. You can also save them as a script and run the script file. Agents not running on Predix require an additional proxy flag. You will need to identify what proxy is appropriate for your environment, and then add this flag to the end of the script:
 ```bash
 -pxy <your proxy, no passwords allowed>
 ```
@@ -104,7 +107,7 @@ cf scale <Gateway app name> -i 2
 <A HREF="#top">Back To Top</A>
 ## Diego, Scaling, and Managing Complex Use Cases
 ### Diego-enabled Agent Apps on Predix and Scaling
-With the introduction, and requirement, of the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) [Diego plugin](https://github.com/cloudfoundry-incubator/Diego-Enabler) for all EC Agents running on Predix, a powerful feature has been established. This update has provided our users the ability to *scale* their EC Agents running on Predix (this can also be mimicked locally and manually) with a simple command:
+With the introduction, and requirement, of the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) [Diego plugin](https://github.com/cloudfoundry-incubator/Diego-Enabler) for all EC agents running on Predix, a powerful feature has been established. This update has provided our users the ability to *scale* their EC agents running on Predix (this can also be mimicked locally and manually) with a simple command:
 ```bash
 cf scale <app name> -i <number of instances you want to scale to>
 ```
@@ -120,7 +123,7 @@ When you create an EC Service instance, you are provided with two IDs by default
 #### GET admin/accounts/{group-id}
 After obtaining your credentials and logging in, you will find a variety of APIs available to monitor and explore your Service. For the sake of this discussion, we will primarily focus on the *Accounts* family of APIs, which all require authorization in form of 'basic <adm_tkn>'. To view the current credentials for a Service, you can use the GET to /admin/accounts/{group-id}. By default, your 'group-id' will be the zone-id of the Service, which is conveniently located in the Service URI.
 #### POST admin/accounts/{group-id}/add
-The most empowering API in the *Accounts* family is the POST to admin/accounts/{group-id}/add. By providing the required authorization ('basic <adm_tkn>') and the 'group-id' (Service zone-id by default), you can use this API to generate additional IDs which can then be used to configure additional EC Agent scripts.
+The most empowering API in the *Accounts* family is the POST to admin/accounts/{group-id}/add. By providing the required authorization ('basic <adm_tkn>') and the 'group-id' (Service zone-id by default), you can use this API to generate additional IDs which can then be used to configure additional EC agent scripts.
 #### Reusability of IDs
 The IDs are capable of being reused, with some exceptions and limitations.
 - When running multiple EC Servers simultaneously, there needs to be a 1:1 relationship between an ID used for the Server's *-aid* flag and the IP found in the Server's *-rht*
@@ -164,11 +167,11 @@ This error occurs when the EC Client script is configured to connect to an inval
 ### Problem: General connectivity (SuperConnection, etc) can be established but deteriorates immediately on end-to-end usage
 While there are a variety of potential causes for this symptom, the most likely causes are:
 
-- The EC Agents running on Predix were not pushed properly, please see: [Pushing Agents to Predix](#pushing-agents-to-predix) 
-- The EC Agents are not running the same version of the binary, or outdated versions of the binary
-    - While some old binary may work, the EC Service and the Agents are not developed with backwards compatibility in mind, because this is a relatively new product, and there are countless improvements and features we plan on adding.
-    - Because the Agents all use the same core binary, regardless of their behavior based on the *-mod* flag, if one of the Agents is using an older or newer version than the others, the interaction between them may become fundamentally flawed.
-    - The Service requires an update to be compatible with current/recommended Agents
+- The EC agents running on Predix were not pushed properly, please see: [Pushing Agents to Predix](#pushing-agents-to-predix) 
+- The EC agents are not running the same version of the binary, or outdated versions of the binary
+    - While some old binary may work, the EC Service and the agents are not developed with backwards compatibility in mind, because this is a relatively new product, and there are countless improvements and features we plan on adding.
+    - Because the agents all use the same core binary, regardless of their behavior based on the *-mod* flag, if one of the agents is using an older or newer version than the others, the interaction between them may become fundamentally flawed.
+    - The Service requires an update to be compatible with current/recommended agents
 - You have attempted to scale an EC Gateway in Predix Select, which is currently not supported due to the platform
 
 ### Problem: The Service is repeatedly crashing or failing in very consistent intervals
@@ -182,7 +185,7 @@ Start up an EC Server or EC Client. After it starts up and reports the version, 
 
 if (y >= x) { You are going to have issues };
 
-### Problem: EC Server Agent getting 404 trying to reach the EC Gateway
+### Problem: EC Server agent getting 404 trying to reach the EC Gateway
 The solutions to this problem range from "simple fix" to a Predix Support ticket. The easiest and most likely causes are:
 - Have you verified the EC Gateway is up and running?
 - Does the *-hst* flag properly reflect the EC Gateway URL in the correct format?
