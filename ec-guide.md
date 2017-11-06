@@ -38,13 +38,18 @@ cf env <name of app you bound the EC Service to>
 ```
 Navigate the JSON that is returned (later referred to as a 'VCAP') and find the portion reflecting the name of your EC Service. It is recommended that you copy everything starting from the word "credentials", and then paste this in a text document for reference, which will prove to be an invaluable time-saver while configuring your EC Agent scripts. Documenting this information is also crucial in regards to knowledge transfers.</br></br>
 <A HREF="#top">Back To Top</A>
+
 ## [UAA Client](https://predix-toolkit.run.aws-usw02-pr.ice.predix.io/) Update
-#### After the creation of the EC Service, a [UAA Client](https://predix-toolkit.run.aws-usw02-pr.ice.predix.io/) must be provisioned and properly updated 
+
+#### After the creation of the EC Service, a [UAA Client](https://predix-toolkit.run.aws-usw02-pr.ice.predix.io/) must be provisioned and properly updated. This task can be accomplished through the UAA dashboard (see below) as well, if you prefer that over the [Predix Tool Kit](https://predix-toolkit.run.aws-usw02-pr.ice.predix.io/).
 - 'Authorized Grant Types' must be updated to include 'client_credentials' and 'refresh_token'
 - The name of the UAA Client, as well as the UAA Client 'secret', will be needed in configuring EC agent scripts
 - Find 'oauth-scope' in the EC portion of the VCAP, and add this to the 'authorities' (not scope!) of the UAA Client 
 - Take note of the 'Token Validity' for your UAA Client, this will also be important in EC agent configuration
 </br></br>
+
+#### Note about the UAA Dashboard:
+The UAA Dashboard can be accessed at https://uaa-dashboard.run.your.domain.predix.io/#/login/your-uaa-zone-id </br></br>
 
 <A HREF="#top">Back To Top</A>
 ## Script Templates
