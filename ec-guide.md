@@ -79,7 +79,7 @@ To run an agent, simply configure the appropriate script, and [download the bina
 
 <A HREF="#top">Back To Top</A>
 ## Pushing Agents to Predix
-### The following instructions are absolutely critical to overall connectivity and behavior of the agents on Predix:
+### Warning! The following instructions are absolutely critical to overall connectivity and behavior of the agents on Predix.
 - You will need three items(<a href="https://github.com/Enterprise-connect/ec-agent-cf-push-sample/tree/dist" target="_blank">'ec.sh', 'manifest.yml'</a>, as well as the appropriate binary) to properly push an EC agent to Predix:
     1. a [file](https://github.com/Enterprise-connect/ec-agent-cf-push-sample/blob/dist/ec.sh) to start the agent binary with agent-mode specific flags, commonly named 'ec.sh'
     2. the Linux [binary](https://github.com/Enterprise-connect/ec-sdk/blob/dist/dist/ecagent_linux_sys.tar.gz)
@@ -88,6 +88,9 @@ To run an agent, simply configure the appropriate script, and [download the bina
         - be mindful of the 'command:' field, if you choose to name rename 'ec.sh', this will need to be reflected here
 - You will need to [add and install the Diego CF CLI plug-in](https://github.com/cloudfoundry-incubator/Diego-Enabler) with the commands found under installation
     - Run both commands, regardless of any perceived error after the first
+- Pushing the EC Gateway agent to Predix first is highly recommended
+    - Gateway, then push/run Server, then push/run Client
+    
 #### Copy, paste, update, and utilize the following commands from the directory of your ec.sh, agent binary, and manifest.yml to push your app to predix
 ***Caution!*** If you are re-pushing an existing EC agent app, it is advised you begin with this command:
 ```bash
@@ -103,6 +106,7 @@ You now have access to powerful features such as scaling, allowing you to push a
 ```bash
 cf scale <Gateway app name> -i 2
 ```
+Other EC agents running on Predix may be scaled in the same manner. Interesting to note is that for some use cases, scaling the EC Server agent may mitigate the occurrence of connectivity errors caused by outside factors(network lag, timeouts, etc.).
 
 <A HREF="#top">Back To Top</A>
 ## Diego, Scaling, and Managing Complex Use Cases
@@ -196,6 +200,7 @@ Beyond these simple fixes, if the 404 error is including the name of your curren
 <A HREF="#top">Back To Top</A>
 ## References and Further Resources
 
+[Enterprise Connect SKD](https://github.com/Enterprise-connect/ec-sdk)
 [Predix Tool Kit](https://predix-toolkit.run.aws-usw02-pr.ice.predix.io/)</br>
 [Diego Enabler Plugin for CF CLI](https://github.com/cloudfoundry-incubator/Diego-Enabler)</br>
 [Enterprise Connect page on Predix.io](https://www.predix.io/services/service.html?id=2184)</br>
