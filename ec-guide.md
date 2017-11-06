@@ -49,7 +49,7 @@ Navigate the JSON that is returned (later referred to as a 'VCAP') and find the 
 </br></br>
 
 #### Note about the UAA Dashboard:
-The UAA Dashboard can be accessed at https://uaa-dashboard.run.your.domain.predix.io/ </br></br>
+The UAA Dashboard can be accessed at https://uaa-dashboard.RUN.YOUR.DOMAIN.PREDIX.IO/ </br></br>
 
 <A HREF="#top">Back To Top</A>
 ## Script Templates
@@ -65,7 +65,7 @@ The EC Server should be the second agent you either push or run - and you will n
 ```bash
 ./ecagent_OS_Version -mod server -aid <VCAP_provided> -cid <UAA_client_name> -csc <UAA_client_Secret> -dur 1200 -hst wss://<Predix_Gateway_App_URL>/agent -oa2 https://<predixUAA_URL>/oauth/token -zon <Predix-Zone-ID> -sst <EC-Service-URI> -rht <IP of data source> -rpt 5432 -dbg -hca ${PORT}
 ```
-'${PORT}' will cause Predix to dynamically assign an available port. If ran elsewhere, '${PORT}' will need to be replaced with a port of your choice, which is not in use. Be sure the '-dur' flag used, which represents how often the agent will fetch a new token from the UAA in minutes, is lower/shorter than the 'Token Validity' values on your UAA Client (the agents need to refresh tokens before the UAA Client expires them).
+'${PORT}' will cause Predix to dynamically assign an available port. If ran elsewhere, '${PORT}' will need to be replaced with a port of your choice, which is not in use. Be sure the '-dur' flag used, which represents how often the agent will fetch a new token from the UAA in minutes, is lower/shorter than the 'Token Validity' values on your UAA Client (the agents need to refresh tokens before the UAA Client expires them). In the vast majority of cases, using the '-dur' value provided in these scripts will work well.
 ##### EC Client Agent
 The EC Client should be the last agent your push or run, as it will have no functionality without the existence of a 'super connection' between the EC Gateway and EC Server agents.
 ```bash
@@ -80,7 +80,7 @@ To run an agent, simply configure the appropriate script, and [download the bina
 <A HREF="#top">Back To Top</A>
 ## Pushing Agents to Predix
 ### The following instructions are absolutely critical to overall connectivity and behavior of the agents on Predix:
-- You will need at least <a href="https://github.com/Enterprise-connect/ec-agent-cf-push-sample/tree/dist" target="_blank">three items present</a> to properly push an EC agent to Predix:
+- You will need three items(<a href="https://github.com/Enterprise-connect/ec-agent-cf-push-sample/tree/dist" target="_blank">'ec.sh', 'manifest.yml'</a>, as well as the appropriate binary) to properly push an EC agent to Predix:
     1. a [file](https://github.com/Enterprise-connect/ec-agent-cf-push-sample/blob/dist/ec.sh) to start the agent binary with agent-mode specific flags, commonly named 'ec.sh'
     2. the Linux [binary](https://github.com/Enterprise-connect/ec-sdk/blob/dist/dist/ecagent_linux_sys.tar.gz)
     3. a [manifest.yml](https://github.com/Enterprise-connect/ec-agent-cf-push-sample/blob/dist/manifest.yml)
