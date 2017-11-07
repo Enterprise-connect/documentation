@@ -90,7 +90,7 @@ tar -xvzf path/to/the/ecagent_OS_sys.tar.gz
     3. a [manifest.yml](https://github.com/Enterprise-connect/ec-agent-cf-push-sample/blob/dist/manifest.yml)
         - you will need to update the 'name:' field of the manifest to push your app, unless you choose to override that via command line
         - be mindful of the 'command:' field, if you choose to name rename 'ec.sh', this will need to be reflected here
-        - please note the 'no-route' option is set to true, this is necessary or will need to be overridden on the command line
+        - please note the **'no-route'** option is set to **true**, this is necessary or will need to be overridden on the command line
 - You will need to [add and install the Diego CF CLI plug-in](https://github.com/cloudfoundry-incubator/Diego-Enabler) with the commands found under installation
     - Run both commands, regardless of any perceived error after the first
 - Pushing the EC Gateway agent to Predix first is highly recommended
@@ -103,7 +103,7 @@ cf d -r -f <app name>
 ```
 For a fresh app, or after you have deleted the previous app, use the following:
 ```bash
-cf push // you will need to add --no-route if you do not have this option in your manifest 
+cf push
 cf enable-diego <app name>
 cf map-route <app name> <run.your.domain.predix.io> -n <app/route name>
 ```
