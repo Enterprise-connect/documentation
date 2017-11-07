@@ -169,6 +169,11 @@ No, Enterprise Connect does not set any limits on bandwidth usage.
 <A HREF="#top">Back To Top</A>
 ## Observed Problems and Resolutions
 
+### Problem: After scaling the Gateway, the previous connections keep failing
+For our customers in Predix Select environments, Select is currently using a differentt API version (older, [2.62.0](https://apidocs.cloudfoundry.org/244/)) than Predix Basic ([2.75.0](https://apidocs.cloudfoundry.org/253/)). We believe this is the reason the agent behavior is different in Select; specifically, why we observe an inability to scale EC Gateways while maintaining connectivity.
+
+If you are in Basic and having issues after scaling, please verify that you have followed all the steps related to enabling Diego in [Pushing Agents to Predix](#pushing-agents-to-predix). Afterwards, stop your EC Server(s), restart your EC Gateway, and then start your EC Server. If the problem still persists, please open a Predix Support ticket or reach out to us on Flowdock in our [EC Usergroup](https://www.flowdock.com/app/ge-developer-cloud/ec-usergroup) channel. If you haven't joined already, please consider [joining the EC Usergroup](https://www.flowdock.com/invitations/44765fcbae5a36d0eff83c9536f87223044ad748) to stay up-to-date on the the latest from the EC team, as well as contribute to, and beneifit from, engaging with our amazing community of users.
+
 ### Problem: '[EC Client] error while adding the client inst.'
 This error occurs when the EC Client script is configured to connect to an invalid Gateway URL via the *-hst* flag, or when it tries to connect to through an EC Gateway with no active super connections.
 
@@ -204,6 +209,7 @@ Beyond these simple fixes, if the 404 error is including the name of your curren
 <A HREF="#top">Back To Top</A>
 ## References and Further Resources
 
+[Join the EC Usergroup on Flowdock!](https://www.flowdock.com/invitations/44765fcbae5a36d0eff83c9536f87223044ad748)</br>
 [Enterprise Connect SKD](https://github.com/Enterprise-connect/ec-sdk)</br>
 [Predix Tool Kit](https://predix-toolkit.run.aws-usw02-pr.ice.predix.io/)</br>
 [Diego Enabler Plugin for CF CLI](https://github.com/cloudfoundry-incubator/Diego-Enabler)</br>
