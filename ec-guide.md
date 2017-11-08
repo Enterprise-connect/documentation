@@ -211,7 +211,7 @@ Beyond these simple fixes, if the 404 error is including the name of your curren
 ## References and Further Resources
 
 [Join the EC Usergroup on Flowdock!](https://www.flowdock.com/invitations/44765fcbae5a36d0eff83c9536f87223044ad748)</br>
-[Enterprise Connect SKD](https://github.com/Enterprise-connect/ec-sdk)</br>
+[Enterprise Connect SDK](https://github.com/Enterprise-connect/ec-sdk)</br>
 [Predix Tool Kit](https://predix-toolkit.run.aws-usw02-pr.ice.predix.io/)</br>
 [Diego Enabler Plugin for CF CLI](https://github.com/cloudfoundry-incubator/Diego-Enabler)</br>
 [Enterprise Connect page on Predix.io](https://www.predix.io/services/service.html?id=2184)</br>
