@@ -90,6 +90,7 @@ tar -xvzf path/to/the/ecagent_OS_sys.tar.gz
     3. a [manifest.yml](https://github.com/Enterprise-connect/ec-agent-cf-push-sample/blob/dist/manifest.yml)
         - you will need to update the 'name:' field of the manifest to push your app, unless you choose to override that via command line
         - be mindful of the 'command:' field, if you choose to name rename 'ec.sh', this will need to be reflected here
+        - please note the **'no-route'** option is set to **true**, this is necessary or will need to be overridden on the command line
 - You will need to [add and install the Diego CF CLI plug-in](https://github.com/cloudfoundry-incubator/Diego-Enabler) with the commands found under installation
     - Run both commands, regardless of any perceived error after the first
 - Pushing the EC Gateway agent to Predix first is highly recommended
@@ -102,7 +103,7 @@ cf d -r -f <app name>
 ```
 For a fresh app, or after you have deleted the previous app, use the following:
 ```bash
-cf push --no-route 
+cf push
 cf enable-diego <app name>
 cf map-route <app name> <run.your.domain.predix.io> -n <app/route name>
 ```
@@ -210,7 +211,7 @@ Beyond these simple fixes, if the 404 error is including the name of your curren
 ## References and Further Resources
 
 [Join the EC Usergroup on Flowdock!](https://www.flowdock.com/invitations/44765fcbae5a36d0eff83c9536f87223044ad748)</br>
-[Enterprise Connect SKD](https://github.com/Enterprise-connect/ec-sdk)</br>
+[Enterprise Connect SDK](https://github.com/Enterprise-connect/ec-sdk)</br>
 [Predix Tool Kit](https://predix-toolkit.run.aws-usw02-pr.ice.predix.io/)</br>
 [Diego Enabler Plugin for CF CLI](https://github.com/cloudfoundry-incubator/Diego-Enabler)</br>
 [Enterprise Connect page on Predix.io](https://www.predix.io/services/service.html?id=2184)</br>
