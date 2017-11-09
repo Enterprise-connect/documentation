@@ -107,7 +107,7 @@ cf push
 cf enable-diego <app name>
 cf map-route <app name> <run.your.domain.predix.io> -n <app/route name>
 ```
-You now have access to powerful features such as scaling, allowing you to push a single Gateway app, and then scale it up - each Gateway instance able to handle 50 concurrent sessions! In fact, the EC team considers it best practice to scale your Gateway up to at least two instances:
+You now have access to powerful features such as scaling(**not supported in Predix Select environment!**), allowing you to push a single Gateway app, and then scale it up - each Gateway instance able to handle 50 concurrent sessions! In fact, the EC team considers it best practice to scale your Gateway up to at least two instances:
 ```bash
 cf scale <Gateway app name> -i 2
 ```
@@ -115,6 +115,7 @@ Other EC agents running on Predix may be scaled in the same manner. Interesting 
 
 <A HREF="#top">Back To Top</A>
 ## Diego, Scaling, and Managing Complex Use Cases
+### (Scaling EC Agents on Select currently producing unexpected behavior!)
 ### Diego-enabled Agent Apps on Predix and Scaling
 With the introduction, and requirement, of the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) [Diego plugin](https://github.com/cloudfoundry-incubator/Diego-Enabler) for all EC agents running on Predix, a powerful feature has been established. This update has provided our users the ability to *scale* their EC agents running on Predix (this can also be mimicked locally and manually) with a simple command:
 ```bash
