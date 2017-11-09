@@ -71,6 +71,7 @@ The EC Client should be the last agent your push or run, as it will have no func
 ```bash
 ./ecagent_OS_Version -mod client -aid <VCAP_provided> -tid <EC Server Agent '-aid'> -cid <UAA_client_name> -csc <UAA_client_Secret> -dur 1200 -hst wss://<Predix_Gateway_App_URL>/agent -oa2 https://<predixUAA_URL>/oauth/token -lpt <Defined_by_You> -dbg
 ```
+##### Running Agents "Locally" with Relevant Binary
 To run an agent, simply configure the appropriate script, and [download the binary](https://github.com/Enterprise-connect/ec-sdk/tree/dist/dist) appropriate to the environment. After extracting the agent to your working directory, simply paste your configured script in your CLI/shell. You can also save them as a script and run the script file. Agents not running on Predix require an additional proxy flag. You will need to identify what proxy is appropriate for your environment, and then add this flag to the end of the script:
 ```bash
 -pxy <your proxy, no passwords allowed>
@@ -87,7 +88,6 @@ tar -xvzf path/to/the/ecagent_OS_sys.tar.gz
 - You will need three items(<a href="https://github.com/Enterprise-connect/ec-agent-cf-push-sample/tree/dist" target="_blank">'ec.sh', 'manifest.yml'</a>, as well as the appropriate binary) to properly push an EC agent to Predix:
     1. a [file](https://github.com/Enterprise-connect/ec-agent-cf-push-sample/blob/dist/ec.sh) to start the agent binary with agent-mode specific flags, commonly named 'ec.sh'
     2. the Linux [binary](https://github.com/Enterprise-connect/ec-sdk/blob/dist/dist/ecagent_linux_sys.tar.gz)
-        - [All agent binary files](https://github.com/Enterprise-connect/ec-sdk/tree/dist/dist)
     3. a [manifest.yml](https://github.com/Enterprise-connect/ec-agent-cf-push-sample/blob/dist/manifest.yml)
         - you will need to update the 'name:' field of the manifest to push your app, unless you choose to override that via command line
         - be mindful of the 'command:' field, if you choose to name rename 'ec.sh', this will need to be reflected here
