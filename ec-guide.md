@@ -53,7 +53,7 @@ The UAA Dashboard can be accessed at https://uaa-dashboard.run.YOUR.DOMAIN.predi
 
 <A HREF="#top">Back To Top</A>
 ## Script Templates
-#### In the next section, we will discuss pushing EC agents to Predix. The purpose of this portion is to take a look at the EC agent scripts and explain some aspects of their usage.
+#### In the next section, we will discuss pushing EC agents to Predix. The purpose of this portion is to take a look at the EC agent scripts and explain some aspects of their usage. The following sections will guide your through configuring EC agent scripts as well as an implied directory structure. There is an [EC SDK](https://github.com/Enterprise-connect/ec-sdk) available to work from, but this repo comes with a lot of example code and may be a large or cumbersome download depending on your network connection speeds.
 ##### EC Gateway Agent
 The EC Gateway should be the first agent you push and run.
 ```bash
