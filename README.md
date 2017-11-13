@@ -5,7 +5,7 @@
 
 [EC Cert Generation Flow](https://github.com/Enterprise-connect/ec-misc-docs/blob/master/README.cert.md)
 
-[Plugins: VLAN and TLS]
+[Plugins: VLAN and TLS](https://github.com/Enterprise-connect/ec-misc-docs/blob/pwof_maint/plugins.md)
 
 
 ## Antiquated Documentation
