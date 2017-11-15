@@ -2,6 +2,7 @@
     
 # Comprehensive Guide to Enterprise Connect
 
+* [Foreword](#foreword)
 * [Service Creation](#service-creation)
 * [UAA Client Update](#uaa-client-update)
 * [Script Templates](#script-templates) 
@@ -11,6 +12,11 @@
 * [FAQs](#faqs) 
 * [Observed Problems and Resolutions](#observed-problems-and-resolutions) 
 * [References and Further Resources](#references-and-further-resources)
+
+## Foreword
+This guide is to serve as a means, for users who are new to Enterprise Connect (EC), to gain a cursory understanding of how to set up EC and how EC should ultimately behave. It is important to understand that due to the multitude of moving parts, the security measures EC implements, and the lack of predictability and/or entropy of certain outside factors, that adherence to the steps outlined in this guide is absolutely crucial, to at the very least begin to isolate any connectivity issues that may arise.</br> 
+
+For the clear and staggering majority of users, after a quality configuration is established, EC will hold up its end of the bargain and deliver consistent and stable connectivity between two remote entities. We strongly encourage that users submit, as "Issues", any problems they face using this guide or with EC in general, either to this repo or to our [SDK](https://github.com/Enterprise-connect/ec-sdk). This will notify our team and allow us to address the issue. If we deem this is a reasonably reproducable issue for other users that is not a result of faulty EC behavior, we will add this to our knowledge base here (FAQs, Problems/Resolutions below).
 
 ## Service Creation
 #### The Enterprise Connect Service requires a valid [UAA Instance](https://www.predix.io/services/service.html?id=1172) on Predix
