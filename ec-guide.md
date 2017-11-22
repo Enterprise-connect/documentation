@@ -18,6 +18,8 @@ This guide is to serve as a means, for users who are new to Enterprise Connect (
 
 For the clear and staggering majority of users, after a quality configuration is established, EC will hold up its end of the bargain and deliver consistent and stable connectivity between two remote entities. We strongly encourage that users submit, as "Issues", any problems they face using this guide or with EC in general, either to this repo or to our [SDK](https://github.com/Enterprise-connect/ec-sdk). This will notify our team and allow us to address the issue. If we deem this is a reasonably reproducable issue for other users that is not a result of faulty EC behavior, we will add this to our knowledge base here (FAQs, Problems/Resolutions below).
 
+This guide also assumes (and suggests) a shell-centric approach. While there are web UIs available to acclomplish many of the tasks presented, we recommend using the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html), as this will make your future as an Enterprise Connect expert much brighter. There is ample [CF CLI documentation and reference](https://docs.cloudfoundry.org/cf-cli/cf-help.html) available, but for the purpose of this guide, you will only need to utilize a few basic commands pertaining to apps and services.
+
 ## Service Creation
 #### The Enterprise Connect Service requires a valid [UAA Instance](https://www.predix.io/services/service.html?id=1172) on Predix
 Using the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html), use the following command to view Services and Plans in CloudFoundry Marketplace:
@@ -221,6 +223,8 @@ Beyond these simple fixes, if the 404 error is including the name of your curren
 [Join the EC Usergroup on Flowdock!](https://www.flowdock.com/invitations/44765fcbae5a36d0eff83c9536f87223044ad748)</br>
 [Enterprise Connect SDK](https://github.com/Enterprise-connect/ec-sdk)</br>
 [Predix Tool Kit](https://predix-toolkit.run.aws-usw02-pr.ice.predix.io/)</br>
+[CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)</br>
+[CF CLI Docs](https://docs.cloudfoundry.org/cf-cli/)</br>
 [Diego Enabler Plugin for CF CLI](https://github.com/cloudfoundry-incubator/Diego-Enabler)</br>
 [Enterprise Connect page on Predix.io](https://www.predix.io/services/service.html?id=2184)</br>
 [User Account and Authentication page on Predix.io](https://www.predix.io/services/service.html?id=1172)</br>
