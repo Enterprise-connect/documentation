@@ -91,6 +91,8 @@ tar -xvzf path/to/the/ecagent_OS_sys.tar.gz
 ```
 ##### Simple Directory Structure
 This is a good structure for keeping your agent configurations organized:
+
+
 ```
 enterprise_connect
 │   notes.txt             
