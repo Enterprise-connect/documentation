@@ -60,8 +60,8 @@ Navigate the JSON that is returned (later referred to as a 'VCAP') and find the 
 The UAA Dashboard can be accessed at https://uaa-dashboard.run.YOUR.DOMAIN.predix.io/ </br></br>
 
 <A HREF="#top">Back To Top</A>
-## Script Templates
-#### In the next section, we will discuss pushing EC agents to Predix. The purpose of this portion is to take a look at the EC agent scripts and explain some aspects of their usage. The following sections will guide your through configuring EC agent scripts as well as an implied directory structure. There is an [EC SDK](https://github.com/Enterprise-connect/ec-sdk) available to work from, but this repo comes with a lot of example code and may be a large or cumbersome download depending on your network connection speeds.
+## EC Agent Script Explanations and Templates
+#### In the [next section](#pushing-agents-to-predix), we will discuss pushing EC agents to Predix. The purpose of this portion is to take a look at the EC agent scripts and explain some aspects of their usage. The following sections will guide your through configuring EC agent scripts as well as an implied directory structure. There is an [EC SDK](https://github.com/Enterprise-connect/ec-sdk) available to work from, but this repo comes with a lot of example code and may be a large or cumbersome download depending on your network connection speeds.
 ##### EC Gateway Agent
 The EC Gateway should be the first agent you push and run.
 ```bash
@@ -88,6 +88,30 @@ To run an agent, simply configure the appropriate script, and [download the bina
 CLI/shell command to extract agents:
 ```bash
 tar -xvzf path/to/the/ecagent_OS_sys.tar.gz
+```
+##### Simple Directory Structure
+This is a good structure for keeping your agent configurations organized:
+```
+enterprise_connect
+│   notes.txt               // very useful for maintain Service info
+│   uaa.json          
+│
+└───ec_gateway
+│   │   ec.sh
+│   │   manifest.yml
+│   │   ecagent_linux_sys
+│
+│   
+└───ec_server
+│   │   ec.sh
+│   │   manifest.yml        // if running on Predix
+│   │   ecagent_envOS_sys   // linux for Predix
+│
+│
+└───ec_client
+    │   ec.sh               
+    │   manifest.yml        // if running on Predix
+    │   ecagent_envOS_sys   // linux on Predix
 ```
 
 <A HREF="#top">Back To Top</A>
