@@ -5,7 +5,7 @@
 * [Foreword](#foreword)
 * [Service Creation](#service-creation)
 * [UAA Client Update](#uaa-client-update)
-* [Script Templates](#ec-agent-script-explanation-and-templates) 
+* [Script Templates](#ec-agent-script-explanations-and-templates) 
 * [Pushing Agents to Predix](#pushing-agents-to-predix) 
 * [Diego, Scaling, and Managing Complex Use Cases](#diego-scaling-and-managing-complex-use-cases)
     * [Reusability of IDs](#reusability-of-ids)
@@ -81,11 +81,13 @@ The EC Client should be the last agent your push or run, as it will have no func
 ```
 ##### Running Agents "Locally" with Relevant Binary
 To run an agent, simply configure the appropriate script, and [download the binary](https://github.com/Enterprise-connect/ec-sdk/tree/dist/dist) appropriate to the environment. After extracting the agent to your working directory, simply paste your configured script in your CLI/shell. You can also save them as a script and run the script file. Agents not running on Predix require an additional proxy flag. You will need to identify what proxy is appropriate for your environment, and then add this flag to the end of the script:
+
 ```bash
 -pxy <your proxy, no passwords allowed>
 ```
 </br>
 CLI/shell command to extract agents:
+
 ```bash
 tar -xvzf path/to/the/ecagent_OS_sys.tar.gz
 ```
