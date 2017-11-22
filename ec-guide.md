@@ -5,11 +5,11 @@
 * [Foreword](#foreword)
 * [Service Creation](#service-creation)
 * [UAA Client Update](#uaa-client-update)
-* [Script Templates](#script-templates) 
+* [Script Templates](#ec-agent-script-explanation-and-templates) 
 * [Pushing Agents to Predix](#pushing-agents-to-predix) 
 * [Diego, Scaling, and Managing Complex Use Cases](#diego-scaling-and-managing-complex-use-cases)
     * [Reusability of IDs](#reusability-of-ids)
-* [FAQs](#faqs) 
+* [FAQs](#faqs)
 * [Observed Problems and Resolutions](#observed-problems-and-resolutions) 
 * [References and Further Resources](#references-and-further-resources)
 
@@ -93,7 +93,7 @@ tar -xvzf path/to/the/ecagent_OS_sys.tar.gz
 This is a good structure for keeping your agent configurations organized:
 ```
 enterprise_connect
-│   notes.txt               // very useful for maintain Service info
+│   notes.txt             
 │   uaa.json          
 │
 └───ec_gateway
