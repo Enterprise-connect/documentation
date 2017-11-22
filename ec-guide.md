@@ -85,12 +85,13 @@ To run an agent, simply configure the appropriate script, and [download the bina
 ```bash
 -pxy <your proxy, no passwords allowed>
 ```
-</br>
+
 CLI/shell command to extract agents:
 
 ```bash
 tar -xvzf path/to/the/ecagent_OS_sys.tar.gz
 ```
+
 ##### Simple Directory Structure
 This is a good structure for keeping your agent configurations organized:
 
