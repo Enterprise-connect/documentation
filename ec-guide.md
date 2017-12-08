@@ -5,11 +5,11 @@
 * [Foreword](#foreword)
 * [Service Creation](#service-creation)
 * [UAA Client Update](#uaa-client-update)
-* [Script Templates](#script-templates) 
+* [Script Templates](#ec-agent-script-explanations-and-templates) 
 * [Pushing Agents to Predix](#pushing-agents-to-predix) 
 * [Diego, Scaling, and Managing Complex Use Cases](#diego-scaling-and-managing-complex-use-cases)
     * [Reusability of IDs](#reusability-of-ids)
-* [FAQs](#faqs) 
+* [FAQs](#faqs)
 * [Observed Problems and Resolutions](#observed-problems-and-resolutions) 
 * [References and Further Resources](#references-and-further-resources)
 
@@ -60,8 +60,8 @@ Navigate the JSON that is returned (later referred to as a 'VCAP') and find the 
 The UAA Dashboard can be accessed at https://uaa-dashboard.run.YOUR.DOMAIN.predix.io/ </br></br>
 
 <A HREF="#top">Back To Top</A>
-## Script Templates
-#### In the next section, we will discuss pushing EC agents to Predix. The purpose of this portion is to take a look at the EC agent scripts and explain some aspects of their usage. The following sections will guide your through configuring EC agent scripts as well as an implied directory structure. There is an [EC SDK](https://github.com/Enterprise-connect/ec-sdk) available to work from, but this repo comes with a lot of example code and may be a large or cumbersome download depending on your network connection speeds.
+## EC Agent Script Explanations and Templates
+#### In the [next section](#pushing-agents-to-predix), we will discuss pushing EC agents to Predix. The purpose of this portion is to take a look at the EC agent scripts and explain some aspects of their usage. The following sections will guide your through configuring EC agent scripts as well as an implied directory structure. There is an [EC SDK](https://github.com/Enterprise-connect/ec-sdk) available to work from, but this repo comes with a lot of example code and may be a large or cumbersome download depending on your network connection speeds.
 ##### EC Gateway Agent
 The EC Gateway should be the first agent you push and run.
 ```bash
@@ -81,13 +81,42 @@ The EC Client should be the last agent your push or run, as it will have no func
 ```
 ##### Running Agents "Locally" with Relevant Binary
 To run an agent, simply configure the appropriate script, and [download the binary](https://github.com/Enterprise-connect/ec-sdk/tree/dist/dist) appropriate to the environment. After extracting the agent to your working directory, simply paste your configured script in your CLI/shell. You can also save them as a script and run the script file. Agents not running on Predix require an additional proxy flag. You will need to identify what proxy is appropriate for your environment, and then add this flag to the end of the script:
+
 ```bash
 -pxy <your proxy, no passwords allowed>
 ```
-</br>
+
 CLI/shell command to extract agents:
+
 ```bash
 tar -xvzf path/to/the/ecagent_OS_sys.tar.gz
+```
+
+##### Simple Directory Structure
+This is a good structure for keeping your agent configurations organized:
+
+
+```
+enterprise_connect
+│   notes.txt             
+│   uaa.json          
+│
+└───ec_gateway
+│   │   ec.sh
+│   │   manifest.yml
+│   │   ecagent_linux_sys
+│
+│   
+└───ec_server
+│   │   ec.sh
+│   │   manifest.yml        // if running on Predix
+│   │   ecagent_envOS_sys   // linux for Predix
+│
+│
+└───ec_client
+    │   ec.sh               
+    │   manifest.yml        // if running on Predix
+    │   ecagent_envOS_sys   // linux on Predix
 ```
 
 <A HREF="#top">Back To Top</A>
@@ -112,9 +141,10 @@ cf d -r -f <app name>
 ```
 For a fresh app, or after you have deleted the previous app, use the following:
 ```bash
-cf push
+cf push --no-start
 cf enable-diego <app name>
 cf map-route <app name> <run.your.domain.predix.io> -n <app/route name>
+cf start <app name>
 ```
 You now have access to powerful features such as scaling(**not supported in Predix Select environment!**), allowing you to push a single Gateway app, and then scale it up - each Gateway instance able to handle 50 concurrent sessions! In fact, the EC team considers it best practice to scale your Gateway up to at least two instances:
 ```bash
