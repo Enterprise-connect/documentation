@@ -141,9 +141,10 @@ cf d -r -f <app name>
 ```
 For a fresh app, or after you have deleted the previous app, use the following:
 ```bash
-cf push
+cf push --no-start
 cf enable-diego <app name>
 cf map-route <app name> <run.your.domain.predix.io> -n <app/route name>
+cf start <app name>
 ```
 You now have access to powerful features such as scaling(**not supported in Predix Select environment!**), allowing you to push a single Gateway app, and then scale it up - each Gateway instance able to handle 50 concurrent sessions! In fact, the EC team considers it best practice to scale your Gateway up to at least two instances:
 ```bash
