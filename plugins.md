@@ -18,7 +18,13 @@ A modified Server script to run on Predix (notice the *-plg* flag!):
 
 ```bash
 #!/bin/bash
-./ecagent_linux_sys -mod server -aid q1w2e3 -cid myuaaclient -csc clientsecret -dur 1200 -hst wss://some-example-gateway.run.aws-usw02-pr.ice.predix.io/agent -oa2 https://normally-a-valid-uuid-here.predix-uaa.run.aws-usw02-pr.ice.predix.io/oauth/token -zon your-ec-service-zone-id -sst https://your-ec-service-zone-id.run.aws-usw02-pr.ice.predix.io -rht some.example.data.source.predix.io -rpt 7979 -dbg -hca ${PORT} -plg tls
+./ecagent_linux_sys -mod server -aid q1w2e3 \
+-cid myuaaclient -csc clientsecret -dur 1200 \
+-oa2 https://normally-a-valid-uuid-here.predix-uaa.run.aws-usw02-pr.ice.predix.io/oauth/token \
+-hst wss://some-example-gateway.run.aws-usw02-pr.ice.predix.io/agent \
+-zon your-ec-service-zone-id -sst https://your-ec-service-zone-id.run.aws-usw02-pr.ice.predix.io \
+-rht some.example.data.source.predix.io -rpt 7979 \
+-dbg -hca ${PORT} -plg tls
 ```
 
 For a Server running on Predix (or Linux machine), you might have a plugins.yml file that looks like this:
