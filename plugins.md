@@ -53,8 +53,9 @@ After both are configured properly, you may have a directory structure that look
     │   ecagent_linux_sys
     │   plugins.yml
     │   tls_linux           
-
 ```
+
+Notice the agent binary and the tls binary are both Linux, because they will be running in the same environment, they need to correspond in that regard.
 
 
 <A HREF="#top">Back To Top</A>
