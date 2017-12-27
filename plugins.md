@@ -44,6 +44,18 @@ ec-plugin:
  - ips: 
 ```
 
+After both are configured properly, you may have a directory structure that looks something like this:
+
+```
+/ec_server
+    │   ec.sh
+    │   manifest.yml        
+    │   ecagent_linux_sys
+    │   plugins.yml
+    │   tls_linux           
+
+```
+
 
 <A HREF="#top">Back To Top</A>
 ## VLAN
