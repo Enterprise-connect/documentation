@@ -128,7 +128,6 @@ enterprise_connect
     3. a [manifest.yml](https://github.com/Enterprise-connect/ec-agent-cf-push-sample/blob/dist/manifest.yml)
         - you will need to update the 'name:' field of the manifest to push your app, unless you choose to override that via command line
         - be mindful of the 'command:' field, if you choose to name rename 'ec.sh', this will need to be reflected here
-        - please note the **'no-route'** option is set to **true**, this is necessary or will need to be overridden on the command line
 - Pushing the EC Gateway agent to Predix first is highly recommended
     - Push the Gateway, then push/run Server, then push/run Client
     
