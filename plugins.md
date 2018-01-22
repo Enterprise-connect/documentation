@@ -4,9 +4,59 @@
 * [TLS](#tls)
 * [VLAN](#vlan)
 
+To take advantage of either plugin's functionality, a user must provide a 'plugins.yml' in their agent directory, as well as the relevant plugin binary, explained below.
+
 ## TLS
-### Features
-Some explanation.
+
+### Usage
+
+Some slight changes need to be made to the EC Server script to enable the plugin and signal its usage. Nothing needs to be done to the 'manifest.yml' for the Server agent itsef (if pushing to Predix). Just like the agents themselves, there are binary executables associated with Linux, Windows and Mac.
+
+### Examples
+
+A modified Server script to run on Predix (notice the *-plg* flag!):
+
+```bash
+#!/bin/bash
+./ecagent_linux_sys -mod server -aid q1w2e3 \
+-cid myuaaclient -csc clientsecret -dur 1200 \
+-oa2 https://normally-a-valid-uuid-here.predix-uaa.run.aws-usw02-pr.ice.predix.io/oauth/token \
+-hst wss://some-example-gateway.run.aws-usw02-pr.ice.predix.io/agent \
+-zon your-ec-service-zone-id -sst https://your-ec-service-zone-id.run.aws-usw02-pr.ice.predix.io \
+-rht some.example.data.source.predix.io -rpt 7979 \
+-dbg -hca ${PORT} -plg tls
+```
+
+For a Server running on Predix (or Linux machine), you might have a plugins.yml file that looks like this:
+
+```yaml
+ec-plugin:
+ tls:
+ - status: Active
+   schema: https
+   hostname: some.example.data.source.predix.io
+   tlsport: "443"
+   proxy: ""
+   port: "7979"
+   command: ./tls_linux -v
+ vlan:
+ - status: Inactive
+ - ips: 
+```
+
+After both are configured properly, you may have a directory structure that looks something like this:
+
+```
+/ec_server
+    │   ec.sh
+    │   manifest.yml        
+    │   ecagent_linux_sys
+    │   plugins.yml
+    │   tls_linux           
+```
+
+Notice the agent binary and the tls binary are both Linux, because they will be running in the same environment, they need to correspond in that regard.
+
 
 <A HREF="#top">Back To Top</A>
 ## VLAN

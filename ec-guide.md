@@ -128,9 +128,6 @@ enterprise_connect
     3. a [manifest.yml](https://github.com/Enterprise-connect/ec-agent-cf-push-sample/blob/dist/manifest.yml)
         - you will need to update the 'name:' field of the manifest to push your app, unless you choose to override that via command line
         - be mindful of the 'command:' field, if you choose to name rename 'ec.sh', this will need to be reflected here
-        - please note the **'no-route'** option is set to **true**, this is necessary or will need to be overridden on the command line
-- You will need to [add and install the Diego CF CLI plug-in](https://github.com/cloudfoundry-incubator/Diego-Enabler) with the commands found under installation
-    - Run both commands, regardless of any perceived error after the first
 - Pushing the EC Gateway agent to Predix first is highly recommended
     - Push the Gateway, then push/run Server, then push/run Client
     
@@ -141,10 +138,8 @@ cf d -r -f <app name>
 ```
 For a fresh app, or after you have deleted the previous app, use the following:
 ```bash
-cf push --no-start
-cf enable-diego <app name>
-cf map-route <app name> <run.your.domain.predix.io> -n <app/route name>
-cf start <app name>
+cd /location/of/your/ec/agent/app/files
+cf push
 ```
 You now have access to powerful features such as scaling(**not supported in Predix Select environment!**), allowing you to push a single Gateway app, and then scale it up - each Gateway instance able to handle 50 concurrent sessions! In fact, the EC team considers it best practice to scale your Gateway up to at least two instances:
 ```bash
@@ -156,7 +151,7 @@ Other EC agents running on Predix may be scaled in the same manner. Interesting 
 ## Diego, Scaling, and Managing Complex Use Cases
 ### (Scaling EC Agents on Select currently producing unexpected behavior!)
 ### Diego-enabled Agent Apps on Predix and Scaling
-With the introduction, and requirement, of the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) [Diego plugin](https://github.com/cloudfoundry-incubator/Diego-Enabler) for all EC agents running on Predix, a powerful feature has been established. This update has provided our users the ability to *scale* their EC agents running on Predix (this can also be mimicked locally and manually) with a simple command:
+Now that Diego is the default architecture on CF1, pushing EC Agent apps has become much simpler while giving users better flexibility to manage different use cases. This update has provided our users the ability to *scale* their EC agents running on Predix (this can also be mimicked locally and manually) with a simple command:
 ```bash
 cf scale <app name> -i <number of instances you want to scale to>
 ```
@@ -213,7 +208,7 @@ No, Enterprise Connect does not set any limits on bandwidth usage.
 ### Problem: After scaling the Gateway, the previous connections keep failing
 For our customers in Predix Select environments, Select is currently using a differentt API version (older, [2.62.0](https://apidocs.cloudfoundry.org/244/)) than Predix Basic ([2.75.0](https://apidocs.cloudfoundry.org/253/)). We believe this is the reason the agent behavior is different in Select; specifically, why we observe an inability to scale EC Gateways while maintaining connectivity.
 
-If you are in Basic and having issues after scaling, please verify that you have followed all the steps related to enabling Diego in [Pushing Agents to Predix](#pushing-agents-to-predix). Afterwards, stop your EC Server(s), restart your EC Gateway, and then start your EC Server. If the problem still persists, please open a Predix Support ticket or reach out to us on Flowdock in our [EC Usergroup](https://www.flowdock.com/app/ge-developer-cloud/ec-usergroup) channel. If you haven't joined already, please consider [joining the EC Usergroup](https://www.flowdock.com/invitations/44765fcbae5a36d0eff83c9536f87223044ad748) to stay up-to-date on the the latest from the EC team, as well as contribute to, and beneifit from, engaging with our amazing community of users.
+Stop your EC Server(s), restart your EC Gateway, and then start your EC Server. If the problem still persists, please open a Predix Support ticket or reach out to us on Flowdock in our [EC Usergroup](https://www.flowdock.com/app/ge-developer-cloud/ec-usergroup) channel. If you haven't joined already, please consider [joining the EC Usergroup](https://www.flowdock.com/invitations/44765fcbae5a36d0eff83c9536f87223044ad748) to stay up-to-date on the the latest from the EC team, as well as contribute to, and beneifit from, engaging with our amazing community of users.
 
 ### Problem: '[EC Client] error while adding the client inst.'
 This error occurs when the EC Client script is configured to connect to an invalid Gateway URL via the *-hst* flag, or when it tries to connect to through an EC Gateway with no active super connections.
@@ -254,8 +249,7 @@ Beyond these simple fixes, if the 404 error is including the name of your curren
 [Enterprise Connect SDK](https://github.com/Enterprise-connect/ec-sdk)</br>
 [Predix Tool Kit](https://predix-toolkit.run.aws-usw02-pr.ice.predix.io/)</br>
 [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)</br>
-[CF CLI Docs](https://docs.cloudfoundry.org/cf-cli/)</br>
-[Diego Enabler Plugin for CF CLI](https://github.com/cloudfoundry-incubator/Diego-Enabler)</br>
+[CF CLI Docs](https://docs.cloudfoundry.org/cf-cli/)</br>  
 [Enterprise Connect page on Predix.io](https://www.predix.io/services/service.html?id=2184)</br>
 [User Account and Authentication page on Predix.io](https://www.predix.io/services/service.html?id=1172)</br>
 
