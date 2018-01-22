@@ -10,7 +10,6 @@
 ## SOPs
 [Blue / Green Service Upgrades](https://github.com/Enterprise-connect/ec-misc-docs/blob/master/upgradeSOPs.md)
 
-
 ## Antiquated Documentation
 [EC Original](https://github.com/Enterprise-connect/ec-misc-docs/blob/master/README.origin.md)
 
