@@ -8,7 +8,7 @@
 [Plugins: VLAN and TLS](https://github.com/Enterprise-connect/ec-misc-docs/blob/pwof_maint/plugins.md)
 
 ## SOPs
-[Blue / Green Service Upgrades]
+[Blue / Green Service Upgrades](https://github.com/Enterprise-connect/ec-misc-docs/blob/master/upgradeSOPs.md)
 
 
 ## Antiquated Documentation
