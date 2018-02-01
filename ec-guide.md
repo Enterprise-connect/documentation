@@ -205,6 +205,9 @@ No, Enterprise Connect does not set any limits on bandwidth usage.
 <A HREF="#top">Back To Top</A>
 ## Observed Problems and Resolutions
 
+### Problem: My database connection is failing or intermittent, I believe EC is failing
+Typically, when there is a problem with EC, you will have no connectivity whatsoever. You will not be able to login to a DB via PG Admin, or anything of the sort. If you have some connectivity but scripts and/or batch jobs are failing to complete - be sure to check for locks on processes within the DB itself.
+
 ### Problem: After scaling the Gateway, the previous connections keep failing
 For our customers in Predix Select environments, Select is currently using a differentt API version (older, [2.62.0](https://apidocs.cloudfoundry.org/244/)) than Predix Basic ([2.75.0](https://apidocs.cloudfoundry.org/253/)). We believe this is the reason the agent behavior is different in Select; specifically, why we observe an inability to scale EC Gateways while maintaining connectivity.
 
