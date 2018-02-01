@@ -1,6 +1,6 @@
 <A NAME="top">
     
-# Blue-Green Service Upgrade Process
+# Blue-Green Service Upgrade Process (INCOMPLETE / IN-PROGRESS 2/1/2018)
 
 ## Sec 1 : Purpose
 
@@ -30,4 +30,5 @@ This procedure applies to updating any existing Enterprise Connect Service withi
 - Service version 
 
 ### 4. Run the build
-Assuming the build is successful, at this point the user/customer should be manually notified that an updated service has been provisioned for their use and testing. The EC team member should outline the implications. 
+Assuming the build is successful, at this point the user/customer should be manually notified that an updated service has been provisioned for their use and testing. The EC team member should outline the implications.
+
