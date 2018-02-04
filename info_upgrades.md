@@ -1,4 +1,5 @@
-<A NAME="top">   
+<A NAME="top"> 
+  
 # Blue-Green Service Upgrade Process for Users
 
 ## Purpose
