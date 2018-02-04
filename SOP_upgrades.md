@@ -4,7 +4,7 @@
 
 ## Sec 1 : Purpose
 
-Enterprise Connect employs a "[Blue-Green](https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html)" approach to upgrading existing services for its users. This document endeavors to provide insight to that procedure for our users, as well as to serve as a how-to guide internally, for posterity. 
+Enterprise Connect employs a "[Blue-Green](https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html)" approach to upgrading existing services for its users. This is the documentation for the process.
 
 ## Sec 2 : Scope
 
