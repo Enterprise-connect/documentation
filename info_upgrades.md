@@ -1,5 +1,5 @@
 <A NAME="top"> 
-  
+
 # Blue-Green Service Upgrade Process for Users
 
 ## Purpose
@@ -29,8 +29,9 @@ There is one EC Service, and one route.
 #### After Step 1, two EC Services exist:
 There are now two EC Services, and two routes, with the new EC Service using a temporary route.
 
-<A NAME="step1">
-![Step 1](./docs/step1.png)
+
+
+![Step 1](./docs/step1.png) <A NAME="step1">
 
 </br>  
 </br>
