@@ -26,12 +26,12 @@ There is one EC Service, and one route.
 </br>
 
 
-#### After Step 1, two EC Services exist:
+#### After Step 1, two EC Services exist: <A NAME="step1">
 There are now two EC Services, and two routes, with the new EC Service using a temporary route.
 
 
 
-![Step 1](./docs/step1.png) <A NAME="step1">
+![Step 1](./docs/step1.png)
 
 </br>  
 </br>
