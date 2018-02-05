@@ -14,6 +14,7 @@ This document is designed to provide insight into the Enterprise Connect (EC) te
 
 We use a [Blue-Green](https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html) approach in our upgrade process. In simple terms, this means that we preserve the initial, "base" iteration of your EC Service to provide you with time to test the upgraded iteration. This is done through the use of temporary routes. When you are satisfied with the behavior of the newly created, upgraded iteration of your EC Service, we will finalize the upgrade, the temporary route and the old EC Service will be deleted, and the upgrade EC Service will be available at the original route.
 
+(All of the following images were taken from the [Cloud Foundry Docs](https://docs.cloudfoundry.org) page on the same topic)
   
 </br>
 

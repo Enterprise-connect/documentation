@@ -1,6 +1,8 @@
 <A NAME="top">
     
-# Blue-Green Service Upgrade Process (INCOMPLETE / IN-PROGRESS 2/1/2018)
+# Blue-Green Service Upgrade Process
+
+This document is currently a work in progress due to an imminent deprecation of the Jenkins instance we use to perform the steps explained herein. As the migration is finalized, the instructions will be updated to reflect more precisely the steps involved.
 
 ## Sec 1 : Purpose
 
@@ -30,5 +32,4 @@ This procedure applies to updating any existing Enterprise Connect Service withi
 - Service version 
 
 ### 4. Run the build
-Assuming the build is successful, at this point the user/customer should be manually notified that an updated service has been provisioned for their use and testing. The EC team member should outline the implications.
-
+Assuming the build is successful, at this point the user/customer should be manually notified that an updated service has been provisioned for their use and testing. The EC team member should provide the user with the temporary route their newly provisioned EC Service can be reached at for this purpose of testing.
