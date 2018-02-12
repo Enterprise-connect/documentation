@@ -61,8 +61,8 @@ Notice the agent binary and the tls binary are both Linux, because they will be 
 
 
 <A HREF="#top">Back To Top</A>
-## VLAN (LINUX ONLY!)
-The **VLAN** plugin allows the EC Client to be able to speak to a variety of IPs and ports on the backend. Rather than having to configure EC Clients for each target data source, one EC Client can be configured along with the plugins.yml to access as many data source IPs as necessary.
+## VLAN (currently available for Linux only)
+The **VLAN** plugin allows the EC Client to create a Virtual LAN which mirrors the resources on the EC Server side. Rather than having to configure EC Clients for each target data source, one EC Client can be configured along with the plugins.yml to access as many data source IPs as necessary. Whereas normally you would access 'localhost' and some 
 
 
 ### Features  
@@ -73,21 +73,17 @@ The **VLAN** plugin allows the EC Client to be able to speak to a variety of IPs
 
 ### Examples
 <pre><code>  
-ecagent_linux_sys -aid r4t5y6 -tid q1w2e3 \ 
--cid myuaaclient -csc clientsecret -dur 1200 \ 
--oa2 https://normally-a-valid-uuid-here.predix-uaa.run.aws-usw02-pr.ice.predix.io/oauth/token \
--hst wss://some-example-gateway.run.aws-usw02-pr.ice.predix.io/agent \ 
--dbg -lpt 3984 <b>-rpt 1525,1554 -vln</b>
+  ./ecagent_linux_sys -mod server -aid <VCAP_provided> -cid <UAA_client_ID> -csc <UAA_client_Secret> -dur 1200 -hst wss://<Predix_Gateway_App_URL>/agent -oa2 https://<predixUAA_URL>/oauth/token -zon <Predix-Zone-ID> -sst <EC-Service-URI> -rht <resource IP> -rpt <resource port> -dbg -hca ${PORT} -vln
+
+  ./ecagent_linux_sys -mod client -aid <VCAP_provided> -tid <VCAP_provided> -cid <UAA_client_ID> -csc <UAA_client_Secret> -dur 1200 -hst wss://<Predix_Gateway_App_URL>/agent -oa2 https://<predixUAA_URL>/oauth/token -lpt <local listening port of your choosing, irrelevant for this use case> -rpt <comma separated resource ports> -plg vlan -vln -dbg -pxy <your proxy info>
 </code></pre>
  
-Notice the bold sections. The rpt flag should have local listener and remote listener(scan) ports. In this example case it was 1525 and 1554 and so we've added those 2 ports. We have also included the `-vln` flag required to enable the plugin's usage.
 
 ```yml
 ec-plugin:
 vlan:
 - status: active
-   ips: 10.93.210.30/32,10.93.210.32/32,10.93.210.31/32,10.220.96.13/32,192.168.11.13/32,10.93.210.23/32 (These are the ips of the SCAN listener and local listener)
-   port: 8995
+   ips: 10.93.210.30/32,10.93.210.32/32,10.93.210.31/32,10.220.96.13/32,192.168.11.13/32,10.93.210.23/32 (IPs of data sources server will speak to)
    command: ./vlan
 ```   
 
