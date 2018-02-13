@@ -41,9 +41,6 @@ ec-plugin:
    proxy: ""
    port: "7979"
    command: ./tls_linux -v
- vlan:
- - status: Inactive
- - ips: 
 ```
 
 After both are configured properly, you may have a directory structure that looks something like this:
