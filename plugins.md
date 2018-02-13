@@ -71,12 +71,25 @@ The **VLAN** plugin allows the EC Client to create a Virtual LAN which mirrors t
 * VLAN ip/port mapping
 
 
-### Examples
+### Example Agent Scripts
 
-```  
-  ./ecagent_linux_sys -mod server -aid <VCAP_provided> -cid <UAA_client_ID> -csc <UAA_client_Secret> -dur 1200 -hst wss://<Predix_Gateway_App_URL>/agent -oa2 https://<predixUAA_URL>/oauth/token -zon <Predix-Zone-ID> -sst <EC-Service-URI> -rht <resource IP> -rpt <resource port> -dbg -hca ${PORT} -vln
+```
+  ./ecagent_linux_sys -mod server -aid <VCAP_provided> \
+  -cid <UAA_client_ID> -csc <UAA_client_Secret> \
+  -dur 1200 -oa2 https://<predixUAA_URL>/oauth/token \
+  -hst wss://<Predix_Gateway_App_URL>/agent \
+  -zon <Predix-Zone-ID> -sst <EC-Service-URI> \
+  -rht <resource IP> -rpt <resource port> \
+  -dbg -hca ${PORT} -vln
 
-  ./ecagent_linux_sys -mod client -aid <VCAP_provided> -tid <VCAP_provided> -cid <UAA_client_ID> -csc <UAA_client_Secret> -dur 1200 -hst wss://<Predix_Gateway_App_URL>/agent -oa2 https://<predixUAA_URL>/oauth/token -lpt <local listening port of your choosing, irrelevant for this use case> -rpt <comma separated resource ports> -plg vlan -vln -dbg -pxy <your proxy info>
+  ./ecagent_linux_sys -mod client -aid <VCAP_provided> -tid <VCAP_provided> \
+  -cid <UAA_client_ID> -csc <UAA_client_Secret> \
+  -dur 1200 -oa2 https://<predixUAA_URL>/oauth/token \
+  -hst wss://<Predix_Gateway_App_URL>/agent \ 
+  -lpt <local listening port of your choosing, irrelevant for this use case> \
+  -rpt <comma separated resource ports> \
+  -dbg -pxy <your proxy info> \
+  -plg vlan -vln
 ```
  
 
@@ -84,8 +97,10 @@ The **VLAN** plugin allows the EC Client to create a Virtual LAN which mirrors t
 ec-plugin:
 vlan:
 - status: active
-   ips: 10.93.210.30/32,10.93.210.32/32,10.93.210.31/32,10.220.96.13/32,192.168.11.13/32,10.93.210.23/32 (IPs of data sources server will speak to)
+   ips: 10.93.210.30/32,10.93.210.32/32
    command: ./vlan
 ```   
+
+The `status` must be set to 'active'. The `ips` should be the IPs of your data sources, you may need to be creative in finding these values. `Command` is how the plugin binary is started, should not be changed/configured.
 
 <A HREF="#top">Back To Top</A>
