@@ -72,11 +72,12 @@ The **VLAN** plugin allows the EC Client to create a Virtual LAN which mirrors t
 
 
 ### Examples
-<pre><code>  
+
+```  
   ./ecagent_linux_sys -mod server -aid <VCAP_provided> -cid <UAA_client_ID> -csc <UAA_client_Secret> -dur 1200 -hst wss://<Predix_Gateway_App_URL>/agent -oa2 https://<predixUAA_URL>/oauth/token -zon <Predix-Zone-ID> -sst <EC-Service-URI> -rht <resource IP> -rpt <resource port> -dbg -hca ${PORT} -vln
 
   ./ecagent_linux_sys -mod client -aid <VCAP_provided> -tid <VCAP_provided> -cid <UAA_client_ID> -csc <UAA_client_Secret> -dur 1200 -hst wss://<Predix_Gateway_App_URL>/agent -oa2 https://<predixUAA_URL>/oauth/token -lpt <local listening port of your choosing, irrelevant for this use case> -rpt <comma separated resource ports> -plg vlan -vln -dbg -pxy <your proxy info>
-</code></pre>
+```
  
 
 ```yml
