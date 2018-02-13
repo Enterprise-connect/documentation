@@ -12,7 +12,7 @@ The **TLS** plugin allows the EC Server to sit in the middle of communication be
 
 ### Usage
 
-Some slight changes need to be made to the EC Server script to enable the plugin and signal its usage. Nothing needs to be done to the 'manifest.yml' for the Server agent itsef (if pushing to Predix). Just like the agents themselves, there are binary executables associated with Linux, Windows and Mac.
+Some slight changes need to be made to the EC Server script to enable the plugin and signal its usage. Nothing needs to be done to the 'manifest.yml' for the EC Server agent itself (if pushing to Predix). Just like the agents themselves, there are binary executables associated with Linux, Windows and Mac.
 
 ### Examples
 
@@ -36,14 +36,11 @@ ec-plugin:
  tls:
  - status: Active
    schema: https
-   hostname: some.example.data.source.predix.io
+   hostname: some.address.in.a.remote.network
    tlsport: "443"
    proxy: ""
    port: "7979"
    command: ./tls_linux -v
- vlan:
- - status: Inactive
- - ips: 
 ```
 
 After both are configured properly, you may have a directory structure that looks something like this:
@@ -57,11 +54,11 @@ After both are configured properly, you may have a directory structure that look
     │   tls_linux           
 ```
 
-Notice the agent binary and the tls binary are both Linux, because they will be running in the same environment, they need to correspond in that regard.
+Notice the agent binary and the tls binary are both Linux. Because they will be running in the same environment, they need to correspond in that regard.
 
 
 <A HREF="#top">Back To Top</A>
-## VLAN (currently available for Linux only)
+## VLAN
 The **VLAN** plugin allows the EC Client to create a Virtual LAN which mirrors the resources on the EC Server side. Rather than having to configure EC Clients for each target data source, one EC Client can be configured along with the plugins.yml to access as many data source IPs as necessary. Whereas normally you would access 'localhost' and some `-lpt` of your choosing, you will now have tools like pgAdmin and psql target the IPs you list in the plugins.yml. The EC Client will take over all connections to those IPs and then handle the rest. 
 
 
@@ -71,20 +68,36 @@ The **VLAN** plugin allows the EC Client to create a Virtual LAN which mirrors t
 * VLAN ip/port mapping
 
 
-### Examples
-<pre><code>  
-  ./ecagent_linux_sys -mod server -aid <VCAP_provided> -cid <UAA_client_ID> -csc <UAA_client_Secret> -dur 1200 -hst wss://<Predix_Gateway_App_URL>/agent -oa2 https://<predixUAA_URL>/oauth/token -zon <Predix-Zone-ID> -sst <EC-Service-URI> -rht <resource IP> -rpt <resource port> -dbg -hca ${PORT} -vln
+### Example Agent Scripts
 
-  ./ecagent_linux_sys -mod client -aid <VCAP_provided> -tid <VCAP_provided> -cid <UAA_client_ID> -csc <UAA_client_Secret> -dur 1200 -hst wss://<Predix_Gateway_App_URL>/agent -oa2 https://<predixUAA_URL>/oauth/token -lpt <local listening port of your choosing, irrelevant for this use case> -rpt <comma separated resource ports> -plg vlan -vln -dbg -pxy <your proxy info>
-</code></pre>
+```
+  ./ecagent_linux_sys -mod server -aid <VCAP_provided> \
+  -cid <UAA_client_ID> -csc <UAA_client_Secret> \
+  -dur 1200 -oa2 https://<predixUAA_URL>/oauth/token \
+  -hst wss://<Predix_Gateway_App_URL>/agent \
+  -zon <Predix-Zone-ID> -sst <EC-Service-URI> \
+  -rht <resource IP> -rpt <resource port> \
+  -dbg -hca ${PORT} -vln
+
+  ./ecagent_linux_sys -mod client -aid <VCAP_provided> -tid <VCAP_provided> \
+  -cid <UAA_client_ID> -csc <UAA_client_Secret> \
+  -dur 1200 -oa2 https://<predixUAA_URL>/oauth/token \
+  -hst wss://<Predix_Gateway_App_URL>/agent \ 
+  -lpt <local listening port of your choosing, irrelevant for this use case> \
+  -rpt <comma separated resource ports> \
+  -dbg -pxy <your proxy info> \
+  -plg vlan -vln
+```
  
 
 ```yml
 ec-plugin:
 vlan:
 - status: active
-   ips: 10.93.210.30/32,10.93.210.32/32,10.93.210.31/32,10.220.96.13/32,192.168.11.13/32,10.93.210.23/32 (IPs of data sources server will speak to)
+   ips: 10.93.210.30/32,10.93.210.32/32
    command: ./vlan
 ```   
+
+The `status` must be set to 'active'. The `ips` should be the IPs of your data sources, you may need to be creative in finding these values. `Command` is how the plugin binary is started, should not be changed/configured.
 
 <A HREF="#top">Back To Top</A>
