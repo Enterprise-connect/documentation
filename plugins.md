@@ -12,7 +12,7 @@ The **TLS** plugin allows the EC Server to sit in the middle of communication be
 
 ### Usage
 
-Some slight changes need to be made to the EC Server script to enable the plugin and signal its usage. Nothing needs to be done to the 'manifest.yml' for the Server agent itsef (if pushing to Predix). Just like the agents themselves, there are binary executables associated with Linux, Windows and Mac.
+Some slight changes need to be made to the EC Server script to enable the plugin and signal its usage. Nothing needs to be done to the 'manifest.yml' for the EC Server agent itself (if pushing to Predix). Just like the agents themselves, there are binary executables associated with Linux, Windows and Mac.
 
 ### Examples
 
@@ -54,7 +54,7 @@ After both are configured properly, you may have a directory structure that look
     │   tls_linux           
 ```
 
-Notice the agent binary and the tls binary are both Linux, because they will be running in the same environment, they need to correspond in that regard.
+Notice the agent binary and the tls binary are both Linux. Because they will be running in the same environment, they need to correspond in that regard.
 
 
 <A HREF="#top">Back To Top</A>
