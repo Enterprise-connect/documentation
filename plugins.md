@@ -58,7 +58,7 @@ Notice the agent binary and the tls binary are both Linux, because they will be 
 
 
 <A HREF="#top">Back To Top</A>
-## VLAN (currently available for Linux only)
+## VLAN
 The **VLAN** plugin allows the EC Client to create a Virtual LAN which mirrors the resources on the EC Server side. Rather than having to configure EC Clients for each target data source, one EC Client can be configured along with the plugins.yml to access as many data source IPs as necessary. Whereas normally you would access 'localhost' and some `-lpt` of your choosing, you will now have tools like pgAdmin and psql target the IPs you list in the plugins.yml. The EC Client will take over all connections to those IPs and then handle the rest. 
 
 
