@@ -36,7 +36,7 @@ ec-plugin:
  tls:
  - status: Active
    schema: https
-   hostname: some.example.data.source.predix.io
+   hostname: some.address.in.a.remote.network
    tlsport: "443"
    proxy: ""
    port: "7979"
