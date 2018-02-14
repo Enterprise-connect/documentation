@@ -35,4 +35,7 @@ This procedure applies to updating any existing Enterprise Connect Service withi
 At this point, several considerations are needed based on user specifications/requests:
 
 #### 3.4.1 The user has requested that only Step 1 be performed:
-If the user has specified that they only want step 1 to be performed
+If the user has specified that they only want step 1 to be performed, please notify them at this point.
+
+#### 3.4.2 The user has requested that both steps be performed:
+Proceed to perform step 2. Notify user upon completion.

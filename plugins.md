@@ -70,7 +70,7 @@ The **VLAN** plugin allows the EC Client to create a Virtual LAN which mirrors t
 
 ### Example Agent Scripts
 
-```
+```bash
   ./ecagent_linux_sys -mod server -aid <VCAP_provided> \
   -cid <UAA_client_ID> -csc <UAA_client_Secret> \
   -dur 1200 -oa2 https://<predixUAA_URL>/oauth/token \
