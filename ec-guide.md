@@ -60,7 +60,7 @@ Please copy and paste this information to a document you can readily access for 
 <A HREF="#top">Back To Top</A>
 
 #### Bind the EC Service to an App
-To gain access to the important credentials related to your newly created service, EC must be bound to an app in your org/space. The app you choose is irrelevant. Using the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html), use the following command to bind the EC Service to an app of your choice:
+To gain access to the important credentials related to your newly created service, EC may be bound to an app in your org/space, if you chose not to use a Service Key (recommended). The app you choose is irrelevant. Using the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html), use the following command to bind the EC Service to an app of your choice:
 ```
 cf bind-service <app name> <EC Service name>
 ```
