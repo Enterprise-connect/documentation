@@ -44,6 +44,21 @@ The format for the trustedIssuerId JSON should be as follows:
 {"trustedIssuerIds":["https://<UAA URL>/oauth/token"]}
 ```
 For best results, save the JSON to a file, and perform the EC creation command from that directory. The raw JSON may require escape characters if entered directly to the command line. Using a .json file circumvents this issue.</br></br>
+
+### Get the EC Service Credentials
+
+#### Service Credentials via Service Key
+To gain access to the important credentials related to your newly created service, you may create a Service Key in your Org/Space. Using the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html), use the following command to create a Service Key:
+```
+cf create-service-key <EC Service name> <a name for the Service Key>
+```
+Using the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html), use the following command to view the important credentials related to your service:
+```
+cf service-key <EC Service name> <Service Key name, chosen in previous command>
+```
+Please copy and paste this information to a document you can readily access for upcoming configurations, preferably in a working directory holding all documents related to this setup and configuration.</br></br>
+<A HREF="#top">Back To Top</A>
+
 #### Bind the EC Service to an App
 To gain access to the important credentials related to your newly created service, EC must be bound to an app in your org/space. The app you choose is irrelevant. Using the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html), use the following command to bind the EC Service to an app of your choice:
 ```
@@ -74,19 +89,19 @@ The UAA Dashboard can be accessed at https://uaa-dashboard.run.YOUR.DOMAIN.predi
 ##### EC Gateway Agent
 The EC Gateway should be the first agent you push and run.
 ```bash
-./ecagent_linux_sys -mod gateway -lpt ${PORT} -zon <Predix-Zone-ID> -sst <EC-Service-URI> -tkn <admin-token> -dbg
+./ecagent_linux_sys -mod gateway -lpt ${PORT} -zon <Predix-Zone-ID> -sst <EC-Service-URI> -tkn <admin-token>
 ```
 Agents running on Predix will always require the [Linux agent binary](https://github.com/Enterprise-connect/ec-sdk/blob/dist/dist/ecagent_linux_sys.tar.gz), but other agents will require the appropriate binary based on the environment for your use case.
 ##### EC Server Agent
 The EC Server should be the second agent you either push or run - and you will need the EC Gateway's URL to configure the EC Server and EC Client scripts. Once the EC Server agent is running, you will want to verify the 'super connection' with your Gateway, before moving onto pushing or running the EC Client.
 ```bash
-./ecagent_OS_Version -mod server -aid <VCAP_provided> -cid <UAA_client_name> -csc <UAA_client_Secret> -dur 1200 -hst wss://<Predix_Gateway_App_URL>/agent -oa2 https://<predixUAA_URL>/oauth/token -zon <Predix-Zone-ID> -sst <EC-Service-URI> -rht <IP of data source> -rpt 5432 -dbg -hca ${PORT}
+./ecagent_OS_Version -mod server -aid <VCAP_provided> -cid <UAA_client_name> -csc <UAA_client_Secret> -dur 1200 -hst wss://<Predix_Gateway_App_URL>/agent -oa2 https://<predixUAA_URL>/oauth/token -zon <Predix-Zone-ID> -sst <EC-Service-URI> -rht <IP of data source> -rpt 5432 -hca ${PORT}
 ```
 '${PORT}' will cause Predix to dynamically assign an available port. If ran elsewhere, '${PORT}' will need to be replaced with a port of your choice, which is not in use. Be sure the '-dur' flag used, which represents how often the agent will fetch a new token from the UAA in minutes, is lower/shorter than the 'Token Validity' values on your UAA Client (the agents need to refresh tokens before the UAA Client expires them). In the vast majority of cases, using the '-dur' value provided in these scripts will work well.
 ##### EC Client Agent
 The EC Client should be the last agent your push or run, as it will have no functionality without the existence of a 'super connection' between the EC Gateway and EC Server agents.
 ```bash
-./ecagent_OS_Version -mod client -aid <VCAP_provided> -tid <EC Server Agent '-aid'> -cid <UAA_client_name> -csc <UAA_client_Secret> -dur 1200 -hst wss://<Predix_Gateway_App_URL>/agent -oa2 https://<predixUAA_URL>/oauth/token -lpt <Defined_by_You> -dbg
+./ecagent_OS_Version -mod client -aid <VCAP_provided> -tid <EC Server Agent '-aid'> -cid <UAA_client_name> -csc <UAA_client_Secret> -dur 1200 -hst wss://<Predix_Gateway_App_URL>/agent -oa2 https://<predixUAA_URL>/oauth/token -lpt <Defined_by_You>
 ```
 ##### Running Agents "Locally" with Relevant Binary
 To run an agent, simply configure the appropriate script, and [download the binary](https://github.com/Enterprise-connect/ec-sdk/tree/dist/dist) appropriate to the environment. After extracting the agent to your working directory, simply paste your configured script in your CLI/shell. You can also save them as a script and run the script file. Agents not running on Predix require an additional proxy flag. You will need to identify what proxy is appropriate for your environment, and then add this flag to the end of the script:
