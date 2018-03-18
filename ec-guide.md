@@ -91,7 +91,7 @@ The EC Gateway should be the first agent you push and run.
 ```bash
 ./ecagent_linux_sys -mod gateway -lpt ${PORT} -zon <Predix-Zone-ID> -sst <EC-Service-URI ending in predix.io> -tkn <admin-token>
 ```
-Agents running on Predix will always require the [Linux agent binary](https://github.com/Enterprise-connect/ec-sdk/blob/dist/dist/ecagent_linux_sys.tar.gz), but other agents will require the appropriate binary based on the environment for your use case. Once the Gateway is up, you can view ['/health' endpoint](docs/health.json)
+Agents running on Predix will always require the [Linux agent binary](https://github.com/Enterprise-connect/ec-sdk/blob/dist/dist/ecagent_linux_sys.tar.gz), but other agents will require the appropriate binary based on the environment for your use case. Once the Gateway is up, you can view ['/health' endpoint](docs/health.txt)
 ##### EC Server Agent
 The EC Server should be the second agent you either push or run - and you will need the EC Gateway's URL to configure the EC Server and EC Client scripts. Once the EC Server agent is running, you will want to verify the 'super connection' with your Gateway, before moving onto pushing or running the EC Client.
 ```bash
