@@ -1,6 +1,6 @@
-## TLS Plugin Deployement.
+## TLS Plugin Deployment.
 ### TLS Plugin
-Unlike the usual setup use cases for EC, the this plugin can be used in scenarios where the connectivity between the EC Server agent and the data-source has to be encrypted. The most common use case is connecting to an end point ( data-source) using the "https" protocol over the port 443 instead of a regular "http" connection.
+Unlike the usual setup use cases for EC, the TLS plugin can be used in scenarios where the connectivity between the EC Server agent and the data-source has to be encrypted. The most common use case is connecting to an end point (data-source) using the "https" protocol over the port 443 instead of a regular "http" connection.
 
 The plugin is always configured with the EC Server.
 ![TLS Plugin arch](docs/TLSPluginSetup.png)
@@ -59,7 +59,7 @@ cf create-service predix-uaa Free <anyServiceName> -c <anyflie>.json
 ``
 
 where the .json file consists of the client secret for the UAA service instance in the following format.
-> {"adminClientSecret":"<the password for you UAA>"}
+> {"adminClientSecret":"<the password for your UAA>"}
 
 Note: The JSON file should exist in the same directory you navigated to.
 
@@ -106,20 +106,19 @@ Your EC service is now added to the UAA client and token exchange feature is ena
 * Edit the manifest.yml to contain the EC gateway application name.
 * In the ec.sh file , edit the following command with corresponding credentials from the EC service-key
 ``
-ecagent_linux_sys 
--mod gateway 
--lpt ${PORT} 
--zon <Predix-Zone-ID in the EC service-key> 
--sst <EC-Service-URI> 
--tkn <admin-token> 
--dbg
+./ecagent_linux_sys \
+-mod gateway \
+-lpt ${PORT} \
+-zon <Predix-Zone-ID in the EC service-key> \
+-sst <EC-Service-URI> \
+-tkn <admin-token>
 ``
 * Comment the other commands and save the changes.
 * Push the app onto predix from the cmd using the command
     `` cf push ``
 * If you see the EC gateway status as "Running" , you are ready to proceed to the next step.
 * Keep a note of the Gateway-URL
-* [Enable Diego]("https://github.com/cloudfoundry-attic/Diego-Enabler") for the gateway application
+* [Enable Diego]("https://github.com/cloudfoundry-attic/Diego-Enabler") for the gateway application, as needed
 * [Scale the gateway]("https://docs.cloudfoundry.org/devguide/deploy-apps/cf-scale.html") application based on the load you might need to handle
 
 #### Step 5 Pushing the TLS plugin enabled EC Server 
@@ -128,22 +127,21 @@ ecagent_linux_sys
 * Edit the manifest.yml to contain the EC server application name.
 * In the ec.sh file , edit the following command with corresponding credentials from the EC service-key
 ``
-    ecagent_os_sys 
-            -mod server
-            [-grp <group-id>]
-            -aid <VCAP_provided/ service-key_provided EC "id"> 
-            -cid <UAA_client_ID/UAA_client_name> 
-            -csc <UAA_client_Secret> 
-            -dur 1200 
-            -hst wss://<Predix_Gateway_App_URL>/agent 
-            -oa2 https://<predixUAA_URL_in_ECService_key>/oauth/token 
-            -zon <Predix-Zone-ID_in_ECService_key> 
-            -sst <EC-Service-URI> 
-            -rht localhost 
-            -rpt <specified_by_you>
-            -dbg 
-            -hca ${PORT}
-            -plg tls
+    ./ecagent_os_sys 
+            -mod server \
+            [-grp <group-id>] \
+            -aid <VCAP_provided/ service-key_provided EC "id"> \
+            -cid <UAA_client_ID/UAA_client_name> \
+            -csc <UAA_client_Secret> \
+            -dur 1200 \
+            -hst wss://<Predix_Gateway_App_URL>/agent \
+            -oa2 https://<predixUAA_URL_in_ECService_key>/oauth/token \
+            -zon <Predix-Zone-ID_in_ECService_key> \
+            -sst <EC-Service-URI> \
+            -rht localhost \
+            -rpt <specified_by_you> \
+            -hca ${PORT} \
+            -plg tls \
             [-pxy "http proxy"]
 ``
 Note: 
@@ -175,17 +173,16 @@ Note:
 * In the ec.sh file , edit the following command with corresponding credentials from the EC service-key. Run this command directly on your terminal/cmd
 ``
     ecagent_os_sys 
-            -mod client
-            [-grp <group-id>]
-            -aid <cannot be same as server_ID>
-            -tid <-aid of server>
-            -cid <UAA_client_ID/UAA_client_name> 
-            -csc <UAA_client_Secret> 
-            -dur 1200 
-            -hst wss://<Predix_Gateway_App_URL>/agent 
-            -oa2 https://<predixUAA_URL_in_ECService_key>/oauth/token 
-            -lpt <Defined_by_you>
-            -dbg 
+            -mod client \
+            [-grp <group-id>] \
+            -aid <cannot be same as server_ID> \
+            -tid <-aid of server> \
+            -cid <UAA_client_ID/UAA_client_name> \
+            -csc <UAA_client_Secret> \
+            -dur 1200 \
+            -hst wss://<Predix_Gateway_App_URL>/agent \
+            -oa2 https://<predixUAA_URL_in_ECService_key>/oauth/token \
+            -lpt <Defined_by_you> \
             [-pxy "http proxy"]
 ``
 Note: 
