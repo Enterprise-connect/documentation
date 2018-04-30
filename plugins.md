@@ -20,13 +20,16 @@ A modified Server script to run on Predix (notice the *-plg* flag!):
 
 ```bash
 #!/bin/bash
-./ecagent_linux_sys -mod server -aid q1w2e3 \
+chmod 755 ./tls_linux_sys;
+./ecagent_linux_sys -mod server \
+-grp group-name (probably same value as -zon) \
+-aid q1w2e3 \
 -cid myuaaclient -csc clientsecret -dur 1200 \
 -oa2 https://normally-a-valid-uuid-here.predix-uaa.run.aws-usw02-pr.ice.predix.io/oauth/token \
 -hst wss://some-example-gateway.run.aws-usw02-pr.ice.predix.io/agent \
 -zon your-ec-service-zone-id -sst https://your-ec-service-zone-id.run.aws-usw02-pr.ice.predix.io \
--rht some.example.resource -rpt 7979 \
--dbg -hca ${PORT} -plg tls
+-rht localhost -rpt 7979 \
+-dbg -hca ${PORT} -plg
 ```
 
 For a Server running on Predix (or Linux machine), you might have a plugins.yml file that looks like this:
@@ -34,13 +37,13 @@ For a Server running on Predix (or Linux machine), you might have a plugins.yml 
 ```yaml
 ec-plugin:
  tls:
- - status: Active
+ - status: active
    schema: https
-   hostname: some.address.in.a.remote.network
+   hostname: www.some.host.com
    tlsport: "443"
    proxy: ""
    port: "7979"
-   command: ./tls_linux -v
+   command: ./tls_linux_sys
 ```
 
 After both are configured properly, you may have a directory structure that looks something like this:
@@ -51,7 +54,7 @@ After both are configured properly, you may have a directory structure that look
     │   manifest.yml        
     │   ecagent_linux_sys
     │   plugins.yml
-    │   tls_linux           
+    │   tls_linux_sys           
 ```
 
 Notice the agent binary and the tls binary are both Linux. Because they will be running in the same environment, they need to correspond in that regard.
