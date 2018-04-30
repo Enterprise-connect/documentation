@@ -89,19 +89,36 @@ The UAA Dashboard can be accessed at https://uaa-dashboard.run.YOUR.DOMAIN.predi
 ##### EC Gateway Agent
 The EC Gateway should be the first agent you push and run.
 ```bash
-./ecagent_linux_sys -mod gateway -lpt ${PORT} -zon <Predix-Zone-ID> -sst <EC-Service-URI ending in predix.io> -tkn <admin-token>
+./ecagent_linux_sys -mod gateway -lpt ${PORT} \
+-zon <Predix-Zone-ID> -sst <EC-Service-URI ending in predix.io> \
+-tkn <admin-token>
 ```
 Agents running on Predix will always require the [Linux agent binary](https://github.com/Enterprise-connect/ec-sdk/blob/dist/dist/ecagent_linux_sys.tar.gz), but other agents will require the appropriate binary based on the environment for your use case. Once the Gateway is up, you can view the Gateway's ['/health' endpoint](docs/health.txt)
 ##### EC Server Agent
 The EC Server should be the second agent you either push or run - and you will need the EC Gateway's URL to configure the EC Server and EC Client scripts. Once the EC Server agent is running, you will want to verify the 'super connection' with your Gateway, before moving onto pushing or running the EC Client.
 ```bash
-./ecagent_OS_Version -mod server -aid <VCAP_provided> -cid <UAA_client_name> -csc <UAA_client_Secret> -dur 1200 -hst wss://<Predix_Gateway_App_URL>/agent -oa2 https://<predixUAA_URL>/oauth/token -zon <Predix-Zone-ID> -sst <EC-Service-URI ending in predix.io> -rht <IP of data source> -rpt 5432 -hca ${PORT}
+./ecagent_dist -mod server \
+-grp <Group, Service Zone ID by Default> \
+-aid <VCAP Provided> \
+-cid <UAA Client ID> -csc <UAA Client Secret> -dur <Bearer Token Refresh Time in Seconds> \
+-oa2 https://<Predix UAA URL>/oauth/token \
+-hst wss://<EC Gateway URL>/agent \
+-zon <Predix Zone ID of the EC Service> \
+-sst <EC Service URL> \
+-rht <Resource IP> -rpt <Resource Port> \
+-hca <Port for Health Check, use ${PORT} on Predix>
 ```
 '${PORT}' will cause Predix to dynamically assign an available port. If ran elsewhere, '${PORT}' will need to be replaced with a port of your choice, which is not in use. Be sure the '-dur' flag used, which represents how often the agent will fetch a new token from the UAA in minutes, is lower/shorter than the 'Token Validity' values on your UAA Client (the agents need to refresh tokens before the UAA Client expires them). In the vast majority of cases, using the '-dur' value provided in these scripts will work well.
 ##### EC Client Agent
 The EC Client should be the last agent your push or run, as it will have no functionality without the existence of a 'super connection' between the EC Gateway and EC Server agents.
 ```bash
-./ecagent_OS_Version -mod client -aid <VCAP_provided> -tid <EC Server Agent '-aid'> -cid <UAA_client_name> -csc <UAA_client_Secret> -dur 1200 -hst wss://<Predix_Gateway_App_URL>/agent -oa2 https://<predixUAA_URL>/oauth/token -lpt <Defined_by_You>
+./ecagent_dist -mod client \
+-grp <Group, Service Zone ID by Default> \
+-aid <VCAP Provided> -tid <VCAP Provided, this value needs to match the target Server's '-aid'> \
+-cid <UAA Client ID> -csc <UAA Client Secret> -dur <Bearer Token Refresh Time in Seconds> \
+-oa2 https://<Predix UAA URL>/oauth/token \
+-hst wss://<EC Gateway URL>/agent \
+-lpt <Any Available Port of Your Choice>
 ```
 ##### Running Agents "Locally" with Relevant Binary
 To run an agent, simply configure the appropriate script, and [download the binary](https://github.com/Enterprise-connect/ec-sdk/tree/dist/dist) appropriate to the environment. After extracting the agent to your working directory, simply paste your configured script in your CLI/shell. You can also save them as a script and run the script file. Agents not running on Predix require an additional proxy flag. You will need to identify what proxy is appropriate for your environment, and then add this flag to the end of the script:
@@ -113,7 +130,7 @@ To run an agent, simply configure the appropriate script, and [download the bina
 CLI/shell command to extract agents:
 
 ```bash
-tar -xvzf path/to/the/ecagent_OS_sys.tar.gz
+tar -xvzf path/to/the/ecagent_dist.tar.gz
 ```
 
 ##### Simple Directory Structure
@@ -134,13 +151,13 @@ enterprise_connect
 └───ec_server
 │   │   ec.sh
 │   │   manifest.yml        // if running on Predix
-│   │   ecagent_envOS_sys   // linux for Predix
+│   │   ecagent_dist        // linux for Predix
 │
 │
 └───ec_client
     │   ec.sh               
     │   manifest.yml        // if running on Predix
-    │   ecagent_envOS_sys   // linux on Predix
+    │   ecagent_dist        // linux on Predix
 ```
 
 <A HREF="#top">Back To Top</A>
