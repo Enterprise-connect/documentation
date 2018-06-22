@@ -75,6 +75,7 @@ The **VLAN** plugin allows the EC Client to create a Virtual LAN which mirrors t
 
 ```bash
   ./ecagent_linux_sys -mod server -aid <VCAP_provided> \
+  -grp <agent group, default group is the same as Predix-Zone-ID> \
   -cid <UAA_client_ID> -csc <UAA_client_Secret> \
   -dur 1200 -oa2 https://<predixUAA_URL>/oauth/token \
   -hst wss://<Predix_Gateway_App_URL>/agent \
@@ -83,6 +84,7 @@ The **VLAN** plugin allows the EC Client to create a Virtual LAN which mirrors t
   -dbg -hca ${PORT} -vln
 
   ./ecagent_linux_sys -mod client -aid <VCAP_provided> -tid <VCAP_provided> \
+  -grp <agent group, default group is the same as Predix-Zone-ID> \
   -cid <UAA_client_ID> -csc <UAA_client_Secret> \
   -dur 1200 -oa2 https://<predixUAA_URL>/oauth/token \
   -hst wss://<Predix_Gateway_App_URL>/agent \ 
