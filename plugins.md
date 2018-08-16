@@ -92,7 +92,7 @@ The **VLAN** plugin allows the EC Client to create a Virtual LAN which mirrors t
   -lpt <local listening port of your choosing, irrelevant for this use case> \
   -rpt <comma separated resource ports> \
   -dbg -pxy <your proxy info> \
-  -plg vlan -vln
+  -plg
 ```
  
 
