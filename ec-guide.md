@@ -1,5 +1,5 @@
 <A NAME="top">
-    
+
 # Comprehensive Guide to Enterprise Connect
 
 * [Foreword](#foreword)
