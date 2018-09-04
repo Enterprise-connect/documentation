@@ -1,25 +1,43 @@
 <A NAME="top">
 
-# Comprehensive Guide to Enterprise Connect
+# Comprehensive Guide to Enterprise Connect (EC)
 
 * [Foreword](#foreword)
 * [Common Use Cases](#common-use-cases)
 * [Service Creation](#service-creation)
 * [UAA Client Update](#uaa-client-update)
-* [Script Templates](#ec-agent-script-explanations-and-templates) 
-* [Pushing Agents to Predix](#pushing-agents-to-predix) 
+* [EC Agency](#ec-agency) 
+* [Agent Scripts and Running Agents](#agent-scripts-and-running-agents) 
 * [Diego, Scaling, and Managing Complex Use Cases](#diego-scaling-and-managing-complex-use-cases)
     * [Reusability of IDs](#reusability-of-ids)
 * [FAQs](#faqs)
 * [Observed Problems and Resolutions](#observed-problems-and-resolutions) 
+* [CF CLI Quick Reference for EC](#cf-cli-quick-reference-for-ec) 
 * [References and Further Resources](#references-and-further-resources)
 
 ## Foreword
-This guide is to serve as a means, for users who are new to Enterprise Connect (EC), to gain a cursory understanding of how to set up EC and how EC should ultimately behave. It is important to understand that due to the multitude of moving parts, the security measures EC implements, and the lack of predictability and/or entropy of certain outside factors, that adherence to the steps outlined in this guide is absolutely crucial, to at the very least begin to isolate any connectivity issues that may arise.</br> 
 
-For the clear and staggering majority of users, after a quality configuration is established, EC will hold up its end of the bargain and deliver consistent and stable connectivity between two remote entities. We strongly encourage that users submit, as "Issues", any problems they face using this guide or with EC in general, either to this repo or to our [SDK](https://github.com/Enterprise-connect/ec-sdk). This will notify our team and allow us to address the issue. If we deem this is a reasonably reproducable issue for other users that is not a result of faulty EC behavior, we will add this to our knowledge base here (FAQs, Problems/Resolutions below).
+Enterprise Connect ('EC') is a software-based solution to very common network environment challenges. It allows those familiar with the configuration to connect to a remote resource from 'on-prem', and vice versa, in a matter of minutes - without ever having to touch ports, firewalls, et cetera! It is 100% software. While Enterprise Connect is a Predix Service at the core, it is more well known by its 'agent', a binary that can run as an app, in three distinct modes, which will be explained in detail later.</br> 
 
-This guide also assumes (and suggests) a shell-centric approach. While there are web UIs available to acclomplish many of the tasks presented, we recommend using the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html), as this will make your future as an Enterprise Connect expert much brighter. There is ample [CF CLI documentation and reference](https://docs.cloudfoundry.org/cf-cli/cf-help.html) available, but for the purpose of this guide, you will only need to utilize a few basic commands pertaining to apps and services.
+This guide is the entry point for those new to Enterprise Connect, and can also serve to refresh the memory of those who may have not configured Enterprise Connect recently - we are always developing and refining script-flags, usage and features!</br> 
+
+Finally, this guide assumes (and recommends!) a shell or command line approach. While there are web UIs available for some of the tasks presented, we recommend using the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) as much as possible, as this will make your future as an Enterprise Connect expert much brighter - and not to mention our support is 100% shell-based. There is ample [CF CLI documentation and reference](https://docs.cloudfoundry.org/cf-cli/cf-help.html) available, but for the purpose of this guide and most of Enterprise Connect, you will only need to utilize a few basic commands which you will be able to, for the most part, copy and paste.</br> 
+
+### CAUTION: Document Everything, Every Time
+
+It stands to reason that the Enterprise Connect team and Predix Support cannot know what someone wrote in a file on their computer. We do not readily know who subscribed to, or 'owns', the Enterprise Connect subscription (without investigative work). It is your responsibility to document your use cases, configurations, and everything else. Conservatively estimating, something around 10% of support time is spent doing superflous investigative work resulting from a lack of documentation of initial configuration(s).
+
+> Imagine your production environment is down, and you reach out to us or Predix Support, and we need to view a UAA configuration, but you do not know who the UAA admin is, or which UAA client you were using. Your prod environment will stay down until that is figured out. This is unfortunately common. Please, please, please... document **everything**.
+
+Additionally, it is altogether too common that the teams and team-of-teams we work with have internal communication breakdowns. Sometimes, while resolving one developer's issue, we create a problem for another developer - simply because those developers were not adequately **communicating and documenting** changes made to one another. If 10 people across two teams are using the same Enterprise Connect subscription, everyone needs to be on the same page. Due to the amount of security involved with Enterprise Connect's end-to-end connectivity, it is by design that configurations are easily broken and will fail authorization checks. 
+
+While a bit premature, these are the most common items requested from our side and from Predix Support to help resolve issues. It is not overly important to understand these at this point, but for what it's worth, here are some items to keep in mind:
+
+- Predix Zone ID (GUID) of the EC Service
+- Gateway, Server and Client logs with corresponding/relevant time stamps
+- UAA Client configuration
+
+Issues are rarely resolvable without these pieces. Only you can prevent Support Fires - through documentation!
 
 ## Common Use Cases
 
@@ -29,176 +47,196 @@ This guide also assumes (and suggests) a shell-centric approach. While there are
 > On-Premises to Predix Data Source </br>
 ![On-Premises to Predix Data Source](docs/ecToPredixDataSources.png)
 
+
+
 ## Service Creation
 #### The Enterprise Connect Service requires a valid [UAA Instance](https://www.predix.io/services/service.html?id=1172) on Predix
-Using the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html), use the following command to view Services and Plans in CloudFoundry Marketplace:
-```
-cf m
+Using the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html), use the following command to view info about the Enterprise Connect Service:
+```bash
+cf m -s enterprise-connect
 ```
 Using the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html), use the following command to create an EC Service Instance in your org and space:
+```bash
+cf create-service enterprise-connect Oneway-TLS <name the service> -c <trusted issuer json, see below>
 ```
-cf create-service enterprise-connect <plan> <service instance name> -c <trusted issuer as a json or path to a json file>
-```
-The format for the trustedIssuerId JSON should be as follows:
+**Format the trusted issuer JSON as follows:**
 ```javascript
 {"trustedIssuerIds":["https://<UAA URL>/oauth/token"]}
 ```
-For best results, save the JSON to a file, and perform the EC creation command from that directory. The raw JSON may require escape characters if entered directly to the command line. Using a .json file circumvents this issue.</br></br>
+This can get unduly tricky with escape characters. If you are working out of a relevant directory, i.e., 'my-enterprise-connect-configuration/', you can just save the trusted issuer as a JSON file, and then simply reference that file in the CF create-service command.
+```bash
+cf create-service enterprise-connect Oneway-TLS <name the service> -c oauth.json
+```
 
-### Get the EC Service Credentials
-
-#### Service Credentials via Service Key
-To gain access to the important credentials related to your newly created service, you may create a Service Key in your Org/Space. Using the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html), use the following command to create a Service Key:
+### Get the EC Service Credentials via 'Service Key'
+Using the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html), use the following command to create a Service Key:
 ```
 cf create-service-key <EC Service name> <a name for the Service Key>
 ```
-Using the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html), use the following command to view the important credentials related to your service:
+After creating a Service Key, use this command to view the EC credentials:
 ```
-cf service-key <EC Service name> <Service Key name, chosen in previous command>
+cf service-key <EC Service name> <Service Key name>
 ```
-Please copy and paste this information to a document you can readily access for upcoming configurations, preferably in a working directory holding all documents related to this setup and configuration.</br></br>
-<A HREF="#top">Back To Top</A>
 
-#### Bind the EC Service to an App
-To gain access to the important credentials related to your newly created service, EC may be bound to an app in your org/space, if you chose not to use a Service Key (recommended). The app you choose is irrelevant. Using the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html), use the following command to bind the EC Service to an app of your choice:
+This should return something along these lines (ENVs/'VCAP'):
+
+```javascript
+{
+ "ec-info": {
+  "adm_tkn": "YWRtaW46c2VjcmV0",
+  "ids": [
+   "q1w2e3",
+   "r4t5y6"
+  ],
+  "trustedIssuerIds": [
+   "https://my-predix-uaa-guid.predix-uaa.run.aws-usw02-pr.ice.predix.io/oauth/token"
+  ]
+ },
+ "service-uri": "https://12345678-abcd-1234-abcd-12345678abcd.run.aws-usw02-pr.ice.predix.io/v1beta/index/",
+ "usage-doc": "https://github.com/Enterprise-connect/ec-misc-docs",
+ "zone": {
+  "http-header-name": "Predix-Zone-Id",
+  "http-header-value": "12345678-abcd-1234-abcd-12345678abcd",
+  "oauth-scope": "enterprise-connect.zones.12345678-abcd-1234-abcd-12345678abcd.user"
+ }
+}
 ```
-cf bind-service <app name> <EC Service name>
-```
-Using the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html), use the following command to view the important credentials related to your service:
-```
-cf env <name of app you bound the EC Service to>
-```
-Navigate the JSON that is returned (later referred to as a 'VCAP') and find the portion reflecting the name of your EC Service. It is recommended that you copy everything starting from the word "credentials", and then paste this in a text document for reference, which will prove to be an invaluable time-saver while configuring your EC agent scripts. Documenting this information is also crucial in regards to knowledge transfers.</br></br>
+Please copy and paste this information to a document you can readily access for upcoming configurations, preferably in a working directory holding all documents related to this setup and configuration.
+
+#### Document Check! Are these recorded?
+- use case / need for Enterprise Connect Service Instance
+- Predix UAA Instance details
+    - UAA Instance URI
+    - UAA Admin/contact
+- Enterprise Connect Service Intstance details
+    - Predix Org and Space
+    - Name
+    - Who created?
+    - Service Key
+
+</br></br>
 <A HREF="#top">Back To Top</A>
 
 ## [UAA Client](https://predix-toolkit.run.aws-usw02-pr.ice.predix.io/) Update
 
-#### After the creation of the EC Service, a [UAA Client](https://predix-toolkit.run.aws-usw02-pr.ice.predix.io/) must be provisioned and properly updated. This task can be accomplished through the UAA dashboard (see below) as well, if you prefer that over the [Predix Tool Kit](https://predix-toolkit.run.aws-usw02-pr.ice.predix.io/).
+#### After the creation of the EC Service, a [UAA Client](https://predix-toolkit.run.aws-usw02-pr.ice.predix.io/) must be provisioned and properly updated. This task can be accomplished through the UAA dashboard (see below) as well, if you prefer that over the [Predix Tool Kit](https://predix-toolkit.run.aws-usw02-pr.ice.predix.io/). While we are providing this explanation, please understand that `EC != UAA`. If you need further assistance with UAA beyond what is explained here, please reach out to Predix or other relevant parties. This explanation is 'as-is'.
 - 'Authorized Grant Types' must be updated to include 'client_credentials' and 'refresh_token'
 - The name of the UAA Client, as well as the UAA Client 'secret', will be needed in configuring EC agent scripts
-- Find 'oauth-scope' in the EC portion of the VCAP, and add this to the 'authorities' (not scope!) of the UAA Client 
+- The 'oauth-scope' from the Service Key / ENVs needs to be added to the **Authorities** portion, **not the Scopes**
 - Take note of the 'Token Validity' for your UAA Client, this will also be important in EC agent configuration
 </br></br>
 
 #### Note about the UAA Dashboard:
-The UAA Dashboard can be accessed at https://uaa-dashboard.run.YOUR.DOMAIN.predix.io/ </br></br>
+The UAA Dashboard can be accessed at https://uaa-dashboard.run.PREDIX_SUBDOMAIN.predix.io/ 
+
+#### Document Check! Are these recorded?
+- use case / need for Enterprise Connect Service Instance
+- Predix UAA Instance details
+    - UAA Instance URI
+    - UAA Admin/contact
+- Predix UAA Client details
+    - Name
+    - 'Secret'
+    - Configuration (state of all settings previously mentioned)
+- Enterprise Connect Service Intstance details
+    - Predix Org and Space
+    - Name
+    - Who created?
+    - Service Key
+</br></br>
 
 <A HREF="#top">Back To Top</A>
-## EC Agent Script Explanations and Templates
-#### In the [next section](#pushing-agents-to-predix), we will discuss pushing EC agents to Predix. The purpose of this portion is to take a look at the EC agent scripts and explain some aspects of their usage. The following sections will guide your through configuring EC agent scripts as well as an implied directory structure. There is an [EC SDK](https://github.com/Enterprise-connect/ec-sdk) available to work from, but this repo comes with a lot of example code and may be a large or cumbersome download depending on your network connection speeds.
-##### EC Gateway Agent
-The EC Gateway should be the first agent you push and run.
-```bash
-./ecagent_linux_sys -mod gateway -lpt ${PORT} \
--zon <Predix-Zone-ID> -sst <EC-Service-URI ending in predix.io> \
--tkn <admin-token>
-```
-Agents running on Predix will always require the [Linux agent binary](https://github.com/Enterprise-connect/ec-sdk/blob/dist/dist/ecagent_linux_sys.tar.gz), but other agents will require the appropriate binary based on the environment for your use case. Once the Gateway is up, you can view the Gateway's ['/health' endpoint](docs/health.txt)
-##### EC Server Agent
-The EC Server should be the second agent you either push or run - and you will need the EC Gateway's URL to configure the EC Server and EC Client scripts. Once the EC Server agent is running, you will want to verify the 'super connection' with your Gateway, before moving onto pushing or running the EC Client.
-```bash
-./ecagent_dist -mod server \
--grp <Group, Service Zone ID by Default> \
--aid <VCAP Provided> \
--cid <UAA Client ID> -csc <UAA Client Secret> -dur <Bearer Token Refresh Time in Seconds> \
--oa2 https://<Predix UAA URL>/oauth/token \
--hst wss://<EC Gateway URL>/agent \
--zon <Predix Zone ID of the EC Service> \
--sst <EC Service URL> \
--rht <Resource IP> -rpt <Resource Port> \
--hca <Port for Health Check, use ${PORT} on Predix>
-```
-'${PORT}' will cause Predix to dynamically assign an available port. If ran elsewhere, '${PORT}' will need to be replaced with a port of your choice, which is not in use. Be sure the '-dur' flag used, which represents how often the agent will fetch a new token from the UAA in minutes, is lower/shorter than the 'Token Validity' values on your UAA Client (the agents need to refresh tokens before the UAA Client expires them). In the vast majority of cases, using the '-dur' value provided in these scripts will work well.
-##### EC Client Agent
-The EC Client should be the last agent your push or run, as it will have no functionality without the existence of a 'super connection' between the EC Gateway and EC Server agents.
-```bash
-./ecagent_dist -mod client \
--grp <Group, Service Zone ID by Default> \
--aid <VCAP Provided> -tid <VCAP Provided, this value needs to match the target Server's '-aid'> \
--cid <UAA Client ID> -csc <UAA Client Secret> -dur <Bearer Token Refresh Time in Seconds> \
--oa2 https://<Predix UAA URL>/oauth/token \
--hst wss://<EC Gateway URL>/agent \
--lpt <Any Available Port of Your Choice>
-```
-##### Running Agents "Locally" with Relevant Binary
-To run an agent, simply configure the appropriate script, and [download the binary](https://github.com/Enterprise-connect/ec-sdk/tree/dist/dist) appropriate to the environment. After extracting the agent to your working directory, simply paste your configured script in your CLI/shell. You can also save them as a script and run the script file. Agents not running on Predix require an additional proxy flag. You will need to identify what proxy is appropriate for your environment, and then add this flag to the end of the script:
+## EC Agency
+It is understood that human beings can identify, understand and remember something better when presented with behaviors versus abstract, technical facts. In this section, we hope to preface the coming technical configuration pieces with a 'behavioral' look at how the EC Agent operates in its three distinct modes: Gateway, Server, and Client.
+
+### EC Agent as a 'Gateway'
+The EC agent binary, running as a Gateway, is widely considered to be the 'core' of Enterprise Connect, so much so that many users actually believe the Gateway **is** the Service itself, but that is actually not the case. 
+
+The EC Gateway runs as a hub, and when an EC Client goes to make a connection to a particular EC Server, the EC Gateway will use details about both, and verify the validity of these connections with the EC Service APIs. It makes sure that no connections are made using an EC Service that do not provide the most basic identification and authorizations. 
+
+The EC Gateway, once running on Predix, will have a /health endpoint, which is probably the most powerful tool users have to self-diagnose and monitor their connectivity. Expert and seasoned users oftentimes set up various automated jobs and scripts to access this endpoint, and use the values therein to maintain good connectivity, and spot anomalies before they become problems. More on such anomalies and their root causes later.
+
+**Gateway Agent Key Flags**
+- `tkn`: _A Basic authorization used to access certain EC Service APIs_
+- `sst`: _The EC Service URI, to hit the correct APIs_
+
+### EC Agent as a 'Server'
+The EC Server, while having a *visually* larger configuration, is actually only concerned with two things: the IP/hostname and PORT for the data source that is central to your use case. I.e., if your use case involves accessing a Postgres instance on Predix, it would know the hostname for that instance, as well as the port, which is typically 5432. 
+
+When the EC Server is ran/started, it actively and immediately attempts to make a 'Super Connection' (full duplex, bidirectional) with the EC Gateway using the EC Service APIs (Bearer/oauth2, more later). Once this is accomplished, we will be able to see this connection reflected at the /health endpoint for the Gateway. After that, it will wait for connections from the EC Client, mediated by the EC Gateway. 
+
+**Server Agent Key Flags**
+- `aid`: _The EC Server **A**gent's **ID**_
+- `rht`: _Resource hostname/IP_
+- `rpt`: _Resource PORT_
+
+### EC Agent as a 'Client'
+The EC Client also has a rather *visually* large configuration, and like the other two modes, the bulk of this is background security stuff. Also, the Client is fairly lazy. When you tell it to run, it will! However, it just kind of sits there until something tries to access it via `127.0.0.1:${CHOSEN_PORT}`. Then and only then will it make any call to the EC Gateway or appropriate EC Server. The only things the EC Client really cares about is a PORT to listen on, and the 'id' of the EC Server you wish to reach. As mentioned previously, the rest of the configuration is background/security minutiae. 
+
+**Client Agent Key Flags**
+- `aid`: _The EC Client **A**gent's **ID**_
+- `tid`: _The **T**arget EC Server's **ID**_
+- `lpt`: _The local PORT the EC Client listens on_
+
+</br> 
+
+<A HREF="#top">Back To Top</A>
+## Agent Scripts and Running Agents
+
+### Agent templates
+The [EC agent templates](https://github.com/Enterprise-connect/ec-agent-cf-push-sample/blob/dist/ec.sh) we provide in our [cf push example repo](https://github.com/Enterprise-connect/ec-agent-cf-push-sample) are essentially pre-written scripts for the three distinct agent modes: Gateway, Server, and Client. However, these are not absolute or all-inclusive. These are simply the *most basic*, functioning examples for each EC agent mode. 
+    
+If you have been following along linearly to this point, you should have access to every value described in those templates. Additionally, at the bottom of [ec.sh](https://github.com/Enterprise-connect/ec-agent-cf-push-sample/blob/dist/ec.sh) you will find a slightly modified 'flag map' which explains the meaning behind every flag/value in the templates, as well as additional, optional flags not being used or always needed.
+
+### Agent binary
+Once you configure the appropriate files (ec.sh for local/VMs, ec.sh and manifest.yml for Predix deployment), all that is left is to put the appropriate binary in the directory. 
+
+>It is worth pointing out that the file-based approach is simply for documentation and convenience. You can manually enter, character-by-character, an EC agent binary command and all of the flags everytime you want to run the agent, but that's rather absurd, right? You can copy and paste the commands from a file, but again, why? It is, generally speaking, better to simply work out of a file. A support call that relies on vi tends to take at least twice as long, especially when you factor in being #skyped and the ubiquitous 'can you see my screen? is it showing?'. Text editors, please. 
+
+You can find the [appropriate binary](https://github.com/Enterprise-connect/ec-sdk/tree/dist/dist) in our SDK. Select the 'sys' or 'sys.exe' relevant to the OS where the agent will run. Not necessarily YOUR OS. For instance, Windows users pushing an EC agent to Predix would not use the 'ecagent_windows_sys.exe' binary, as Predix runs Linux, not Windows.
+
+### Summary
+By this point, you might have something resembling the example below. I have gone a little bit overboard with the layout, but that is to err on the side of caution. While excessive, the below file structure is one example of a very self-evident file structure, which eases knowledge transfers and maintainability.
+
 
 ```bash
--pxy <your proxy, no passwords allowed>
-```
-
-CLI/shell command to extract agents:
-
-```bash
-tar -xvzf path/to/the/ecagent_dist.tar.gz
-```
-
-##### Simple Directory Structure
-This is a good structure for keeping your agent configurations organized:
-
-
-```
-enterprise_connect
-│   notes.txt             
-│   uaa.json          
+my-enterprise-connect-configuration-documentation
+│   notes.txt              # worksheet/notes        
+│   uaa.json               # our oauth/uaa json for service creation
 │
 └───ec_gateway
-│   │   ec.sh
-│   │   manifest.yml
-│   │   ecagent_linux_sys
+│   │   ec.sh               
+│   │   manifest.yml       # apps on Predix 'need' a manifest
+│   │   ecagent_linux_sys  # Gateway 'always' runs on Predix/Linux
 │
 │   
 └───ec_server
 │   │   ec.sh
-│   │   manifest.yml        // if running on Predix
-│   │   ecagent_dist        // linux for Predix
+│   │   manifest.yml        # if running on Predix
+│   │   ecagent_some_dist   # Linux for Predix
 │
 │
 └───ec_client
     │   ec.sh               
-    │   manifest.yml        // if running on Predix
-    │   ecagent_dist        // linux on Predix
+    │   ecagent_some_dist   # Be sure the ecagent distribution matches the OS where the agent will run (Windows, Darwin, Linux, etc)
 ```
 
-<A HREF="#top">Back To Top</A>
-## Pushing Agents to Predix
-### Warning! The following instructions are absolutely critical to overall connectivity and behavior of the agents on Predix.
-- You will need three items(<a href="https://github.com/Enterprise-connect/ec-agent-cf-push-sample/tree/dist" target="_blank">'ec.sh', 'manifest.yml'</a>, as well as the appropriate binary) to properly push an EC agent to Predix:
-    1. a [file](https://github.com/Enterprise-connect/ec-agent-cf-push-sample/blob/dist/ec.sh) to start the agent binary with agent-mode specific flags, commonly named 'ec.sh'
-    2. the Linux [binary](https://github.com/Enterprise-connect/ec-sdk/blob/dist/dist/ecagent_linux_sys.tar.gz)
-    3. a [manifest.yml](https://github.com/Enterprise-connect/ec-agent-cf-push-sample/blob/dist/manifest.yml)
-        - you will need to update the 'name:' field of the manifest to push your app, unless you choose to override that via command line
-        - be mindful of the 'command:' field, if you choose to name rename 'ec.sh', this will need to be reflected here
-- Pushing the EC Gateway agent to Predix first is highly recommended
-    - Push the Gateway, then push/run Server, then push/run Client
-    
-#### Copy, paste, update, and utilize the following commands from the directory of your ec.sh, agent binary, and manifest.yml to push your app to predix
-***Caution!*** If you are re-pushing an existing EC agent app, it is advised you begin with this command:
-```bash
-cf d -r -f <app name>
-```
-For a fresh app, or after you have deleted the previous app, use the following:
-```bash
-cd /location/of/your/ec/agent/app/files
-cf push
-```
-You now have access to powerful features such as scaling(**not supported in Predix Select environment!**), allowing you to push a single Gateway app, and then scale it up - each Gateway instance able to handle 50 concurrent sessions! In fact, the EC team considers it best practice to scale your Gateway up to at least two instances:
-```bash
-cf scale <Gateway app name> -i 2
-```
-Other EC agents running on Predix may be scaled in the same manner. Interesting to note is that for some use cases, scaling the EC Server agent may mitigate the occurrence of connectivity errors caused by outside factors(network lag, timeouts, etc.).
+At this point, you should be able to move into the appropriate directory, execute the relevant script and binary, or run a `cf push` command to deploy to Predix, and be all set for end-to-end connectivity. Don't forget to document!
+
+</br></br> 
 
 <A HREF="#top">Back To Top</A>
 ## Diego, Scaling, and Managing Complex Use Cases
-### (Scaling EC Agents on Select currently producing unexpected behavior!)
+
 ### Diego-enabled Agent Apps on Predix and Scaling
 Now that Diego is the default architecture on CF1, pushing EC Agent apps has become much simpler while giving users better flexibility to manage different use cases. This update has provided our users the ability to *scale* their EC agents running on Predix (this can also be mimicked locally and manually) with a simple command:
 ```bash
 cf scale <app name> -i <number of instances you want to scale to>
 ```
-Users no longer need to be concerned with traffic to a Gateway requiring additional Gateways, Servers, Clients, etc. Each Gateway instance will provide *load-balanced* support for up to 50 concurrent sessions! The Gateway will employ machine learning to ensure that the traffic will be normalized across all instances of the Gateway. In other words, if you were to see 10 sessions on one instance of the Gateway, you should also see a number of sessions quite near that on the others.
+Users no longer need to be concerned with traffic to a Gateway requiring additional Gateways, Servers, Clients, etc. Each Gateway instance will provide *load-balanced* support for up to 50 concurrent sessions! If you were to see 10 sessions on one instance of the Gateway, you should also see a number of sessions quite near that on the others.
+
 ### EC Usage with Multiple Data Sources and Client-side Applications
-When you create an EC Service instance, you are provided with two IDs by default. These IDs are used to configure your Server and Client scripts, as discussed previously. This is only going to be adequate for very basic use cases and POCs. Many users new to EC are unaware of the expansive toolkit available at the Service URI. If you navigate to your Service URI, you can click 'API Docs' on the left nav-bar, at which point you will be prompted for a username and password. To obtain your credentials, find your admin token(*adm_tkn*) on your Service's VCAP, and [decode](https://www.base64decode.org/) this to view your credentials. For example:
+When you create an EC Service instance, you are provided with two IDs by default. These IDs are used to configure your Server and Client scripts, as discussed previously. This is only going to be adequate for very basic use cases and POCs. Many users new to EC are unaware of the expansive toolkit available at the Service APIs. If you navigate to your Service URI, you can click 'API Docs' on the left nav-bar, at which point you will be prompted for a username and password. To obtain your credentials, find your admin token(*adm_tkn*) on your Service's VCAP, and [decode](https://www.base64decode.org/) this to view your credentials. For example:
 > dXNlcm5hbWU6cGFzc3dvcmQ= </br>
 
 ... should decode to: </br>
@@ -206,9 +244,11 @@ When you create an EC Service instance, you are provided with two IDs by default
 > username:password </br>
 
 #### GET admin/accounts/{group-id}
-After obtaining your credentials and logging in, you will find a variety of APIs available to monitor and explore your Service. For the sake of this discussion, we will primarily focus on the *Accounts* family of APIs, which all require authorization in form of 'basic <adm_tkn>'. To view the current credentials for a Service, you can use the GET to /admin/accounts/{group-id}. By default, your 'group-id' will be the zone-id of the Service, which is conveniently located in the Service URI.
+After obtaining your credentials and logging in, you will find a variety of APIs available to monitor and explore your Service. For the sake of this discussion, we will primarily focus on the *Accounts* family of APIs, which all require authorization in the form of 'basic <adm_tkn>'. To view the current credentials for a Service, you can use the GET to /admin/accounts/{group-id}. By default, your 'group-id' will be the zone-id of the Service, which is conveniently located in the Service URI.
+
 #### POST admin/accounts/{group-id}/add
 The most empowering API in the *Accounts* family is the POST to admin/accounts/{group-id}/add. By providing the required authorization ('basic <adm_tkn>') and the 'group-id' (Service zone-id by default), you can use this API to generate additional IDs which can then be used to configure additional EC agent scripts.
+
 #### Reusability of IDs
 The IDs are capable of being reused, with some exceptions and limitations.
 - When running multiple EC Servers simultaneously, there needs to be a 1:1 relationship between an ID used for the Server's *-aid* flag and the IP found in the Server's *-rht*
@@ -230,12 +270,12 @@ The IDs are capable of being reused, with some exceptions and limitations.
 ## FAQs
 
 ### Q: Does each Gateway require an EC subscription?
-Pending an upcoming update, only one Gateway can be deployed at this time, but it can be scaled with Diego to multiple instances, allowing for the management of increased traffic volumes.
+Pending an update, only one Gateway can be deployed at this time, but it can be scaled with Diego to multiple instances, allowing for the management of increased traffic volumes.
 
 ### Q: How much data and traffic can my EC Instance manage?
 The EC Service instance is not concerned with the amount of data transferred. While we do recommend a separate EC instance for your 'prod' and 'non-prod' environments for the sake of isolation, there are tools and features that let one Service manage virtually "any" amount of traffic.
 - You can scale your agents on Predix (including Gateways) with *cf scale app_name -i number_of_instances_desired*
-    - Each Gateway instance can handle up to 50 concurrent sessions (Client-Server interactions)
+    - Each Gateway instance can handle up to 50 concurrent sessions (Client-Server active, in-flight connections)
 - You can use the APIs in your Service URI to generate additional IDs beyond the two produced by default
     - You will need one ID per datasource IP, *-rht* flag on the Server. (1:1 ID:Servers)
     - You can use the same ID for all Client *-aid* flags, as long as you use different *-lpt* values and the *-tid* is configured for the correct Server (data source IP)
@@ -247,24 +287,24 @@ No, Enterprise Connect does not set any limits on bandwidth usage.
 ## Observed Problems and Resolutions
 
 ### Problem: My database connection is failing or intermittent, I believe EC is failing
-Typically, when there is a problem with EC, you will have no connectivity whatsoever. You will not be able to login to a DB via PG Admin, or anything of the sort. If you have some connectivity but scripts and/or batch jobs are failing to complete - be sure to check for locks on processes within the DB itself.
-
+Typically, when there is a problem with EC, you will have no connectivity whatsoever. You will not be able to login to a DB via PG Admin, or anything of the sort. If you have some connectivity but scripts and/or batch jobs are failing to complete - be sure to check for locks on processes within the DB itself. If the connectivity is strong for 'a while', but then begins to deteriorate or fail, please take a look at your Gateway /health. If you see active 'sessions' when there should be no activity (ie, `client pool == 0 || client pool < session count`), this is why your connectivity begins to fail, and it's because the application is not sending/signaling an `EOF`. Example:
+```psql
+psql << EOF
+\copy (select * from dummy_data limit 100) to 'dummy_data.csv' csv;
+\q
+EOF
+```
 ### Problem: After scaling the Gateway, the previous connections keep failing
-For our customers in Predix Select environments, Select is currently using a differentt API version (older, [2.62.0](https://apidocs.cloudfoundry.org/244/)) than Predix Basic ([2.75.0](https://apidocs.cloudfoundry.org/253/)). We believe this is the reason the agent behavior is different in Select; specifically, why we observe an inability to scale EC Gateways while maintaining connectivity.
-
 Stop your EC Server(s), restart your EC Gateway, and then start your EC Server. If the problem still persists, please open a Predix Support ticket or reach out to us on Flowdock in our [EC Usergroup](https://www.flowdock.com/app/ge-developer-cloud/ec-usergroup) channel. If you haven't joined already, please consider [joining the EC Usergroup](https://www.flowdock.com/invitations/44765fcbae5a36d0eff83c9536f87223044ad748) to stay up-to-date on the the latest from the EC team, as well as contribute to, and beneifit from, engaging with our amazing community of users.
 
 ### Problem: '[EC Client] error while adding the client inst.'
-This error occurs when the EC Client script is configured to connect to an invalid Gateway URL via the *-hst* flag, or when it tries to connect to through an EC Gateway with no active super connections.
+This error occurs when the EC Client script is configured to connect to an invalid Gateway URL via the *-hst* flag, or when it tries to connect to an EC Server through an EC Gateway with no active super connections matching that Server's `-aid` value.
 
 ### Problem: General connectivity (SuperConnection, etc) can be established but deteriorates immediately on end-to-end usage
 While there are a variety of potential causes for this symptom, the most likely causes are:
 
-- The EC agents running on Predix were not pushed properly, please see: [Pushing Agents to Predix](#pushing-agents-to-predix) 
 - The EC agents are not running the same version of the binary, or outdated versions of the binary
-    - While some old binary may work, the EC Service and the agents are not developed with backwards compatibility in mind, because this is a relatively new product, and there are countless improvements and features we plan on adding.
-    - Because the agents all use the same core binary, regardless of their behavior based on the *-mod* flag, if one of the agents is using an older or newer version than the others, the interaction between them may become fundamentally flawed.
-    - The Service requires an update to be compatible with current/recommended agents
+- The Service requires an update to be compatible with current/recommended agents
 - You have attempted to scale an EC Gateway in Predix Select, which is currently not supported due to the platform
 
 ### Problem: The Service is repeatedly crashing or failing in very consistent intervals
@@ -274,7 +314,7 @@ This is likely an issue with the relationship between your UAA Client and how of
 
 Start up an EC Server or EC Client. After it starts up and reports the version, it will fetch a bearer token (which will be visible if the *-dbg* flag is enabled), and then it will print something out along these lines:
 
-> [EC Client] 2017/10/31 09:28:51 Token refreshed. The token will be expired in ***x*** minutes. Approx. ***y*** minutes to the next auto-refresh
+> [EC Client] 2018/9/31 25:61:00 Token refreshed. The token will be expired in ***x*** minutes. Approx. ***y*** minutes to the next auto-refresh
 
 if (y >= x) { You are going to have issues };
 
@@ -285,6 +325,9 @@ The solutions to this problem range from "simple fix" to a Predix Support ticket
     - *-hst wss://gateway-url/agent*
     
 Beyond these simple fixes, if the 404 error is including the name of your current Gateway app/url, and you have pushed or updated this Gateway in the past, this could be due to the existence of "phantom" apps which were not properly deleted in Cloud Foundry. In such cases, only the Predix Support team has the tools and access to identify and correct such anomalies. In this event, they will need the 'gtwId's of the offending apps, which you can get from the Gateway list at the Service URI, or in the EC Server logs near the 404 message. They can use these Ids to find and properly destroy the bad Gateway apps.
+
+<A HREF="#top">Back To Top</A>
+## CF CLI Quick Reference for EC
 
 <A HREF="#top">Back To Top</A>
 ## References and Further Resources
