@@ -103,8 +103,7 @@ Who needs to be notified on progress and updates? Please provide the emails, or 
 </br>  
 
 Once you have this information together, you can reach us at the following emails, or on Flowdock, or on Skype for Business, or just stopping by our desks!</br>  
-chia.chang@ge.com</br>  
-lauren.small@ge.com</br>  
+apolo.yasuda@ge.com</br>   
 perrin.lake1@ge.com</br>  
-philip.wofford@ge.com</br>  
+philip.wofford1@ge.com</br>  
 prasad.alokam@ge.com</br>  
