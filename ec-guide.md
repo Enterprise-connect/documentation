@@ -3,6 +3,7 @@
 # Comprehensive Guide to Enterprise Connect (EC)
 
 * [Foreword](#foreword)
+* [Caution!](#caution)
 * [Common Use Cases](#common-use-cases)
 * [Service Creation](#service-creation)
 * [UAA Client Update](#uaa-client-update)
@@ -22,22 +23,6 @@ Enterprise Connect ('EC') is a software-based solution to very common network en
 This guide is the entry point for those new to Enterprise Connect, and can also serve to refresh the memory of those who may have not configured Enterprise Connect recently - we are always developing and refining script-flags, usage and features!</br> 
 
 Finally, this guide assumes (and recommends!) a shell or command line approach. While there are web UIs available for some of the tasks presented, we recommend using the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) as much as possible, as this will make your future as an Enterprise Connect expert much brighter - and not to mention our support is 100% shell-based. There is ample [CF CLI documentation and reference](https://docs.cloudfoundry.org/cf-cli/cf-help.html) available, but for the purpose of this guide and most of Enterprise Connect, you will only need to utilize a few basic commands which you will be able to, for the most part, copy and paste.</br> 
-
-### CAUTION: Document Everything, Every Time
-
-It stands to reason that the Enterprise Connect team and Predix Support cannot know what someone wrote in a file on their computer. We do not readily know who subscribed to, or 'owns', the Enterprise Connect subscription (without investigative work). It is your responsibility to document your use cases, configurations, and everything else. Conservatively estimating, something around 10% of support time is spent doing superflous investigative work resulting from a lack of documentation of initial configuration(s).
-
-> Imagine your production environment is down, and you reach out to us or Predix Support, and we need to view a UAA configuration, but you do not know who the UAA admin is, or which UAA client you were using. Your prod environment will stay down until that is figured out. This is unfortunately common. Please, please, please... document **everything**.
-
-Additionally, it is altogether too common that the teams and team-of-teams we work with have internal communication breakdowns. Sometimes, while resolving one developer's issue, we create a problem for another developer - simply because those developers were not adequately **communicating and documenting** changes made to one another. If 10 people across two teams are using the same Enterprise Connect subscription, everyone needs to be on the same page. Due to the amount of security involved with Enterprise Connect's end-to-end connectivity, it is by design that configurations are easily broken and will fail authorization checks. 
-
-While a bit premature, these are the most common items requested from our side and from Predix Support to help resolve issues. It is not overly important to understand these at this point, but for what it's worth, here are some items to keep in mind:
-
-- Predix Zone ID (GUID) of the EC Service
-- Gateway, Server and Client logs with corresponding/relevant time stamps
-- UAA Client configuration
-
-Issues are rarely resolvable without these pieces. Only you can prevent Support Fires - through documentation!
 
 ## Common Use Cases
 
@@ -196,7 +181,7 @@ Once you configure the appropriate files (ec.sh for local/VMs, ec.sh and manifes
 You can find the [appropriate binary](https://github.com/Enterprise-connect/ec-sdk/tree/dist/dist) in our SDK. Select the 'sys' or 'sys.exe' relevant to the OS where the agent will run. Not necessarily YOUR OS. For instance, Windows users pushing an EC agent to Predix would not use the 'ecagent_windows_sys.exe' binary, as Predix runs Linux, not Windows.
 
 ### Summary
-By this point, you might have something resembling the example below. I have gone a little bit overboard with the layout, but that is to err on the side of caution. While excessive, the below file structure is one example of a very self-evident file structure, which eases knowledge transfers and maintainability.
+By this point, you might have something resembling the example below. I have gone a little bit overboard with the layout, but that is to err on the side of caution. While excessive, the below file structure is one example of a very self-evident file structure (unless viewing on mobile, sorry about that), which eases knowledge transfers and maintainability.
 
 
 ```bash
@@ -325,6 +310,25 @@ The solutions to this problem range from "simple fix" to a Predix Support ticket
     - *-hst wss://gateway-url/agent*
     
 Beyond these simple fixes, if the 404 error is including the name of your current Gateway app/url, and you have pushed or updated this Gateway in the past, this could be due to the existence of "phantom" apps which were not properly deleted in Cloud Foundry. In such cases, only the Predix Support team has the tools and access to identify and correct such anomalies. In this event, they will need the 'gtwId's of the offending apps, which you can get from the Gateway list at the Service URI, or in the EC Server logs near the 404 message. They can use these Ids to find and properly destroy the bad Gateway apps.
+
+<A HREF="#top">Back To Top</A>
+### CAUTION! 
+#### 'Document Everything, Every Time: An Anecdotal Tirade Born of Good Intentions'
+
+It stands to reason that the Enterprise Connect team and Predix Support cannot know what someone wrote in a file on their computer. We do not readily know who subscribed to, or 'owns', the Enterprise Connect subscription (without investigative work). It is your responsibility to document your use cases, configurations, and everything else. Conservatively estimating, something around 10% of support time is spent doing superflous investigative work resulting from a lack of documentation of initial configuration(s) - but ALSO resulting from our failure to adequately impress upon users the importance of documentation! (Which is why this warning is so opinionated and verbose!)
+
+> Imagine your production environment is down, and you reach out to us or Predix Support, and we need to view a UAA configuration, but you do not know who the UAA admin is, or which UAA client you were using. Your prod environment will stay down until that is figured out. This is unfortunately common. Please, please, please... document **everything**.
+
+Additionally, it is altogether too common that the teams and team-of-teams we work with have internal communication breakdowns. Sometimes, while resolving one developer's issue, we create a problem for another developer - simply because those developers were not adequately **communicating and documenting** changes made to one another. If 10 people across two teams are using the same Enterprise Connect subscription, everyone needs to be on the same page. Due to the amount of security involved with Enterprise Connect's end-to-end connectivity, it is by design that configurations are easily broken and will fail authorization checks. 
+
+These are the most common items requested from our side and from Predix Support to help resolve issues:
+
+- URI of the EC Service, location explained in this guide
+- Gateway, Server and Client logs with corresponding/relevant time stamps - `cf logs my-app` 
+- UAA Client configuration
+
+Issues are rarely resolvable without these pieces. Only you can prevent Support Fires - through documentation! 
+</br> 
 
 <A HREF="#top">Back To Top</A>
 ## CF CLI Quick Reference for EC
