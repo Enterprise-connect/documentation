@@ -4,7 +4,7 @@
 * [TLS](#tls)
 * [VLAN (Linux only!)](#vlan)
 
-The plugins available for EC are meant to expand the core functionality of EC based on user feedback and use cases which require some special behaviors and considerations. 
+The plugins available for EC are meant to expand the core functionality of EC based on user feedback and use cases which require some special behaviors and considerations. If you are not adequately familiar with a basic EC Setup, please have a look at our EC Guide in this repo, it will bring you up to speed and enable you to tackle advanced/plugin usage.
 
 ## TLS
 
@@ -22,14 +22,13 @@ A modified Server script to run on Predix (notice the *-plg* flag!):
 #!/bin/bash
 chmod 755 ./tls_linux_sys;
 ./ecagent_linux_sys -mod server \
--grp group-name (probably same value as -zon) \
--aid q1w2e3 \
+-grp qwerty -aid server \
 -cid myuaaclient -csc clientsecret -dur 1200 \
 -oa2 https://normally-a-valid-uuid-here.predix-uaa.run.aws-usw02-pr.ice.predix.io/oauth/token \
 -hst wss://some-example-gateway.run.aws-usw02-pr.ice.predix.io/agent \
 -zon your-ec-service-zone-id -sst https://your-ec-service-zone-id.run.aws-usw02-pr.ice.predix.io \
--rht localhost -rpt 7979 \
--dbg -hca ${PORT} -plg
+-rht localhost -rpt 7979 \ # while this line is 'overridden' by the yaml, it must MATCH the yaml
+-hca ${PORT} -plg
 ```
 
 For a Server running on Predix (or Linux machine), you might have a plugins.yml file that looks like this:
@@ -75,24 +74,24 @@ The **VLAN** plugin allows the EC Client to create a Virtual LAN which mirrors t
 ### Example Agent Scripts
 
 ```bash
-  ./ecagent_linux_sys -mod server -aid <VCAP_provided> \
-  -grp <agent group, default group is the same as Predix-Zone-ID> \
-  -cid <UAA_client_ID> -csc <UAA_client_Secret> \
-  -dur 1200 -oa2 https://<predixUAA_URL>/oauth/token \
-  -hst wss://<Predix_Gateway_App_URL>/agent \
-  -zon <Predix-Zone-ID> -sst <EC-Service-URI> \
-  -rht <resource IP> -rpt <resource port> \
-  -dbg -hca ${PORT} -vln
+./ecagent_linux_sys -mod server \
+-grp qwerty -aid server \
+-cid myuaaclient -csc clientsecret -dur 1200 \
+-oa2 https://normally-a-valid-uuid-here.predix-uaa.run.aws-usw02-pr.ice.predix.io/oauth/token \
+-hst wss://some-example-gateway.run.aws-usw02-pr.ice.predix.io/agent \
+-zon your-ec-service-zone-id -sst https://your-ec-service-zone-id.run.aws-usw02-pr.ice.predix.io \
+-rht localhost -rpt 1521 \
+-vln
 
-  ./ecagent_linux_sys -mod client -aid <VCAP_provided> -tid <VCAP_provided> \
-  -grp <agent group, default group is the same as Predix-Zone-ID> \
-  -cid <UAA_client_ID> -csc <UAA_client_Secret> \
-  -dur 1200 -oa2 https://<predixUAA_URL>/oauth/token \
-  -hst wss://<Predix_Gateway_App_URL>/agent \ 
-  -lpt <local listening port of your choosing, irrelevant for this use case> \
-  -rpt <comma separated resource ports> \
-  -dbg -pxy <your proxy info> \
-  -plg
+./ecagent_linux_sys -mod client \
+-aid client -tid server \
+-grp qwerty \
+-cid myuaaclient -csc clientsecret -dur 1200 \
+-oa2 https://normally-a-valid-uuid-here.predix-uaa.run.aws-usw02-pr.ice.predix.io/oauth/token \
+-hst wss://some-example-gateway.run.aws-usw02-pr.ice.predix.io/agent \
+-lpt 7979 \
+-rpt ${COMMA_SEPARATED_RESOURCE_PORTS} \
+-plg
 ```
  
 

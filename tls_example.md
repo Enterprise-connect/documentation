@@ -21,6 +21,7 @@ TLS Plugin compatibility table
 | Agent     |      #1221+     |
 | Service   |      #1051+     |
 | Plugin    |      #1231      |
+
 ### Setup Guide
 #### Step 1. Prepare the essentials
 1. Download / clone the [latest EC agent beta]("https://github.com/Enterprise-connect/ec-sdk/tree/beta") into your machine.
