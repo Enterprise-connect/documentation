@@ -88,7 +88,7 @@ This should return something along these lines (ENVs/'VCAP'):
 ```
 Please copy and paste this information to a document you can readily access for upcoming configurations, preferably in a working directory holding all documents related to this setup and configuration.
 
-#### Document Check! Are these recorded?
+#### [Document Check! Are these recorded?](docs/config.txt)
 - use case / need for Enterprise Connect Service Instance
 - Predix UAA Instance details
     - UAA Instance URI
