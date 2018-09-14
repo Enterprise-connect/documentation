@@ -96,11 +96,13 @@ The **VLAN** plugin allows the EC Client to create a Virtual LAN which mirrors t
  
 
 ```yml
-ec-plugin:
-vlan:
-- status: active
-   ips: 10.93.210.30/32,10.93.210.32/32
-   command: ./vlan
+--- 
+ec-plugin: 
+  vlan: 
+    - 
+      command: ./vlan
+      ips: "10.93.210.30/32,10.93.210.32/32"
+      status: active
 ```   
 
 The `status` must be set to 'active'. The `ips` should be the IPs of your data sources, you may need to be creative in finding these values. `Command` is how the plugin binary is started, should not be changed/configured.
