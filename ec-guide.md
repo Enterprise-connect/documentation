@@ -3,7 +3,7 @@
 
 <A NAME="top">
 
-# Comprehensive Guide to Enterprise Connect (EC)
+# Complete Guide to Enterprise Connect Setup
 
 * [Foreword](#foreword)
 * [Caution!](#caution)
@@ -12,7 +12,7 @@
 * [UAA Client Update](#uaa-client-update)
 * [EC Agency](#ec-agency) 
 * [Agent Scripts and Running Agents](#agent-scripts-and-running-agents) 
-* [Diego, Scaling, and Managing Complex Use Cases](#diego-scaling-and-managing-complex-use-cases)
+* [Scaling, and Managing Complex Use Cases](#scaling-and-managing-complex-use-cases)
     * [Reusability of IDs](#reusability-of-ids)
 * [FAQs](#faqs)
 * [Observed Problems and Resolutions](#observed-problems-and-resolutions) 
@@ -214,7 +214,7 @@ At this point, you should be able to move into the appropriate directory, execut
    
 
 <A HREF="#top">Back To Top</A>
-## Diego, Scaling, and Managing Complex Use Cases
+## Scaling, and Managing Complex Use Cases
 
 ### Diego-enabled Agent Apps on Predix and Scaling
 Now that Diego is the default architecture on CF1, pushing EC Agent apps has become much simpler while giving users better flexibility to manage different use cases. This update has provided our users the ability to *scale* their EC agents running on Predix (this can also be mimicked locally and manually) with a simple command:

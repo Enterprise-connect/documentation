@@ -7,8 +7,8 @@
 This document is designed to provide insight into the Enterprise Connect (EC) team's process for upgrading EC Services. It is not intended to provide a deeply technical understanding, but rather a means for EC users to understand, and be comfortable with, what they can expect through the process.
 
 
-</br>  
-</br>
+    
+  
 
 ## "Blue-Green" Deployment
 
@@ -16,15 +16,15 @@ We use a [Blue-Green](https://docs.cloudfoundry.org/devguide/deploy-apps/blue-gr
 
 (All of the following images were taken from the [Cloud Foundry Docs](https://docs.cloudfoundry.org) page on the same topic)
   
-</br>
+  
 
 #### Example "Starting" State:
 There is one EC Service, and one route.
 
 ![an EC Service to be upgraded](./docs/base.png)
 
-</br>  
-</br>
+    
+  
 
 <A NAME="step1">
 
@@ -35,8 +35,8 @@ There are now two EC Services, and two routes, with the new EC Service using a t
 
 ![Step 1](./docs/step1.png)
 
-</br>  
-</br>
+    
+  
 
 
 #### Step 2.1
@@ -45,16 +45,16 @@ After the user indicates their satisfaction with the upgraded iteration of the E
 ![Step 2](./docs/step2.png)
 
 
-</br>  
-</br>
+    
+  
 
 #### Step 2.2
 After the original route is mapped to the new EC Service, it is then un-mapped from the original EC Service.
 
 ![Finalizing](./docs/finalization.png)
 
-</br>  
-</br>
+    
+  
 
 #### Finalized
 When Step 2 is fully completed, only the new EC Service and the original route will remain. At this point, any Gateways that had been testing the new EC Service via the temporary route will need to be re-pushed with a script reflecting the return to the original route.
@@ -63,8 +63,8 @@ When Step 2 is fully completed, only the new EC Service and the original route w
 
 <A HREF="#top">Back To Top</A>
 
-</br>  
-</br>
+    
+  
 
 ## Requirements
 
@@ -74,36 +74,38 @@ Additionally, some users may not feel the need to test their upgrade, and may in
 
 <A HREF="#top">Back To Top</A>
 
-</br>  
-</br>
+    
+  
 
 ## Getting Started
 
 If you are ready to have your EC Service(s) upgraded, it's time to let us know! Please provide us with the following information to make the process as smooth as possible. 
 
-</br> 
-</br> 
+   
+   
 
 ### Service Info:
 Please provide the URL for the EC Service(s), this will supply both the Zone ID and the domain for the EC Service.
 
-</br> 
-</br>
+   
+  
 
 ### Step Info:
 Please let us know what step(s) you are trying to have performed. Is your intention to test after <A HREF="#step1">Step 1</A> has been completed, or are you comfortable due to your experience with another upgrade and want Steps 1 and 2 performed in succession, without input from your side? We will always try to err on the side of caution if there is a lack of clarity here.
 
-</br> 
-</br>
+   
+  
 
 ### Points of Contact:
 Who needs to be notified on progress and updates? Please provide the emails, or other contact info, for any parties you wish to be kept informed during the upgrade process. We will be sure to oblige.
 
-</br>   
-</br>  
+     
+    
 
-Once you have this information together, you can reach us at the following emails, or on Flowdock, or on Skype for Business, or just stopping by our desks!</br>  
-apolo.yasuda@ge.com</br>   
-perrin.lake1@ge.com</br>  
-philip.wofford1@ge.com</br>  
-prasad.alokam@ge.com</br>  
+Once you have this information together, you can reach us at the following emails, or on Flowdock, or on Skype for Business, or just stopping by our desks!    
+>apolo.yasuda@ge.com     
+perrin.lake1@ge.com    
+philip.wofford1@ge.com    
+prasad.alokam@ge.com  
+
+  
