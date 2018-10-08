@@ -81,7 +81,7 @@ This should return something along these lines (ENVs/'VCAP'):
   ]
  },
  "service-uri": "https://12345678-abcd-1234-abcd-12345678abcd.run.aws-usw02-pr.ice.predix.io/v1beta/index/",
- "usage-doc": "https://github.com/Enterprise-connect/ec-misc-docs",
+ "usage-doc": "https://github.com/Enterprise-connect/documentation",
  "zone": {
   "http-header-name": "Predix-Zone-Id",
   "http-header-value": "12345678-abcd-1234-abcd-12345678abcd",
