@@ -21,18 +21,18 @@
 
 ## Foreword
 
-Enterprise Connect ('EC') is a software-based solution to very common network environment challenges. It allows those familiar with the configuration to connect to a remote resource from 'on-prem', and vice versa, in a matter of minutes - without ever having to touch ports, firewalls, et cetera! It is 100% software. While Enterprise Connect is a Predix Service at the core, it is more well known by its 'agent', a binary that can run as an app, in three distinct modes, which will be explained in detail later.</br> 
+Enterprise Connect ('EC') is a software-based solution to very common network environment challenges. It allows those familiar with the configuration to connect to a remote resource from 'on-prem', and vice versa, in a matter of minutes - without ever having to touch ports, firewalls, et cetera! It is 100% software. While Enterprise Connect is a Predix Service at the core, it is more well known by its 'agent', a binary that can run as an app, in three distinct modes, which will be explained in detail later.  
 
-This guide is the entry point for those new to Enterprise Connect, and can also serve to refresh the memory of those who may have not configured Enterprise Connect recently - we are always developing and refining script-flags, usage and features!</br> 
+This guide is the entry point for those new to Enterprise Connect, and can also serve to refresh the memory of those who may have not configured Enterprise Connect recently - we are always developing and refining script-flags, usage and features!  
 
-Finally, this guide assumes (and recommends!) a shell or command line approach. While there are web UIs available for some of the tasks presented, we recommend using the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) as much as possible, as this will make your future as an Enterprise Connect expert much brighter - and not to mention our support is 100% shell-based. There is ample [CF CLI documentation and reference](https://docs.cloudfoundry.org/cf-cli/cf-help.html) available, but for the purpose of this guide and most of Enterprise Connect, you will only need to utilize a few basic commands which you will be able to, for the most part, copy and paste.</br> 
+Finally, this guide assumes (and recommends!) a shell or command line approach. While there are web UIs available for some of the tasks presented, we recommend using the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) as much as possible, as this will make your future as an Enterprise Connect expert much brighter - and not to mention our support is 100% shell-based. There is ample [CF CLI documentation and reference](https://docs.cloudfoundry.org/cf-cli/cf-help.html) available, but for the purpose of this guide and most of Enterprise Connect, you will only need to utilize a few basic commands which you will be able to, for the most part, copy and paste.  
 
 ## Common Use Cases
 
-> Predix to On-Premises Data Source </br>
+> Predix to On-Premises Data Source  
 ![Predix to On-Premises Data Source](docs/ecToOnPrem.png) 
 
-> On-Premises to Predix Data Source </br>
+> On-Premises to Predix Data Source  
 ![On-Premises to Predix Data Source](docs/ecToPredixDataSources.png)
 
 
@@ -101,8 +101,8 @@ Please copy and paste this information to a document you can readily access for 
     - Name
     - Who created?
     - Service Key
-
-</br></br>
+ 
+ 
 <A HREF="#top">Back To Top</A>
 
 ## [UAA Client](https://predix-toolkit.run.aws-usw02-pr.ice.predix.io/) Update
@@ -112,7 +112,7 @@ Please copy and paste this information to a document you can readily access for 
 - The name of the UAA Client, as well as the UAA Client 'secret', will be needed in configuring EC agent scripts
 - The 'oauth-scope' from the Service Key / ENVs needs to be added to the **Authorities** portion, **not the Scopes**
 - Take note of the 'Token Validity' for your UAA Client, this will also be important in EC agent configuration
-</br></br>
+  
 
 #### Note about the UAA Dashboard:
 The UAA Dashboard can be accessed at https://uaa-dashboard.run.PREDIX_SUBDOMAIN.predix.io/ 
@@ -131,7 +131,7 @@ The UAA Dashboard can be accessed at https://uaa-dashboard.run.PREDIX_SUBDOMAIN.
     - Name
     - Who created?
     - Service Key
-</br></br>
+  
 
 <A HREF="#top">Back To Top</A>
 ## EC Agency
@@ -166,7 +166,7 @@ The EC Client also has a rather *visually* large configuration, and like the oth
 - `tid`: _The **T**arget EC Server's **ID**_
 - `lpt`: _The local PORT the EC Client listens on_
 
-</br> 
+  
 
 <A HREF="#top">Back To Top</A>
 ## Agent Scripts and Running Agents
@@ -211,7 +211,7 @@ my-enterprise-connect-configuration-documentation
 
 At this point, you should be able to move into the appropriate directory, execute the relevant script and binary, or run a `cf push` command to deploy to Predix, and be all set for end-to-end connectivity. Don't forget to document!
 
-</br></br> 
+   
 
 <A HREF="#top">Back To Top</A>
 ## Diego, Scaling, and Managing Complex Use Cases
@@ -225,11 +225,11 @@ Users no longer need to be concerned with traffic to a Gateway requiring additio
 
 ### EC Usage with Multiple Data Sources and Client-side Applications
 When you create an EC Service instance, you are provided with two IDs by default. These IDs are used to configure your Server and Client scripts, as discussed previously. This is only going to be adequate for very basic use cases and POCs. Many users new to EC are unaware of the expansive toolkit available at the Service APIs. If you navigate to your Service URI, you can click 'API Docs' on the left nav-bar, at which point you will be prompted for a username and password. To obtain your credentials, find your admin token(*adm_tkn*) on your Service's VCAP, and [decode](https://www.base64decode.org/) this to view your credentials. For example:
-> dXNlcm5hbWU6cGFzc3dvcmQ= </br>
+> dXNlcm5hbWU6cGFzc3dvcmQ=  
 
-... should decode to: </br>
+... should decode to:  
 
-> username:password </br>
+> username:password  
 
 #### GET admin/accounts/{group-id}
 After obtaining your credentials and logging in, you will find a variety of APIs available to monitor and explore your Service. For the sake of this discussion, we will primarily focus on the *Accounts* family of APIs, which all require authorization in the form of 'basic <adm_tkn>'. To view the current credentials for a Service, you can use the GET to /admin/accounts/{group-id}. By default, your 'group-id' will be the zone-id of the Service, which is conveniently located in the Service URI.
@@ -331,7 +331,7 @@ These are the most common items requested from our side and from Predix Support 
 - UAA Client configuration
 
 Issues are rarely resolvable without these pieces. Only you can prevent Support Fires - through documentation! 
-</br> 
+  
 
 <A HREF="#top">Back To Top</A>
 ## CF CLI Quick Reference for EC
@@ -339,12 +339,12 @@ Issues are rarely resolvable without these pieces. Only you can prevent Support 
 <A HREF="#top">Back To Top</A>
 ## References and Further Resources
 
-[Join the EC Usergroup on Flowdock!](https://www.flowdock.com/invitations/44765fcbae5a36d0eff83c9536f87223044ad748)</br>
-[Enterprise Connect SDK](https://github.com/Enterprise-connect/ec-sdk)</br>
-[Predix Tool Kit](https://predix-toolkit.run.aws-usw02-pr.ice.predix.io/)</br>
-[CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)</br>
-[CF CLI Docs](https://docs.cloudfoundry.org/cf-cli/)</br>  
-[Enterprise Connect page on Predix.io](https://www.predix.io/services/service.html?id=2184)</br>
-[User Account and Authentication page on Predix.io](https://www.predix.io/services/service.html?id=1172)</br>
+[Join the EC Usergroup on Flowdock!](https://www.flowdock.com/invitations/44765fcbae5a36d0eff83c9536f87223044ad748) 
+[Enterprise Connect SDK](https://github.com/Enterprise-connect/ec-sdk) 
+[Predix Tool Kit](https://predix-toolkit.run.aws-usw02-pr.ice.predix.io/) 
+[CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) 
+[CF CLI Docs](https://docs.cloudfoundry.org/cf-cli/)   
+[Enterprise Connect page on Predix.io](https://www.predix.io/services/service.html?id=2184) 
+[User Account and Authentication page on Predix.io](https://www.predix.io/services/service.html?id=1172) 
 
 <A HREF="#top">Back To Top</A>
