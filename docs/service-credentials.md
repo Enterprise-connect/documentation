@@ -2,7 +2,7 @@
 This page aims to help users understand Enterprise Connect ('EC') credentials, how to access them, and where to use them.
 
 * [Accessing Credentials](#accessing-credentials)
-* [How-To](#how-to)
+* [Pro Tips](#pro-tips)
 
 ---
 ---
@@ -87,7 +87,11 @@ This should return a JSON similar to the one below:
 }
 ```
 
-## Pro Tips
+## Next Steps
+* [Configuring UAA Client](./uaa.md)
+* [Deploying Agents](./agents.md)
+
+### Pro Tips
 Here are the most common [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) commands related to service keys and service binding.
 
 ### Service Key Commands

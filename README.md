@@ -2,8 +2,9 @@
 This repo represents the most(ly) current information pertaining to Enterprise Connect (or 'EC' elsewhere on this page), including:
 
 * [Subscribing to EC](docs/subscription.md)
-* [Retrieving Credentials for an EC Service](docs/construction.md)
-* [Deploying EC Agents](docs/construction.md)
+* [Retrieving Credentials for an EC Service](docs/service-credentials.md)
+* [EC and Predix UAA](docs/uaa.md)
+* [Deploying EC Agents](docs/agents.md)
 * [Understanding EC Service and Agent Versions](docs/construction.md)
 * [Understanding EC Service APIs](docs/construction.md)
 * [Understanding User Responsibilities](docs/construction.md)

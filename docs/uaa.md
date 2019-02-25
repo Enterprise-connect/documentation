@@ -3,7 +3,7 @@ This page provides all information required to understand the use and configurat
 
 * [EC Service Creation](./subscription.md)
 * [Client Creation](#client-creation)
-* [Next Steps: Deploying Agents](./agents.md)
+* [Pro Tips](#pro-tips)
 
 ---
 ---
@@ -19,6 +19,10 @@ After the creation of the EC Service, a [UAA Client](https://predix-toolkit.run.
 While the presentation of data may vary depending on how you performed the UAA Client creation (there are more ways than we outline here), your final configuration should reflect something congruent to this Client's config/options:
 
 ![Properly Configured UAA Client](../images/uaa-client-config.png)
+
+## Next Steps
+* [Retrieving Service Credentials](./service-credentials.md)
+* [Deploying Agents](./agents.md)
  
 ### Pro Tips
 - Shared-UAA works, but we have seen some teams struggle with delays stemming from a central admin approach
