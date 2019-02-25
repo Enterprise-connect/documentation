@@ -1,8 +1,7 @@
 # Enterprise Connect Documentation
 This repo represents the most(ly) current information pertaining to Enterprise Connect (or 'EC' elsewhere on this page), including:
 
-* [Requirements for Subscription](docs/subscription.md#requirements) 
-* [Subscribing to EC](docs/subscription.md#how-to)
+* [Subscribing to EC](docs/subscription.md)
 * [Retrieving Credentials for an EC Service](docs/construction.md)
 * [Deploying EC Agents](docs/construction.md)
 * [Understanding EC Service and Agent Versions](docs/construction.md)
