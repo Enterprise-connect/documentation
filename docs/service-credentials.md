@@ -26,9 +26,7 @@ After creating a Service Key, use this command to view the EC credentials:
 cf service-key <EC Service name> <Service Key name>
 ```
 
-This should return something along these lines (ENVs/'VCAP'):
-
-JSON NOTATION
+This should return a JSON similar to the one below:
 
 ```json
 {
@@ -52,52 +50,87 @@ JSON NOTATION
 }
 ```
 
-JS NOTATION
+## Pro Tips
+Here are the most common [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) commands related to service keys and application binding.
 
-```javascript
-{
- "ec-info": {
-  "adm_tkn": "YWRtaW46c2VjcmV0",
-  "ids": [
-   "q1w2e3",
-   "r4t5y6"
-  ],
-  "trustedIssuerIds": [
-   "https://my-predix-uaa-guid.predix-uaa.run.aws-usw02-pr.ice.predix.io/oauth/token"
-  ]
- },
- "service-uri": "https://12345678-abcd-1234-abcd-12345678abcd.run.aws-usw02-pr.ice.predix.io/v1beta/index/",
- "usage-doc": "https://github.com/Enterprise-connect/documentation",
- "zone": {
-  "http-header-name": "Predix-Zone-Id",
-  "http-header-value": "12345678-abcd-1234-abcd-12345678abcd",
-  "oauth-scope": "enterprise-connect.zones.12345678-abcd-1234-abcd-12345678abcd.user"
- }
-}
+### Service Key
+
+#### List
+```
+NAME:
+   service-keys - List keys for a service instance
+
+USAGE:
+   cf service-keys SERVICE_INSTANCE
+
+EXAMPLES:
+   cf service-keys mydb
+
+ALIAS:
+   sk
 ```
 
-GENERIC CODE BLOCK
-
+#### Read
 ```
-{
- "ec-info": {
-  "adm_tkn": "YWRtaW46c2VjcmV0",
-  "ids": [
-   "q1w2e3",
-   "r4t5y6"
-  ],
-  "trustedIssuerIds": [
-   "https://my-predix-uaa-guid.predix-uaa.run.aws-usw02-pr.ice.predix.io/oauth/token"
-  ]
- },
- "service-uri": "https://12345678-abcd-1234-abcd-12345678abcd.run.aws-usw02-pr.ice.predix.io/v1beta/index/",
- "usage-doc": "https://github.com/Enterprise-connect/documentation",
- "zone": {
-  "http-header-name": "Predix-Zone-Id",
-  "http-header-value": "12345678-abcd-1234-abcd-12345678abcd",
-  "oauth-scope": "enterprise-connect.zones.12345678-abcd-1234-abcd-12345678abcd.user"
- }
-}
+NAME:
+   service-key - Show service key info
+
+USAGE:
+   cf service-key SERVICE_INSTANCE SERVICE_KEY
+
+EXAMPLES:
+   cf service-key mydb mykey
+
+OPTIONS:
+   --guid      Retrieve and display the given service-key\'s guid.  All other output for the service is suppressed.
+```
+
+#### Create
+```
+NAME:
+   create-service-key - Create key for a service instance
+
+USAGE:
+   cf create-service-key SERVICE_INSTANCE SERVICE_KEY [-c PARAMETERS_AS_JSON]
+
+   Optionally provide service-specific configuration parameters in a valid JSON object in-line.
+   cf create-service-key SERVICE_INSTANCE SERVICE_KEY -c '{"name":"value","name":"value"}'
+
+   Optionally provide a file containing service-specific configuration parameters in a valid JSON object. The path to the parameters file can be an absolute or relative path to a file.
+   cf create-service-key SERVICE_INSTANCE SERVICE_KEY -c PATH_TO_FILE
+
+   Example of valid JSON object:
+   {
+      "permissions": "read-only"
+   }
+
+EXAMPLES:
+   cf create-service-key mydb mykey -c '{"permissions":"read-only"}'
+   cf create-service-key mydb mykey -c ~/workspace/tmp/instance_config.json
+
+ALIAS:
+   csk
+
+OPTIONS:
+   -c      Valid JSON object containing service-specific configuration parameters, provided either in-line or in a file. For a list of supported configuration parameters, see documentation for the particular service offering.
+```
+
+#### Delete
+```
+NAME:
+   delete-service-key - Delete a service key
+
+USAGE:
+   cf delete-service-key SERVICE_INSTANCE SERVICE_KEY [-f]
+
+EXAMPLES:
+   cf delete-service-key mydb mykey
+
+ALIAS:
+   dsk
+
+OPTIONS:
+   -f      Force deletion without confirmation
 ```
 
 [back to top](#service-credentials)
