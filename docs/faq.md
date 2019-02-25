@@ -1,4 +1,5 @@
 # FAQ
+If you have a question not seen here, please [ask in our Issues](https://github.com/Enterprise-connect/documentation/issues)! Even if it is not 'frequently asked', any good question that the EC team believes will help other users will be added to this or related pages!
 
 * [Technical](#technical)
 * [Pricing](#pricing)
@@ -33,9 +34,15 @@ Pending an update, only one Gateway can be deployed at this time, but it can be 
 
 ## Predix
 
+### Q: Can I get EC without going through Predix?
+We hope to be available in other markets by the end of 2019.
+
 ## Language-Specific Use-Cases
 
 ### Q: Can you help me leverage EC in between a specific language based on libraries and dependencies my team uses?
 Maybe? The EC Agent's behavior does not change between Linux and Windows, and does not know if Node or Java executed it. Because of this, it is largely the user's responsibility to understand how the EC Agent behaves and write their applications accordingly. In the event we have the resources to advise on specific use-cases, we tend to stop at 'proving' connectivity in the most simplistic, 'happy path' form.
+
+### Q: Do you have any examples?
+Yes and no. We have some abstracted examples floating around, but they will not, by any stretch of the imagination, provide adequate substitution for users understanding EC on the process level.
 
 [back to top](#faq)
