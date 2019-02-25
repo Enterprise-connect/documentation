@@ -91,18 +91,17 @@ This should return a JSON similar to the one below:
 ## Understanding Credentials
 Once you have obtained the credentials for your EC Service, you have enough information to [deploy](./agents#deployment) an EC Agent in Gateway mode, but to do that, we should understand the how the ENV JSON of credentials and other data are used to do that and more.
 
-### Quick Reference
-This is a brief glance at the properties of the ENV JSON. 
-
 > **"property"** *relevant agent script flag*: Explanation                                                           
 
 - **"adm_tkn"** *-tkn*: This is your base64-encoded `username:password`. Encoded, it is used in the Gateway script. Decoded, it provides the username and password needed to access basic-auth [Service APIs](./service.md#apis) 
-- **"property"** *relevant agent script flag*: Explanation
-- **"property"** *relevant agent script flag*: Explanation
-- **"property"** *relevant agent script flag*: Explanation
-- **"property"** *relevant agent script flag*: Explanation
-- **"property"** *relevant agent script flag*: Explanation
-- **"property"** *relevant agent script flag*: Explanation
+- **"ids"** *-aid*, *-tid*: An array containing the default, randomly generated IDs that are used in Client and Server scripts. While more IDs can be generated, these are the only two that will ever appear in this location.
+- **"trustedIssuerIds"** *-oa2*: The /oauth/token endpoint for the user-selected UAA instance. This is where the EC Agent will attempt to fetch bearer tokens using the [UAA Client](./uaa.md#client-creation) ID and secret, when running in Server or Client mode.
+- **"service-uri"** *-sst*: This is where you can access the EC Service in your browser. It is also used in configuring the Gateway and Server scripts, but **the value must be reduced to end in 'predix.io'**
+- **"usage-doc"**: The greatest place to learn about Enterprise Connect!
+- **"http-header-value"** *-zon*, *-grp*: This is the 'zone' for the EC Service, as well as the value returned when you run `cf service your-service-name --guid`. It is used for ZAC authorizations as the `-zon` flag, and is the initial 'group' the Client and Server scripts will specify with `-grp`
+- **"oauth-scope"**: This is used when [configuring a UAA Client](./uaa.md#client-creation)
+
+--- 
 
 ## Next Steps
 * [Configuring UAA Client](./uaa.md)
