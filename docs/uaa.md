@@ -18,7 +18,7 @@ After the creation of the EC Service, a [UAA Client](https://predix-toolkit.run.
 
 While the presentation of data may vary depending on how you performed the UAA Client creation (there are more ways than we outline here), your final configuration should reflect something congruent to this Client's config/options:
 
-![Properly Configured UAA Client](../images/uaa-client-config.png)
+![Properly Configured UAA Client](../images/uaaClientConfig.png)
 
 ## Next Steps
 * [Retrieving Service Credentials](./service-credentials.md)

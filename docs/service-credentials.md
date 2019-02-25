@@ -2,6 +2,7 @@
 This page aims to help users understand Enterprise Connect ('EC') credentials, how to access them, and where to use them.
 
 * [Accessing Credentials](#accessing-credentials)
+* [Understanding Credentials](#understanding-credentials)
 * [Pro Tips](#pro-tips)
 
 ---
@@ -91,12 +92,15 @@ This should return a JSON similar to the one below:
 * [Configuring UAA Client](./uaa.md)
 * [Deploying Agents](./agents.md)
 
+[back to top](#service-credentials)
+
 ### Pro Tips
 Here are the most common [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) commands related to service keys and service binding.
 
-### Service Key Commands
+#### Service Key Commands
 
-#### List
+- to List
+
 ```
 NAME:
    service-keys - List keys for a service instance
@@ -111,7 +115,10 @@ ALIAS:
    sk
 ```
 
-#### Read
+---
+
+- to Read
+
 ```
 NAME:
    service-key - Show service key info
@@ -126,7 +133,10 @@ OPTIONS:
    --guid      Retrieve and display the given service-key\'s guid.  All other output for the service is suppressed.
 ```
 
-#### Create
+---
+
+- to Create
+
 ```
 NAME:
    create-service-key - Create key for a service instance
@@ -156,7 +166,10 @@ OPTIONS:
    -c      Valid JSON object containing service-specific configuration parameters, provided either in-line or in a file. For a list of supported configuration parameters, see documentation for the particular service offering.
 ```
 
-#### Delete
+---
+
+- to Delete
+
 ```
 NAME:
    delete-service-key - Delete a service key
@@ -174,9 +187,13 @@ OPTIONS:
    -f      Force deletion without confirmation
 ```
 
-### Service Binding Commands
+---
+---
 
-#### Bind
+#### Service Binding Commands
+
+- to Bind
+
 ```
 NAME:
    bind-service - Bind a service instance to an app
@@ -221,7 +238,10 @@ OPTIONS:
    -c                  Valid JSON object containing service-specific configuration parameters, provided either in-line or in a file. For a list of supported configuration parameters, see documentation for the particular service offering.
 ```
 
-#### Retrieve ENVs
+---
+
+- to Retrieve ENVs
+
 ```
 NAME:
    env - Show all env variables for an app
@@ -233,7 +253,9 @@ ALIAS:
    e
 ```
 
-#### Unbind
+---
+
+- to Unbind
 ```
 NAME:
    unbind-service - Unbind a service instance from an app
@@ -244,5 +266,7 @@ USAGE:
 ALIAS:
    us
 ```
+
+---
 
 [back to top](#service-credentials)
