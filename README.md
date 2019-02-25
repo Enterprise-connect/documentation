@@ -5,7 +5,7 @@ This repo represents the most(ly) current information pertaining to Enterprise C
 * [Retrieving Credentials for an EC Service](docs/service-credentials.md)
 * [EC and Predix UAA](docs/uaa.md)
 * [Deploying EC Agents](docs/agents.md)
-* [Understanding EC Service and Agent Versions](docs/construction.md)
+* [Understanding EC Service and Agent Versions](docs/versions.md)
 * [Understanding EC Service APIs](docs/construction.md)
 * [Understanding User Responsibilities](docs/construction.md)
 * [FAQs, Troubleshooting, Plugin Usage, and more](docs/construction.md)
