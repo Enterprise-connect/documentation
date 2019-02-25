@@ -24,7 +24,7 @@ TLS Plugin compatibility table
 
 ### Setup Guide
 #### Step 1. Prepare the essentials
-1. Download / clone the [latest EC agent beta]("https://github.com/Enterprise-connect/ec-sdk/tree/beta") into your machine.
+1. Download / clone the [latest EC agent]("https://github.com/Enterprise-connect/ec-sdk/tree/dist/dist") into your machine.
 2. Unzip/ Extract the beta agent corresponding to your operating system.
 3. Download / clone the [files required to push applications on Predix]("https://github.com/Enterprise-connect/ec-agent-cf-push-sample/tree/cd53150b6854879254cf9837f31cc0444af79705")
 4. Download /clone the [latest version of the TLS plugin]("https://github.com/Enterprise-connect/ec-sdk/tree/beta/plugins")  

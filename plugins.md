@@ -20,6 +20,14 @@ A modified Server script to run on Predix (notice the *-plg* flag!):
 
 ```bash
 #!/bin/bash
+
+# Do not export http_proxy, HTTP_PROXY, https_proxy or HTTPS_PROXY here!
+# If your use-case requires a proxy on the EC Server, either hardcode it, or avoid 'export'
+PROXY='http://acceptable-proxy.format.com:80'
+export PROXY='https://this-may-break-things.export.com:80'
+
+# On Predix you will not need a proxy
+
 chmod 755 ./tls_linux_sys;
 ./ecagent_linux_sys -mod server \
 -grp qwerty -aid server \

@@ -7,8 +7,6 @@
 This document is designed to provide insight into the Enterprise Connect (EC) team's process for upgrading EC Services. It is not intended to provide a deeply technical understanding, but rather a means for EC users to understand, and be comfortable with, what they can expect through the process.
 
 
-    
-  
 
 ## "Blue-Green" Deployment
 
