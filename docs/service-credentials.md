@@ -110,7 +110,8 @@ Once you have obtained the credentials for your EC Service, you have enough info
 [back to top](#service-credentials)
 
 ### Pro Tips
-Here are the most common [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) commands related to service keys and service binding.
+- Use tools like GitHub (internal/private) to track and manage documents like the JSON produced by the steps outlined above. This can be invaluable when people/teams change and emergency KTs are needed
+- See below for the most common [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) commands related to service keys and service binding
 
 #### Service Key Commands
 
