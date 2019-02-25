@@ -11,7 +11,7 @@ This page aims to help users understand Enterprise Connect ('EC') credentials, h
 There are a couple of methods readily available to users in order to obtain credentials for an EC Service. We strongly recommend the use of [service keys](#service-key) for all users, especially those new to Cloud Foundry, as this adds the least cognitive overhead to an already esoteric process.
 
 * [Service Key](#service-key)
-* [Application Binding](#application-binding)
+* [Service Binding](#service-binding)
 
 ### Service-Key
 Using the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html), use the following command to create a Service Key:
@@ -51,9 +51,9 @@ This should return a JSON similar to the one below:
 ```
 
 ## Pro Tips
-Here are the most common [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) commands related to service keys and application binding.
+Here are the most common [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) commands related to service keys and service binding.
 
-### Service Key
+### Service Key Commands
 
 #### List
 ```
@@ -131,6 +131,77 @@ ALIAS:
 
 OPTIONS:
    -f      Force deletion without confirmation
+```
+
+### Service Binding Commands
+
+#### Bind
+```
+NAME:
+   bind-service - Bind a service instance to an app
+
+USAGE:
+   cf bind-service APP_NAME SERVICE_INSTANCE [-c PARAMETERS_AS_JSON] [--binding-name BINDING_NAME]
+
+   Optionally provide service-specific configuration parameters in a valid JSON object in-line:
+
+   cf bind-service APP_NAME SERVICE_INSTANCE -c '{"name":"value","name":"value"}'
+
+   Optionally provide a file containing service-specific configuration parameters in a valid JSON object.
+   The path to the parameters file can be an absolute or relative path to a file.
+   cf bind-service APP_NAME SERVICE_INSTANCE -c PATH_TO_FILE
+
+   Example of valid JSON object:
+   {
+      "permissions": "read-only"
+   }
+
+   Optionally provide a binding name for the association between an app and a service instance:
+
+   cf bind-service APP_NAME SERVICE_INSTANCE --binding-name BINDING_NAME
+
+EXAMPLES:
+   Linux/Mac:
+      cf bind-service myapp mydb -c '{"permissions":"read-only"}'
+
+   Windows Command Line:
+      cf bind-service myapp mydb -c "{\"permissions\":\"read-only\"}"
+
+   Windows PowerShell:
+      cf bind-service myapp mydb -c '{\"permissions\":\"read-only\"}'
+
+   cf bind-service myapp mydb -c ~/workspace/tmp/instance_config.json --binding-name BINDING_NAME
+
+ALIAS:
+   bs
+
+OPTIONS:
+   --binding-name      Name to expose service instance to app process with (Default: service instance name)
+   -c                  Valid JSON object containing service-specific configuration parameters, provided either in-line or in a file. For a list of supported configuration parameters, see documentation for the particular service offering.
+```
+
+#### Retrieve ENVs
+```
+NAME:
+   env - Show all env variables for an app
+
+USAGE:
+   cf env APP_NAME
+
+ALIAS:
+   e
+```
+
+#### Unbind
+```
+NAME:
+   unbind-service - Unbind a service instance from an app
+
+USAGE:
+   cf unbind-service APP_NAME SERVICE_INSTANCE
+
+ALIAS:
+   us
 ```
 
 [back to top](#service-credentials)
