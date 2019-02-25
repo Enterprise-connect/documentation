@@ -45,46 +45,53 @@ The EC Client also has a rather *visually* large configuration, and like the oth
 [back to top](#complete-guide-to-enterprise-connect-setup)
 
 ## Agent Binary
+Need the [latest Agent Binary](https://github.com/Enterprise-connect/ec-x-sdk/tree/v1/dist)? Clicking the links below will begin the download of the Agent Binary appropriate to run in that environment.
 
 * [Linux](https://github.com/Enterprise-connect/ec-x-sdk/raw/v1/dist/ecagent_linux_sys.tar.gz)
+* [Windows](https://github.com/Enterprise-connect/ec-x-sdk/raw/v1/dist/ecagent_linux_sys.tar.gz)
+* [Mac](https://github.com/Enterprise-connect/ec-x-sdk/raw/v1/dist/ecagent_linux_sys.tar.gz)
 
+Need an [older binary](https://github.com/Enterprise-connect/ec-sdk/commits/dist)? It may or may not be maintained/available. Consider [upgrading](./upgrades.md).
 
 ## Deployment
+When deploying/running the EC Agent, there are two primary considerations to be made:
 
-## Reference
-We provide [EC Agent templates](../reference/ec.sh) for the five distinct agent modes: Gateway, Server, Client, GW:Server and GW:Client. However, these are not absolute or all-inclusive. These are simply the *most basic*, functioning examples for each EC agent mode. 
+* [Where is the agent going to run?](#agent-binary)
+* Does the agent need a proxy?
 
-> ***Interesting to note, one of the first support steps is to translate user scripts to match our templates. Flag order matters. Use templates.***
+### Where?
+While on paper, it may seem simple or obvious how to select the appropriate [EC Agent Binary](#agent-binary), many users get tripped up focusing on the OS they are running on their local machine - rather than the OS of the environment they deploy to. It's common enough to be chalked up to 'honest mistake'.
 
+Consider the EC Agent running in [Gateway mode](#gateway). This is (almost) always ran in Predix / Cloud Foundry, and uses the Linux binary, **regardless if it was pushed to Cloud Foundry from a Windows, Mac, etc., machine**.
 
-### Summary
-By this point, you might have something resembling the example below. I have gone a little bit overboard with the layout, but that is to err on the side of caution. While excessive, the below file structure is one example of a very self-evident file structure (unless viewing on mobile, sorry about that), which eases knowledge transfers and maintainability.
+### Proxy?
+Are you pushing to Cloud Foundry? Then it will not need proxy.
 
+If it's running somewhere other than Cloud Foundry, does that shell/vm/etc have proxy ENVs, i.e., $http_proxy, %HTTPS_PROXY%, etc? If that is the case, the EC Agent will need to know this and provide this value. Here's how.
 
 ```bash
-my-enterprise-connect-configuration-documentation
-│   notes.txt              # worksheet/notes        
-│   uaa.json               # our oauth/uaa json for service creation
-│
-└───ec_gateway
-│   │   ec.sh               
-│   │   manifest.yml       # apps on Predix 'need' a manifest
-│   │   ecagent_linux_sys  # Gateway 'always' runs on Predix/Linux
-│
-│   
-└───ec_server
-│   │   ec.sh
-│   │   manifest.yml        # if running on Predix
-│   │   ecagent_some_dist   # Linux for Predix
-│
-│
-└───ec_client
-    │   ec.sh               
-    │   ecagent_some_dist   # Be sure the ecagent distribution matches the OS where the agent will run (Windows, Darwin, Linux, etc)
+| => echo "$http_proxy"
+http://cis-americas-pitc-cinciz.proxy.corporate.gtm.ge.com:80 # my proxy
 ```
 
-At this point, you should be able to move into the appropriate directory, execute the relevant script and binary, or run a `cf push` command to deploy to Predix, and be all set for end-to-end connectivity. Don't forget to document!
+We have at least two options to add this to our EC Agent script/command:
+
+#### String Literal
+Just copy and paste it right there, just as it appears as an ENV...
+`-pxy http://cis-americas-pitc-cinciz.proxy.corporate.gtm.ge.com:80`
+
+#### String Interpolation
+Use the ENV itself!
+`-pxy $http_proxy`
+
+## Reference
+You may find these files helpful in deploying and running agents.
+
+* [Agent Templates](../reference/ec.sh)
+* [Working, Viable Manifest for Predix](../reference/manifest.yml)
 
 ### Pro Tips
+- Write down everything, there is [no database](./responsibilities.md#dude-wheres-my-gateway)
+- Consider using GitHub to make configuration changes in deployed agents
 
 [back to top](#agents)
