@@ -88,6 +88,22 @@ This should return a JSON similar to the one below:
 }
 ```
 
+## Understanding Credentials
+Once you have obtained the credentials for your EC Service, you have enough information to [deploy](./agents#deployment) an EC Agent in Gateway mode, but to do that, we should understand the how the ENV JSON of credentials and other data are used to do that and more.
+
+### Quick Reference
+This is a brief glance at the properties of the ENV JSON. 
+
+> **"property"** *relevant agent script flag*: Explanation                                                           
+
+- **"adm_tkn"** *-tkn*: This is your base64-encoded `username:password`. Encoded, it is used in the Gateway script. Decoded, it provides the username and password needed to access basic-auth [Service APIs](./service.md#apis) 
+- **"property"** *relevant agent script flag*: Explanation
+- **"property"** *relevant agent script flag*: Explanation
+- **"property"** *relevant agent script flag*: Explanation
+- **"property"** *relevant agent script flag*: Explanation
+- **"property"** *relevant agent script flag*: Explanation
+- **"property"** *relevant agent script flag*: Explanation
+
 ## Next Steps
 * [Configuring UAA Client](./uaa.md)
 * [Deploying Agents](./agents.md)

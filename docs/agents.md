@@ -67,6 +67,8 @@ While on paper, it may seem simple or obvious how to select the appropriate [EC 
 
 Consider the EC Agent running in [Gateway mode](#gateway). This is (almost) always ran in Predix / Cloud Foundry, and uses the Linux binary, **regardless if it was pushed to Cloud Foundry from a Windows, Mac, etc., machine**.
 
+#### For Cloud Foundry
+
 ### Proxy?
 Are you pushing to Cloud Foundry? Then it will not need proxy.
 
