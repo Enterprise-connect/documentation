@@ -1,0 +1,9 @@
+---
+applications:
+  - name: app-name
+    memory: 256M
+    instances: 1
+    stack: cflinuxfs2
+    path: .
+    command: bash ./ec.sh
+    buildpacks: ["https://github.com/cloudfoundry/binary-buildpack.git"]
