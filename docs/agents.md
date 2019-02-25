@@ -93,5 +93,6 @@ You may find these files helpful in deploying and running agents.
 - Write down everything, there is [no database](./responsibilities.md#dude-wheres-my-gateway)
 - Consider using GitHub to make configuration changes in deployed agents
 - We debug EC problems with logs in this order: EC Client, EC Gateway, EC Server. There is [no database](./responsibilities.md#logs)
+- If you do something like `export HTTP_PROXY && ./ec.sh`, the EC Agent will use your proxy ENV even if you do not provide it as a flag - careful!
 
 [back to top](#agents)
