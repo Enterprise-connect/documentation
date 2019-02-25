@@ -13,22 +13,59 @@ There are a couple of methods readily available to users in order to obtain cred
 * [Service Key](#service-key)
 * [Service Binding](#service-binding)
 
-### Service-Key
+### Service Key
 Using the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html), use the following command to create a Service Key:
 
 ```
-cf create-service-key <EC Service name> <a name for the Service Key>
+cf create-service-key SERVICE_INSTANCE SERVICE_KEY
 ```
 
 After creating a Service Key, use this command to view the EC credentials:
 
 ```
-cf service-key <EC Service name> <Service Key name>
+cf service-key SERVICE_INSTANCE SERVICE_KEY
 ```
 
 This should return a JSON similar to the one below:
 
-```json
+```
+{
+ "ec-info": {
+  "adm_tkn": "YWRtaW46c2VjcmV0",
+  "ids": [
+   "q1w2e3",
+   "r4t5y6"
+  ],
+  "trustedIssuerIds": [
+   "https://my-predix-uaa-guid.predix-uaa.run.aws-usw02-pr.ice.predix.io/oauth/token"
+  ]
+ },
+ "service-uri": "https://12345678-abcd-1234-abcd-12345678abcd.run.aws-usw02-pr.ice.predix.io/v1beta/index/",
+ "usage-doc": "https://github.com/Enterprise-connect/documentation",
+ "zone": {
+  "http-header-name": "Predix-Zone-Id",
+  "http-header-value": "12345678-abcd-1234-abcd-12345678abcd",
+  "oauth-scope": "enterprise-connect.zones.12345678-abcd-1234-abcd-12345678abcd.user"
+ }
+}
+```
+
+### Service Binding
+Using the [CloudFoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html), use the following command to bind the service to an application in the same org/space:
+
+```
+cf bind-service APP_NAME SERVICE_INSTANCE
+```
+
+After binding the service to the application, use this command to view the EC credentials:
+
+```
+cf env APP_NAME
+```
+
+This should return a JSON similar to the one below:
+
+```
 {
  "ec-info": {
   "adm_tkn": "YWRtaW46c2VjcmV0",
