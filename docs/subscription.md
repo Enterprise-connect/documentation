@@ -1,5 +1,3 @@
-<A NAME="top">
-
 # Subscription
 This page provides all information required to understand the subscription process for Enterprise Connect on Predix.
 
@@ -49,4 +47,4 @@ cf create-service enterprise-connect Oneway-TLS <name the service> -c uaa.json
 ### Pro Tips
 - We have an [example json](../reference/uaa.json) that makes this easier, just swap out the nonsense with your UAA details
 
-<A HREF="#top">back to top</A>
+[back to top](#subscription)

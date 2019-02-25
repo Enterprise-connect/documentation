@@ -1,6 +1,3 @@
-<A NAME="top">
-<A HREF="#top">back to top</A>
-
 # Versions
 
 * [Requirements](#requirements)
@@ -8,3 +5,5 @@
 
 ---
 ---
+
+[back to top](#versions)

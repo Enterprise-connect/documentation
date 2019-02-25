@@ -13,3 +13,5 @@ We hope that the contents herein provide value to our users, as well as to suppo
 
 ## "What happened to the setup guide?"
 Previously, you were able to find an [EC Setup Guide](https://enterprise-connect.github.io/documentation/ec-guide) here. Well, it's still here. While we rearrange this repo to be easier to navigate, more accurate, more consistent, and more VISUAL - we will continue to provide the old end-to-end setup guide. However, that guide is 'deprecated', for all intents and purposes, and will not be updated and maintained any longer.
+
+[back to top](#enterprise-connect-documentation)

@@ -1,8 +1,3 @@
----
----
-
-<A NAME="top">
-
 # Complete Guide to Enterprise Connect Setup
 
 * [Foreword](#foreword)
@@ -103,7 +98,7 @@ Please copy and paste this information to a document you can readily access for 
     - Service Key
  
  
-<A HREF="#top">Back To Top</A>
+[back to top](#complete-guide-to-enterprise-connect-setup)
 
 ## [UAA Client](https://predix-toolkit.run.aws-usw02-pr.ice.predix.io/) Update
 
@@ -133,7 +128,7 @@ The UAA Dashboard can be accessed at https://uaa-dashboard.run.PREDIX_SUBDOMAIN.
     - Service Key
   
 
-<A HREF="#top">Back To Top</A>
+[back to top](#complete-guide-to-enterprise-connect-setup)
 ## EC Agency
 It is understood that human beings can identify, understand and remember something better when presented with behaviors versus abstract, technical facts. In this section, we hope to preface the coming technical configuration pieces with a 'behavioral' look at how the EC Agent operates in its three distinct modes: Gateway, Server, and Client.
 
@@ -168,7 +163,7 @@ The EC Client also has a rather *visually* large configuration, and like the oth
 
   
 
-<A HREF="#top">Back To Top</A>
+[back to top](#complete-guide-to-enterprise-connect-setup)
 ## Agent Scripts and Running Agents
 
 ### Agent templates
@@ -213,7 +208,7 @@ At this point, you should be able to move into the appropriate directory, execut
 
    
 
-<A HREF="#top">Back To Top</A>
+[back to top](#complete-guide-to-enterprise-connect-setup)
 ## Scaling, and Managing Complex Use Cases
 
 ### Diego-enabled Agent Apps on Predix and Scaling
@@ -254,7 +249,7 @@ The IDs are capable of being reused, with some exceptions and limitations.
 > Figure 2-a: EC Servers are using duplicate IDs for different resources, this will not work
 ![dupilicate IDs on Servers](docs/improperIdUsage.png)
    
-<A HREF="#top">Back To Top</A>
+[back to top](#complete-guide-to-enterprise-connect-setup)
 ## FAQs
 
 ### Q: Does each Gateway require an EC subscription?
@@ -271,7 +266,7 @@ The EC Service instance is not concerned with the amount of data transferred. Wh
 ### Q: Are there any data bandwidth restrictions over EC?
 No, Enterprise Connect does not set any limits on bandwidth usage.
 
-<A HREF="#top">Back To Top</A>
+[back to top](#complete-guide-to-enterprise-connect-setup)
 ## Observed Problems and Resolutions
 
 ### Problem: My database connection is failing or intermittent, I believe EC is failing
@@ -314,7 +309,7 @@ The solutions to this problem range from "simple fix" to a Predix Support ticket
     
 Beyond these simple fixes, if the 404 error is including the name of your current Gateway app/url, and you have pushed or updated this Gateway in the past, this could be due to the existence of "phantom" apps which were not properly deleted in Cloud Foundry. In such cases, only the Predix Support team has the tools and access to identify and correct such anomalies. In this event, they will need the 'gtwId's of the offending apps, which you can get from the Gateway list at the Service URI, or in the EC Server logs near the 404 message. They can use these Ids to find and properly destroy the bad Gateway apps.
 
-<A HREF="#top">Back To Top</A>
+[back to top](#complete-guide-to-enterprise-connect-setup)
 ### CAUTION! 
 #### 'Document Everything, Every Time: An Anecdotal Tirade Born of Good Intentions'
 
@@ -333,10 +328,10 @@ These are the most common items requested from our side and from Predix Support 
 Issues are rarely resolvable without these pieces. Only you can prevent Support Fires - through documentation! 
   
 
-<A HREF="#top">Back To Top</A>
+[back to top](#complete-guide-to-enterprise-connect-setup)
 ## CF CLI Quick Reference for EC
 
-<A HREF="#top">Back To Top</A>
+[back to top](#complete-guide-to-enterprise-connect-setup)
 ## References and Further Resources
 
 [Join the EC Usergroup on Flowdock!](https://www.flowdock.com/invitations/44765fcbae5a36d0eff83c9536f87223044ad748) 
@@ -347,4 +342,4 @@ Issues are rarely resolvable without these pieces. Only you can prevent Support 
 [Enterprise Connect page on Predix.io](https://www.predix.io/services/service.html?id=2184) 
 [User Account and Authentication page on Predix.io](https://www.predix.io/services/service.html?id=1172) 
 
-<A HREF="#top">Back To Top</A>
+[back to top](#complete-guide-to-enterprise-connect-setup)
