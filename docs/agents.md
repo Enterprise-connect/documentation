@@ -34,15 +34,14 @@ When the EC Server is ran/started, it actively and immediately attempts to make 
 - `rpt`: _Resource PORT_
 
 ## Client
-The EC Client also has a rather *visually* large configuration, and like the other two modes, the bulk of this is background security stuff. Also, the Client is fairly lazy. When you tell it to run, it will! However, it just kind of sits there until something tries to access it via `127.0.0.1:${CHOSEN_PORT}`. Then and only then will it make any call to the EC Gateway or appropriate EC Server. The only things the EC Client really cares about is a PORT to listen on, and the 'id' of the EC Server you wish to reach. As mentioned previously, the rest of the configuration is background/security minutiae. 
+The Client is fairly lazy. When you tell it to run, it will! However, it just kind of sits there until something tries to access it via `127.0.0.1:${CHOSEN_PORT}`. Then and only then will it make any call to the EC Gateway or appropriate EC Server. The only things the EC Client really cares about is a PORT to listen on, and the 'id' of the EC Server you wish to reach. The rest of the configuration is background security minutiae. 
 
 **Client Agent Key Flags**
 - `aid`: _The EC Client **A**gent's **ID**_
 - `tid`: _The **T**arget EC Server's **ID**_
 - `lpt`: _The local PORT the EC Client listens on_
 
-  
-[back to top](#complete-guide-to-enterprise-connect-setup)
+[back to top](#agents)
 
 ## Agent Binary
 Need the [latest Agent Binary](https://github.com/Enterprise-connect/ec-x-sdk/tree/v1/dist)? Clicking the links below will begin the download of the Agent Binary appropriate to run in that environment.
@@ -67,7 +66,7 @@ Consider the EC Agent running in [Gateway mode](#gateway). This is (almost) alwa
 ### Proxy?
 Are you pushing to Cloud Foundry? Then it will not need proxy.
 
-If it's running somewhere other than Cloud Foundry, does that shell/vm/etc have proxy ENVs, i.e., $http_proxy, %HTTPS_PROXY%, etc? If that is the case, the EC Agent will need to know this and provide this value. Here's how.
+If it's running somewhere other than Cloud Foundry, does that shell/vm/etc have proxy ENVs, i.e., `$http_proxy`, `%HTTPS_PROXY%`, etc? If that is the case, the EC Agent will need to know this and provide this value. Here's how.
 
 ```bash
 | => echo "$http_proxy"
@@ -93,5 +92,6 @@ You may find these files helpful in deploying and running agents.
 ### Pro Tips
 - Write down everything, there is [no database](./responsibilities.md#dude-wheres-my-gateway)
 - Consider using GitHub to make configuration changes in deployed agents
+- We debug EC problems with logs in this order: EC Client, EC Gateway, EC Server. There is [no database](./responsibilities.md#logs)
 
 [back to top](#agents)
