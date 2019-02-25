@@ -1,3 +1,6 @@
+<A NAME="top">
+<A HREF="#top">back to top</A>
+
 # User Account and Authentication
 This page provides all information required to understand the use and configuration of [Predix UAA](https://www.predix.io/services/service.html?id=1172) for Enterprise Connect.
 
