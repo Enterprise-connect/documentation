@@ -4,6 +4,7 @@ This page is intended to explain the Enterprise Connect 'Agent', a [GoLang](http
 * [Gateway](#gateway)
 * [Server](#server)
 * [Client](#client)
+* [Fuse Modes](#fuse-modes)
 * [Agent Binary](#agent-binary)
 * [Deployment](#deployment)
 * [Reference](#reference)
@@ -40,6 +41,9 @@ The Client is fairly lazy. When you tell it to run, it will! However, it just ki
 - `aid`: _The EC Client **A**gent's **ID**_
 - `tid`: _The **T**arget EC Server's **ID**_
 - `lpt`: _The local PORT the EC Client listens on_
+
+## Fuse Modes
+There are two more EC Agent modes; where we 'fuse' the Gateway and Server, or the Gateway and Client. please see the [expanded documentation](./modes.md) to better understand the nuances of these modes.
 
 [back to top](#agents)
 

@@ -110,6 +110,4 @@ In the following graphs and diagrams, we take a look at the difference in speeds
 
 ---
 
-### Pro Tips
-
 [back to top](#modes)
