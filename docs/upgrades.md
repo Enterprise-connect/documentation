@@ -2,7 +2,7 @@
 
 (WIP)
 
-The upgrades section is under construction!
+The upgrades section is under construction! This page will explain the difference between upgrading an EC Agent vs upgrading an EC Service, and how either is accomplished.
 
 ---
 ---

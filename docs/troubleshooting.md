@@ -2,8 +2,6 @@
 
 (WIP)
 
-The upgrades section is under construction!
-
 ---
 ---
 
