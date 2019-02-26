@@ -1,4 +1,8 @@
 # Modes
+
+(WIP)
+
+
 In this page you will be able to find all the answers for all things **'modes'**, in regards to Enterprise Connect (EC) implementations and *agents*. Please note that all links are placed for the ease of navigation in subsequent reads and visits, but the information is intended to be digestable in a flowing and linear way, start to finish.
 
 * [What are 'Modes'?](#what-are-modes)

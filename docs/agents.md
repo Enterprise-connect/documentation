@@ -1,4 +1,8 @@
 # Agents
+
+(WIP)
+
+
 This page is intended to explain the Enterprise Connect 'Agent', a [GoLang](https://golang.org/) binary capable of running on Linux, Windows and Mac systems, in five distinct [modes](./modes.md#what-are-modes).
 
 * [Gateway](#gateway)

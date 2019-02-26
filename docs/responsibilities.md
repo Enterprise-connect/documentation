@@ -1,4 +1,8 @@
 # Responsibilities
+
+(WIP)
+
+
 This page is aimed in helping users understand their responsibilities as users, and our responsibilities to them as a conscientious product team. 
 
 * [We Are Here For You](#here-for-you)

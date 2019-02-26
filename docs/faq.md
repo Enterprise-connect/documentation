@@ -1,4 +1,7 @@
 # FAQ
+
+(WIP)
+
 If you have a question not seen here, please [ask in our Issues](https://github.com/Enterprise-connect/documentation/issues)! Even if it is not 'frequently asked', any good question that the EC team believes will help other users will be added to this or related pages!
 
 * [Technical](#technical)
