@@ -13,7 +13,6 @@ We hope that the contents herein provide value to our users, as well as to suppo
 ## Knowledge Links
 * [FAQ](docs/faq.md)
 * [Plugins](docs/plugins.md)
-* [Responsibilities](docs/responsibilities.md)
 * [Troubleshooting](docs/troubleshooting.md)
 * [Upgrading Services vs Agents](docs/upgrades.md)
 * [Versions](docs/versions.md)

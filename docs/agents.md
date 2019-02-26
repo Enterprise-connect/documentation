@@ -55,8 +55,8 @@ There are two more EC Agent modes; where we 'fuse' the Gateway and Server, or th
 Need the [latest Agent Binary](https://github.com/Enterprise-connect/ec-x-sdk/tree/v1/dist)? Clicking the links below will begin the download of the Agent Binary appropriate to run in that environment.
 
 * [Linux](https://github.com/Enterprise-connect/ec-x-sdk/raw/v1/dist/ecagent_linux_sys.tar.gz)
-* [Windows](https://github.com/Enterprise-connect/ec-x-sdk/raw/v1/dist/ecagent_linux_sys.tar.gz)
-* [Mac](https://github.com/Enterprise-connect/ec-x-sdk/raw/v1/dist/ecagent_linux_sys.tar.gz)
+* [Windows](https://github.com/Enterprise-connect/ec-x-sdk/raw/v1/dist/ecagent_windows_sys.exe.tar.gz)
+* [Mac](https://github.com/Enterprise-connect/ec-x-sdk/raw/v1/dist/ecagent_darwin_sys.tar.gz)
 
 Need an [older binary](https://github.com/Enterprise-connect/ec-sdk/commits/dist)? It may or may not be maintained/available. Consider [upgrading](./upgrades.md).
 
@@ -94,13 +94,12 @@ Use the ENV itself!
 `-pxy $http_proxy`
 
 ## Reference
-You may find these files helpful in deploying and running agents.
+You may find these files helpful in deploying and running agents (may download and/or view incorrectly from github.io page, see github.com in this case)
 
-* [Agent Templates](../reference/ec.sh)
-* [Working, Viable Manifest for Predix](../reference/manifest.yml)
+- [Agent Templates](../reference/ec.sh)
+- [Working, Viable Manifest for Predix](../reference/manifest.yml)
 
 ### Pro Tips
-- Write down everything, there is [no database](./responsibilities.md#dude-wheres-my-gateway)
 - Consider using GitHub to make configuration changes in deployed agents
 - We debug EC problems with logs in this order: EC Client, EC Gateway, EC Server. There is [no database](./responsibilities.md#logs)
 - If you do something like `export HTTP_PROXY && ./ec.sh`, the EC Agent will use your proxy ENV even if you do not provide it as a flag - careful!
