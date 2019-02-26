@@ -1,7 +1,8 @@
 # Troubleshooting
 
-* [Requirements](#requirements)
-* [How-To](#how-to)
+(WIP)
+
+The upgrades section is under construction!
 
 ---
 ---

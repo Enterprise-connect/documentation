@@ -18,6 +18,8 @@ We hope that the contents herein provide value to our users, as well as to suppo
 * [Upgrading Services vs Agents](docs/upgrades.md)
 * [Versions](docs/versions.md)
 
+*Any files in this repo not specifically linked to, from this page or its children, should be considered out-of-date and the information therein used with caution*
+
 ### "What happened to the setup guide?"
 Previously, you were able to find an [EC Setup Guide](https://enterprise-connect.github.io/documentation/ec-guide) here. Well, it's still here. While we rearrange this repo to be easier to navigate, more accurate, more consistent, and more VISUAL - we will continue to provide the old end-to-end setup guide. However, that guide is 'deprecated', for all intents and purposes, and will not be updated or maintained any longer.
 

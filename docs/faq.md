@@ -40,9 +40,13 @@ We hope to be available in other markets by the end of 2019.
 ## Language-Specific Use-Cases
 
 ### Q: Can you help me leverage EC in between a specific language based on libraries and dependencies my team uses?
-Maybe? The EC Agent's behavior does not change between Linux and Windows, and does not know if Node or Java executed it. Because of this, it is largely the user's responsibility to understand how the EC Agent behaves and write their applications accordingly. In the event we have the resources to advise on specific use-cases, we tend to stop at 'proving' connectivity in the most simplistic, 'happy path' form.
+Maybe? The EC Agent's behavior does not change between Linux and Windows, and does not know if Node or Java executed it. Because of this, it is largely the user's responsibility to understand how the EC Agent behaves and write their applications accordingly. In the event we have the resources to advise on specific use-cases, we tend to stop at 'proving' connectivity in the most simplistic, 'happy path' form. 
+
+*With that said*, time and resources permitting, especially in the interest of **reuse** for other customers, we often spend time with our users to address some common and tricky situations. We learn as much or more when we work with our users. We see pain points firsthand, we can spot the patterns and the 'repeat offenders'. We cannot conceivably create automated tests for all the myriad scenarios EC is used, which is why **our users' feedback is the most important aspect of our continued improvement**.
 
 ### Q: Do you have any examples?
-Yes and no. We have some abstracted examples floating around, but they will not, by any stretch of the imagination, provide adequate substitution for users understanding EC on the process level.
+Yes and no. We have some abstracted examples floating around, but they will not, by any stretch of the imagination, provide adequate substitution for users understanding EC on the process level, rather than ideas on file structure, env injection, etc. While the previous statement may seem a bit ridiculous, consider a (reaching, and similarly ridiculous) metaphor:
+
+>Trying to 'learn EC' by immediately applying it in the place it is needed is like trying to learn arithmetic with Java so that you can apply arithmetic in a Java program. It is easier (and considerably faster) to learn either outside of Java as a medium, and then go back to apply what was learned. Just like arithmetic, the behavior of the EC Agent will be the same regardless of GoLang, Python, Node, Java, etc. - specialized knowledge is not required to implement it in any given language.
 
 [back to top](#faq)
