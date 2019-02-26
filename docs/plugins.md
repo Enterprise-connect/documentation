@@ -1,8 +1,11 @@
 # Plugins
-* [TLS](#tls)
-* [VLAN (Linux only!)](#vlan)
+
+(WIP)
 
 The plugins available for EC are meant to expand the core functionality of EC based on user feedback and use cases which require some special behaviors and considerations. If you are not adequately familiar with a basic EC Setup, please have a look at our EC Guide in this repo, it will bring you up to speed and enable you to tackle advanced/plugin usage.
+
+* [TLS](#tls)
+* [VLAN (Linux only!)](#vlan)
 
 ## TLS
 
