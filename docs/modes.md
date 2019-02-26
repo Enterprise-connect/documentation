@@ -102,12 +102,8 @@ In the following graphs and diagrams, we take a look at the difference in speeds
 
 ### Gateway, Server and Client vs GW:Server and Client
 
-> In these tests, we compared how the **traditional** configuration compares to a **fuse mode**, **gw:server** based configuration.
+> In these tests, we compared how the **traditional** configuration compares to a **fuse mode**, **gw:server** based configuration. In both cases, all EC Agents were ran 'locally' in an attempt to reduce the network traffic as much as possible (for the sake of the traditional modes, which would be inherently more hampered due to raw agent count). See the diagram for some rough figures on the system and network speeds during these tests. For what it is worth, although many, many tests were ran - much more than was recorded here for the sake of accuracy and relevance, **it was exceedingly rare to find an individual test whose results would not appear to be a clone of the average to the human eye**.
 
 ![GW:Server](../images/speedCompGwServer.png)
-
-[back to top](#modes)
-
----
 
 [back to top](#modes)
