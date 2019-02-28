@@ -151,7 +151,23 @@ You may find these files helpful in deploying and running agents (may download a
 
 ### Pro Tips
 - Consider using GitHub to make configuration changes in deployed agents
-- We debug EC problems with logs in this order: EC Client, EC Gateway, EC Server. There is [no database](./responsibilities.md#logs)
-- If you do something like `export HTTP_PROXY && ./ec.sh`, the EC Agent will use your proxy ENV even if you do not provide it as a flag - careful!
+- We debug EC problems with logs in this order: EC Client, EC Gateway, EC Server. There is no database of deployed agent locations
+- 'Messing with' proxies inside of an EC Agent script could produce bizarre behavior and connectivity issues. Use the provided `-pxy` flag to handle this:
+
+```bash
+if [[ $(echo $http_proxy) || $(echo $https_proxy) || $(echo $HTTP_PROXY)|| $(echo $HTTPS_PROXY)  ]]; then 
+	echo "there is a proxy, updating \$EC_AGENT_PROXY value with a convenient leading space to account for the preceding flag and no trailing space to account for the following one"; 
+	EC_AGENT_PROXY=" -pxy ${http_proxy:=${https_proxy:=${HTTP_PROXY:=${HTTPS_PROXY}}}}"; 
+else 
+	echo "some log about a lack of proxy"; 
+fi;  
+
+# Example: '-rpt 5432${EC_AGENT_PROXY} -plg'
+# Produces:
+# 	(no proxy)
+# 		-rpt 5432 -plg
+# 	(proxy)
+# 		-rpt 5432 -pxy http://proxy:80 -plg	
+```
 
 [back to top](#agents)
