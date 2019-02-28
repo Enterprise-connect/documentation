@@ -1,5 +1,5 @@
 # Enterprise Connect Documentation
-We hope that the contents herein provide value to our users, as well as to support, ops teams, etc. If you find any information lacking, unclear, or *just plain wrong*, you would be doing us a generous service if you were to open an [issue here](https://github.com/Enterprise-connect/documentation/issues) to help us find it and correct it. Thank you in advance for your contribution to this ever-evolving project!
+If you find any information lacking, unclear, or *just plain wrong*, please open an [issue here](https://github.com/Enterprise-connect/documentation/issues) to help us find it and correct it.
 
 ## Service Links
 * [Subscribing](docs/subscription.md)
