@@ -35,3 +35,5 @@ Because the dev environment for EC uses a different API version (v1beta instead 
 - Bookmark this page
 
 [back to top](#versions)
+
+[Documentation Home](https://enterprise-connect.github.io/documentation/) 

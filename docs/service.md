@@ -21,3 +21,4 @@ It's just a backend. At the end of the day, the EC Service is simply a series of
 The APIs available can be found by visiting the Service URI that is found in the [EC Service credentials](./service-credentials.md). They have Swagger support, but are also explained below.
 
 [back to top](#service)
+[Documentation Home](https://enterprise-connect.github.io/documentation/)

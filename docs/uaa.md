@@ -28,3 +28,4 @@ While the presentation of data may vary depending on how you performed the UAA C
 - Shared-UAA works, but we have seen some teams struggle with delays stemming from a central admin approach
 
 [back to top](#user-account-and-authentication)
+[Documentation Home](https://enterprise-connect.github.io/documentation/)

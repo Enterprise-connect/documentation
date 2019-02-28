@@ -48,3 +48,4 @@ The solutions to this problem range from "simple fix" to a Predix Support ticket
 Beyond these simple fixes, if the 404 error is including the name of your current Gateway app/url, and you have pushed or updated this Gateway in the past, this could be due to the existence of "phantom" apps which were not properly deleted in Cloud Foundry. In such cases, only the Predix Support team has the tools and access to identify and correct such anomalies. In this event, they will need the 'gtwId's of the offending apps, which you can get from the Gateway list at the Service URI, or in the EC Server logs near the 404 message. They can use these Ids to find and properly destroy the bad Gateway apps.
 
 [back to top](#troubleshooting)
+[Documentation Home](https://enterprise-connect.github.io/documentation/)

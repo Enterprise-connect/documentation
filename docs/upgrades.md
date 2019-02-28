@@ -8,3 +8,4 @@ The upgrades section is under construction! This page will explain the differenc
 ---
 
 [back to top](#upgrades)
+[Documentation Home](https://enterprise-connect.github.io/documentation/)
