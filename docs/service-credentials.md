@@ -89,7 +89,7 @@ This should return a JSON similar to the one below:
 ```
 
 ## Understanding Credentials
-Once you have [obtained the credentials for your EC Service](#accessing-credentials), you have enough information to [deploy](./agents#deployment) an EC Agent in Gateway mode, but to do that, we should understand the how the ENV JSON of credentials and other data are used to do that and more.
+Once you have [obtained the credentials for your EC Service](#accessing-credentials), you have enough information to [deploy](./agents#deployment) an EC Agent in Gateway mode, but to do that, we should understand the how the ENV JSON of credentials and other data are used to do that and more. The [EC Server](./agents.md#server) and [EC Client](./agents.md#client) modes require [additional flags](../reference/ec.sh) and [UAA client configuration](./uaa.md#client-creation).
 
 > **"property"** *relevant agent script flag*: Explanation                                                           
 
