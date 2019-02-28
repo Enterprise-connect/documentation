@@ -28,6 +28,19 @@ The EC Gateway, once running on Predix, will have a /health endpoint, which is p
 - `tkn`: _A Basic authorization used to access certain EC Service APIs_
 - `sst`: _The EC Service URI, to hit the correct APIs_
 
+**Gateway Agent Example Script**
+```bash
+./ecagent_linux_sys \
+-mod gateway \
+# gpt should be 8080 or ${PORT} when pushing to Predix
+-gpt $GPT \
+-zon $ZON \
+-sst $SST \
+-tkn $TKN
+```
+
+> see ['Understanding Service Credentials'](./service-credentials.md#understanding-credentials) for an idea on how to populate these values. For a commented-template with all EC Agent Mode examples, and explanations of flags, see [our recommended templates](../reference/ec.sh).
+
 ## Server
 The EC Server is primarily concerned with two things: the IP/hostname and PORT for the data source that is central to your use case. I.e., if your use case involves accessing a Postgres instance on Predix, it would know the hostname for that instance, as well as the port, which is typically 5432. 
 
@@ -38,6 +51,26 @@ When the EC Server is ran/started, it actively and immediately attempts to make 
 - `rht`: _Resource hostname/IP_
 - `rpt`: _Resource PORT_
 
+**Server Agent Example Script**
+```bash
+./ecagent_linux_sys \
+-mod server \
+-aid $SERVER_ID \
+-grp $GRP \
+-cid $CID \
+-csc $CSC \
+-dur $DUR \
+-oa2 $OA2 \
+-hst $HST \
+-zon $ZON \
+-sst $SST \
+-rht $RHT \
+-rpt $RPT \
+-hca $HCA
+```
+
+> see ['Understanding Service Credentials'](./service-credentials.md#understanding-credentials) for an idea on how to populate these values. For a commented-template with all EC Agent Mode examples, and explanations of flags, see [our recommended templates](../reference/ec.sh).
+
 ## Client
 The Client is fairly lazy. When you tell it to run, it will! However, it just kind of sits there until something tries to access it via `127.0.0.1:${CHOSEN_PORT}`. Then and only then will it make any call to the EC Gateway or appropriate EC Server. The only things the EC Client really cares about is a PORT to listen on, and the 'id' of the EC Server you wish to reach. The rest of the configuration is background security minutiae. 
 
@@ -45,6 +78,23 @@ The Client is fairly lazy. When you tell it to run, it will! However, it just ki
 - `aid`: _The EC Client **A**gent's **ID**_
 - `tid`: _The **T**arget EC Server's **ID**_
 - `lpt`: _The local PORT the EC Client listens on_
+
+**Client Agent Example Script**
+```bash
+./ecagent_linux_sys \
+-mod client \
+-aid $CLIENT_ID \
+-tid $SERVER_ID \
+-grp $GRP \
+-cid $CID \
+-csc $CSC \
+-dur $DUR \
+-oa2 $OA2 \
+-hst $HST \
+-lpt $LPT
+```
+
+> see ['Understanding Service Credentials'](./service-credentials.md#understanding-credentials) for an idea on how to populate these values. For a commented-template with all EC Agent Mode examples, and explanations of flags, see [our recommended templates](../reference/ec.sh).
 
 ## Fuse Modes
 There are two more EC Agent modes; where we 'fuse' the Gateway and Server, or the Gateway and Client. please see the [expanded documentation](./modes.md) to better understand the nuances of these modes.

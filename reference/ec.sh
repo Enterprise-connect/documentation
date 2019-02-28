@@ -19,8 +19,8 @@ SST=${SST///v1*}
 # the TKN is the admin token of the service, found in the service key
 TKN=
 
-# the IDs used by the server/client agents belong to a 'group', by default it is the GUID of the Service subscription 
-GRP=
+# the IDs used by the server/client agents belong to a named 'group' (string), the starting default group name is the GUID or 'Zone' of the Service subscription 
+GRP=${ZON}
 
 # the CLIENT_ID is the ID for the EC Client
 CLIENT_ID=
@@ -35,7 +35,7 @@ CID=
 CSC=
 
 # the DUR is the auto-refresh time for the server and client agents, this must be lower than the expiration value of tokens for the uaa client id, or the token will expire and connectivity will be broken 
-DUR=
+DUR=3000
 
 # the OA2 is the /oauth/token endpoint of the uaa instance that the server and client agents use to fetch and refresh bearer tokens
 OA2=
@@ -50,13 +50,13 @@ RHT=
 RPT=
 
 # the LPT is the port the client will listen on locally
-LPT=
+LPT=7990
 
 # the GPT is the Gateway's listening port, '${PORT}' should be used for gateway agents running on Predix
-GPT=
+GPT=8080
 
 # the HCA refers to the port the /health check will use, this is only needed explicitly in Server and Client modes
-HCA=
+HCA=8080
 
 
 # -----------------------------------------------------

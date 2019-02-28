@@ -9,7 +9,7 @@ This page aims to help users understand Enterprise Connect ('EC') credentials, h
 ---
 
 ## Accessing Credentials
-There are a couple of methods readily available to users in order to obtain credentials for an EC Service. We strongly recommend the use of [service keys](#service-key) for all users, especially those new to Cloud Foundry, as this adds the least cognitive overhead to an already esoteric process.
+There are a couple of methods readily available to users in order to obtain credentials for an EC Service. We strongly recommend the use of [service keys](#service-key) for all users, especially those new to Cloud Foundry, as this adds the least cognitive overhead to an already esoteric process. After that, we will explain [how the values in the credentials JSON are used](#understanding-credentials).
 
 * [Service Key](#service-key)
 * [Service Binding](#service-binding)
@@ -89,7 +89,7 @@ This should return a JSON similar to the one below:
 ```
 
 ## Understanding Credentials
-Once you have obtained the credentials for your EC Service, you have enough information to [deploy](./agents#deployment) an EC Agent in Gateway mode, but to do that, we should understand the how the ENV JSON of credentials and other data are used to do that and more.
+Once you have [obtained the credentials for your EC Service](#accessing-credentials), you have enough information to [deploy](./agents#deployment) an EC Agent in Gateway mode, but to do that, we should understand the how the ENV JSON of credentials and other data are used to do that and more.
 
 > **"property"** *relevant agent script flag*: Explanation                                                           
 
