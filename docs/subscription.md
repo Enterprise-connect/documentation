@@ -52,4 +52,5 @@ cf create-service enterprise-connect Oneway-TLS <name the service> -c uaa.json
 - We have an [example json](../reference/uaa.json) that makes this easier, just swap out the nonsense with your UAA details
 
 [back to top](#subscription)
-[Documentation Home](https://enterprise-connect.github.io/documentation/)
+
+[documentation home](https://enterprise-connect.github.io/documentation/) 

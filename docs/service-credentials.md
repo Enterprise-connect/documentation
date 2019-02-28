@@ -286,3 +286,5 @@ ALIAS:
 ---
 
 [back to top](#service-credentials)
+
+[documentation home](https://enterprise-connect.github.io/documentation/) 

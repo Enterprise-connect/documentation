@@ -28,3 +28,5 @@ Please see our [Predix page](https://www.predix.io/services/service.html?id=2184
 We hope to be available in other markets by the end of 2019.
 
 [back to top](#faq)
+
+[documentation home](https://enterprise-connect.github.io/documentation/) 

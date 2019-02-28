@@ -117,3 +117,5 @@ ec-plugin:
 The `status` must be set to 'active'. The `ips` should be the IPs of your data sources, you may need to be creative in finding these values. `Command` is how the plugin binary is started, should not be changed/configured.
 
 [back to top](#plugins)
+
+[documentation home](https://enterprise-connect.github.io/documentation/) 

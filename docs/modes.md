@@ -111,3 +111,5 @@ In the following graphs and diagrams, we take a look at the difference in speeds
 ![GW:Server](../images/speedCompGwServer.png)
 
 [back to top](#modes)
+
+[documentation home](https://enterprise-connect.github.io/documentation/) 
