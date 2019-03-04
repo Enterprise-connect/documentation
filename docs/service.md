@@ -42,6 +42,7 @@ When you visit the EC Service URI in a browser, you will be prompted for a usern
 	- Click 'Inspect'
 	- Near the top of the field that should pop out are several icons and tabs, find and click the Console tab
 	- In the console tab, enter: `atob('YWRtaW46cGFzc3dvcmQ=')` (using your admin token, this is an example value)
+	- You should see the results in double-quotes directly afterwards, i.e. `"admin:password"`
 
 #### Basic Token
 The basic token is used as authorization on the most common, and user-relevant endpoints. When using the basic token, be sure to populate the appropriate field with the word 'basic', a space, and then your token. You should have something like:
