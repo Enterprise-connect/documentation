@@ -135,6 +135,21 @@ curl -X POST \
 Here you can make an ID present in one group, available in another.
 
 
+```bash
+curl -X POST \
+--header 'Content-Type: application/json' \
+--header 'Accept: application/json' \
+--header 'Authorization: basic YWRtaW46cGFzc3dvcmQ=' \
+'https://4988a094-66af-47ff-bbdd-d894870272bf.run.aws-usw02-pr.ice.predix.io/v1/admin/accounts/some-custom-group'
+```
+
+*example response/output*
+```json
+{
+  "status": "account group created."
+}
+```
+
 
 [back to APIs](#apis)
 
