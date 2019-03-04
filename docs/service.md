@@ -128,6 +128,8 @@ curl -X POST \
 
 ---
 
+Here you can make an ID present in one group, available in another.
+
 
 
 [back to APIs](#apis)
@@ -139,6 +141,8 @@ curl -X POST \
 
 ---
 
+Use absolutely no pressure. Just like an angel's wing. Isn't it fantastic that you can change your mind and create all these happy things? Just use the old one inch brush.
+
 [back to APIs](#apis)
 
 [back to top](#service)
@@ -147,6 +151,8 @@ curl -X POST \
 > Get the EC system account
 
 ---
+
+Let your imagination be your guide. See how easy it is to create a little tree right in your world. That's what painting is all about. It should make you feel good when you paint. All those little son of a guns. Don't hurry. Take your time and enjoy. If you hypnotize it, it will go away.
 
 [back to APIs](#apis)
 
@@ -157,6 +163,8 @@ curl -X POST \
 
 ---
 
+La- da- da- da- dah. Just be happy. There is immense joy in just watching - watching all the little creatures in nature. I guess that would be considered a UFO. A big cotton ball in the sky. Just let this happen. We just let this flow right out of our minds. With something so strong, a little bit can go a long way.
+
 [back to APIs](#apis)
 
 [back to top](#service)
@@ -165,6 +173,8 @@ curl -X POST \
 > Update the EC Service settings in the account
 
 ---
+
+Brown is such a nice color. Clouds are free they come and go as they please. The shadows are just like the highlights, but we're going in the opposite direction. There we are. You can do anything your heart can imagine. Just beat the devil out of it.
 
 [back to APIs](#apis)
 
@@ -175,6 +185,8 @@ curl -X POST \
 
 ---
 
+Only God can make a tree - but you can paint one. All kinds of happy little splashes. In this world, everything can be happy. It's life. It's interesting. It's fun. You can create the world you want to see and be a part of. You have that power. You can get away with a lot.
+
 [back to APIs](#apis)
 
 [back to top](#service)
@@ -183,6 +195,8 @@ curl -X POST \
 > Validate the agent ids if both are in a same group
 
 ---
+
+It's important to me that you're happy. All you have to do is let your imagination go wild. The light is your friend. Preserve it. I was blessed with a very steady hand; and it comes in very handy when you're doing these little delicate things. This is probably the greatest thing to happen in my life - to be able to share this with you. Sometimes you learn more from your mistakes than you do from your masterpieces.
 
 [back to APIs](#apis)
 
