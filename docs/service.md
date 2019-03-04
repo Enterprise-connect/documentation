@@ -76,10 +76,10 @@ Similar to using the basic token, authorization fields must provide the word 'be
 ## Accounts
 Below you will find an explanation of all the endpoint available in the 'Accounts' API family. When you visit the Service URI in your browser, you will see we have ['Swagger'](https://swagger.io/) support which explains the usage there as well.
 
-* [Add an ID](#POST-/admin/accounts/{group-id}/add/{agent-id})
-* [Create a Group]()
-* [Check a Group]()
-* [List All Groups]()
+* [Generate Additional IDs](#post-adminaccountsgroup-idadd)
+* [Create a Group](#post-adminaccountsgroup-id)
+* [Check a Group's IDs and Settings](#get-adminaccountsgroup-id)
+* [List All Groups](#get-adminaccountslist)
 
 ### POST /admin/accounts/{group-id}/add 
 > Generate an EC system account
