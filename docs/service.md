@@ -1,7 +1,5 @@
 # Service
 
-(WIP)
-
 This page is written to help people understand the Enterprise Connect (EC) Service.
 
 * [Basics](#basics)
@@ -77,6 +75,11 @@ Similar to using the basic token, authorization fields must provide the word 'be
 
 ## Accounts
 Below you will find an explanation of all the endpoint available in the 'Accounts' API family. When you visit the Service URI in your browser, you will see we have ['Swagger'](https://swagger.io/) support which explains the usage there as well.
+
+* [Add an ID](#POST-/admin/accounts/{group-id}/add/{agent-id})
+* [Create a Group]()
+* [Check a Group]()
+* [List All Groups]()
 
 ### POST /admin/accounts/{group-id}/add 
 > Generate an EC system account

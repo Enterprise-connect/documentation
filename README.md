@@ -18,7 +18,7 @@ If you find any information lacking, unclear, or *just plain wrong*, please open
 * [Upgrading Services vs Agents](docs/upgrades.md)
 * [Versions](docs/versions.md)
 
-Any files/pages with 'WIP' appearing near the top are missing information that currently exists elsewhere and will be added in the near future once reviewed and revised as necessary.
+Any files/pages with 'WIP' appearing near the top are missing information that currently exists elsewhere and will be added in the near future once reviewed and revised as necessary. All files are inherently a 'work in progress' otherwise.
 
 *Any files in this repo not specifically linked to, from this page or its children, should be considered out-of-date and the information therein used with caution*
 
