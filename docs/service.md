@@ -5,6 +5,8 @@
 This page is written to help people understand the Enterprise Connect (EC) Service.
 
 * [Basics](#basics)
+* [IDs](#ids)
+* [Groups](#groups)
 * [APIs](#apis)
 
 ![EC Service APIs](../images/serviceApisCollage.png) 
@@ -18,6 +20,20 @@ Behind the scenes, the EC Service is a Node app. When a user subscribes to EC in
 **It's not the Gateway.** The most common misconception is that the EC Service and the EC Agent Gateway are somehow the same entity, but this is not even remotely true. One is a single-tenant Node application in Cloud Foundry, and the other is a one-size-fits-most, compiled GoLang binary.
 
 **It's just a backend.** At the end of the day, the EC Service is simply a series of APIs that the EC Agents use for various interactions and authorizations between themselves and other entities.
+
+## IDs
+IDs are the 'bread and butter' of EC Agent Client and EC Agent Server communications. One of the first things the EC Agent Gateway does is to verify if the requesting EC Agent Client's ID and the targeted EC Agent Server's ID are part of the same [group](#groups). If they are not part of the same group, even if they are valid for the EC Service otherwise, communication will fail.
+
+> With the [Accounts APIs](#accounts), an ID from one group can be added to another, making it valid for both groups! This is not hugely important, but is another way of organizing and managing use-cases, users, developers, teams, etc.
+
+## Groups
+Enterprise Connect uses the concept of 'groups' for both security management, as well as a tool for organization. When a new Service is created, it will come with a single group, which shares a name with the ['zone'](./service-credentials.md#understanding-credentials) of the Service, and that group will contain the two randomly generated IDs for use with the first EC Agent Server and EC Agent Client.
+
+### Groups and IDs
+The [Accounts APIs](#accounts) provide ways to manage and understand these groups and IDs. Using the functionality of groups is not at all required. You are free to add more IDs to the default group. With that said, the utility of groups and IDs can be as robust as you would like to make it. An admin-person is able to 'secure' the APIs behind additional auth requirements, and then can propagate desired group/ID information to appropriate parties. 
+
+> **Why bother?** Because EC is incredibly touchy (obedient and un-thinking), and the vast majority of users only spend enough time learning EC to get the initial config working, many are unaware that a single uninformed person can crash all connectivity for an entire EC Service. If everyone on the team has access to everything - when things go wrong, it is very hard to find out who did what/why/how/when. By leveraging groups, IDs, whitelists, blocklists, etc., admin personas can ensure they have an airtight grip on their EC Service.
+
 
 ## APIs
 The APIs available can be found by visiting the Service URI that is found in the [EC Service credentials](./service-credentials.md). They have Swagger support, but are also explained below.
@@ -56,33 +72,122 @@ Similar to using the basic token, authorization fields must provide the word 'be
 
 > bearer eyJhbG...
 
+---
+---
+
 ### Accounts
 
 #### POST /admin/accounts/{group-id}/add 
 > Generate an EC system account
 
+---
+
+This will add an additional ID for the specified group. Here is an example, valid `curl` command for reference:
+
+*for default group...*
+```bash
+curl -X POST \
+--header 'Content-Type: application/json' \
+--header 'Accept: application/json' \
+--header 'Authorization: basic YWRtaW46cGFzc3dvcmQ=' \
+'https://4988a094-66af-47ff-bbdd-d894870272bf.run.aws-usw02-pr.ice.predix.io/v1/admin/accounts/4988a094-66af-47ff-bbdd-d894870272bf/add'
+```
+
+*for custom group...* (notice it's nearly the same!)
+```bash
+curl -X POST \
+--header 'Content-Type: application/json' \
+--header 'Accept: application/json' \
+--header 'Authorization: basic YWRtaW46cGFzc3dvcmQ=' \
+'https://4988a094-66af-47ff-bbdd-d894870272bf.run.aws-usw02-pr.ice.predix.io/v1/admin/accounts/some-custom-group/add'
+```
+
+*example response/output*
+```json
+{
+  "status": "account generated/added.",
+  "details": {
+    "ids": [
+      "evV6ZY",
+      "DZok1N",
+      "tdHFkb"
+    ],
+    "trustedIssuerIds": [
+      "https://cfa4ec8d-7d9e-4dca-b318-5f67b98afe14.predix-uaa.run.aws-usw02-dev.ice.predix.io/oauth/token"
+    ]
+  }
+}
+```
+
+[back to APIs](#apis)
+
+[back to top](#service)
+
 #### POST /admin/accounts/{group-id}/add/{agent-id} 
 > Attach an existing agent id to an exiting EC system account
+
+---
+
+[back to APIs](#apis)
+
+[back to top](#service)
 
 #### DELETE /admin/accounts/{group-id} 
 > Delete the EC system account
 
+---
+
+[back to APIs](#apis)
+
+[back to top](#service)
+
 #### GET /admin/accounts/{group-id} 
 > Get the EC system account
 
+---
+
+[back to APIs](#apis)
+
+[back to top](#service)
+
 #### POST /admin/accounts/{group-id} 
-> reate a pair of EC system accounts and assigned to the indicated group.
+> Create a pair of EC system accounts and assigned to the indicated group.
+
+---
+
+[back to APIs](#apis)
+
+[back to top](#service)
 
 #### PUT /admin/accounts/{group-id} 
 > Update the EC Service settings in the account
 
+---
+
+[back to APIs](#apis)
+
+[back to top](#service)
+
 #### GET /admin/accounts/list 
 > Get the list of account available for agent Ids
+
+---
+
+[back to APIs](#apis)
+
+[back to top](#service)
 
 #### GET /admin/accounts/validate 
 > Validate the agent ids if both are in a same group
 
+---
 
+[back to APIs](#apis)
+
+[back to top](#service)
+
+### Pro Tips
+- You can import curl statements to Postman, and export Postman 'code' as a curl command (or Java library style, JS library style, Python library style, etc.)! A very handy tool for those learning or new to developing web-apps that have or interact with REST APIs
 
 [back to top](#service)
 
