@@ -13,6 +13,7 @@ If you find any information lacking, unclear, or *just plain wrong*, please open
 ## Knowledge Links
 * [FAQ](docs/faq.md)
 * [Plugins](docs/plugins.md)
+* [Using EC Service APIs](docs/service.md#apis)
 * [Troubleshooting](docs/troubleshooting.md)
 * [Upgrading Services vs Agents](docs/upgrades.md)
 * [Versions](docs/versions.md)
