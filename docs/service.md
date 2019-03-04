@@ -75,9 +75,10 @@ Similar to using the basic token, authorization fields must provide the word 'be
 ---
 ---
 
-### Accounts
+## Accounts
+Below you will find an explanation of all the endpoint available in the 'Accounts' API family.
 
-#### POST /admin/accounts/{group-id}/add 
+### POST /admin/accounts/{group-id}/add 
 > Generate an EC system account
 
 ---
@@ -123,6 +124,9 @@ curl -X POST \
 
 [back to top](#service)
 
+---
+---
+
 #### POST /admin/accounts/{group-id}/add/{agent-id} 
 > Attach an existing agent id to an exiting EC system account
 
@@ -136,6 +140,9 @@ Here you can make an ID present in one group, available in another.
 
 [back to top](#service)
 
+---
+---
+
 #### DELETE /admin/accounts/{group-id} 
 > Delete the EC system account
 
@@ -146,6 +153,9 @@ Use absolutely no pressure. Just like an angel's wing. Isn't it fantastic that y
 [back to APIs](#apis)
 
 [back to top](#service)
+
+---
+---
 
 #### GET /admin/accounts/{group-id} 
 > Get the EC system account
@@ -158,6 +168,9 @@ Let your imagination be your guide. See how easy it is to create a little tree r
 
 [back to top](#service)
 
+---
+---
+
 #### POST /admin/accounts/{group-id} 
 > Create a pair of EC system accounts and assigned to the indicated group.
 
@@ -168,6 +181,9 @@ Here you can create a new group with a name of your choosing, the group will com
 [back to APIs](#apis)
 
 [back to top](#service)
+
+---
+---
 
 #### PUT /admin/accounts/{group-id} 
 > Update the EC Service settings in the account
@@ -180,6 +196,9 @@ Brown is such a nice color. Clouds are free they come and go as they please. The
 
 [back to top](#service)
 
+---
+---
+
 #### GET /admin/accounts/list 
 > Get the list of account available for agent Ids
 
@@ -191,6 +210,9 @@ Only God can make a tree - but you can paint one. All kinds of happy little spla
 
 [back to top](#service)
 
+---
+---
+
 #### GET /admin/accounts/validate 
 > Validate the agent ids if both are in a same group
 
@@ -201,6 +223,9 @@ It's important to me that you're happy. All you have to do is let your imaginati
 [back to APIs](#apis)
 
 [back to top](#service)
+
+---
+---
 
 ### Pro Tips
 - You can import curl statements to Postman, and export Postman 'code' as a curl command (or Java library style, JS library style, Python library style, etc.)! A very handy tool for those learning or new to developing web-apps that have or interact with REST APIs
