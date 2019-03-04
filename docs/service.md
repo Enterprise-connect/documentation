@@ -134,22 +134,28 @@ curl -X POST \
 
 Here you can make an ID present in one group, available in another.
 
-
+*example request*
 ```bash
 curl -X POST \
 --header 'Content-Type: application/json' \
 --header 'Accept: application/json' \
 --header 'Authorization: basic YWRtaW46cGFzc3dvcmQ=' \
-'https://4988a094-66af-47ff-bbdd-d894870272bf.run.aws-usw02-pr.ice.predix.io/v1/admin/accounts/some-custom-group'
+'https://4988a094-66af-47ff-bbdd-d894870272bf.run.aws-usw02-pr.ice.predix.io/v1/admin/accounts/some-custom-group/add/evV6ZY'
 ```
 
 *example response/output*
-```json
+```javascript
 {
-  "status": "account group created."
+  "status": "account generated/added.",
+  "details": {
+    "ids": [
+      "nBpxA6",
+      "F5GCT1",
+      "evV6ZY" // the ID from our default group,now present in our 'some-custom-group' 
+    ]
+  }
 }
 ```
-
 
 [back to APIs](#apis)
 
@@ -191,7 +197,23 @@ Let your imagination be your guide. See how easy it is to create a little tree r
 
 ---
 
-Here you can create a new group with a name of your choosing, the group will come with two randomly generated IDs for use with an initial EC Agent Client and EC Agent Server. Here is an example on how to use it:
+Here you can create a new group with a name of your choosing, the group will come with two randomly generated IDs for use with an initial EC Agent Client and EC Agent Server.
+
+*example request*
+```bash
+curl -X POST \
+--header 'Content-Type: application/json' \
+--header 'Accept: application/json' \
+--header 'Authorization: basic YWRtaW46cGFzc3dvcmQ=' \
+'https://4988a094-66af-47ff-bbdd-d894870272bf.run.aws-usw02-pr.ice.predix.io/v1/admin/accounts/some-custom-group'
+```
+
+*example response/output*
+```json
+{
+  "status": "account group created."
+}
+```
 
 [back to APIs](#apis)
 
