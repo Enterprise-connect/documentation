@@ -203,7 +203,28 @@ curl -X DELETE \
 
 ---
 
-Let your imagination be your guide. See how easy it is to create a little tree right in your world. That's what painting is all about. It should make you feel good when you paint. All those little son of a guns. Don't hurry. Take your time and enjoy. If you hypnotize it, it will go away.
+Here you can see the settings for a particular group.
+
+*example request*
+```bash
+curl \
+--header 'Accept: application/json' \
+--header 'Authorization: basic YWRtaW46cGFzc3dvcmQ=' \
+'https://4988a094-66af-47ff-bbdd-d894870272bf.run.aws-usw02-pr.ice.predix.io/v1/admin/accounts/4988a094-66af-47ff-bbdd-d894870272bf'
+```
+
+*example response/output*
+```json
+{
+  "ids": [
+    "3zOjfn",
+    "0iAkp5"
+  ],
+  "trustedIssuerIds": [
+    "https://cfa4ec8d-7d9e-4dca-b318-5f67b98afe14.predix-uaa.run.aws-usw02-dev.ice.predix.io/oauth/token"
+  ]
+}
+```
 
 [back to APIs](#apis)
 
@@ -247,7 +268,7 @@ curl -X POST \
 
 ---
 
-Brown is such a nice color. Clouds are free they come and go as they please. The shadows are just like the highlights, but we're going in the opposite direction. There we are. You can do anything your heart can imagine. Just beat the devil out of it.
+Here you can update the trustedIssuerId of the EC Service to use a different UAA.
 
 [back to APIs](#apis)
 
@@ -261,7 +282,26 @@ Brown is such a nice color. Clouds are free they come and go as they please. The
 
 ---
 
-Only God can make a tree - but you can paint one. All kinds of happy little splashes. In this world, everything can be happy. It's life. It's interesting. It's fun. You can create the world you want to see and be a part of. You have that power. You can get away with a lot.
+Here you can get a list of all the groups for a particular EC Service.
+
+*example request*
+```bash
+curl \
+--header 'Accept: application/json' \
+--header 'Authorization: basic YWRtaW46cGFzc3dvcmQ=' \
+--header 'predix-zone-id: 4988a094-66af-47ff-bbdd-d894870272bf' \
+'https://4988a094-66af-47ff-bbdd-d894870272bf.run.aws-usw02-pr.ice.predix.io/v1/admin/accounts/list'
+```
+
+*example response/output*
+```json
+{
+  "groups": [
+    "4988a094-66af-47ff-bbdd-d894870272bf",
+    "some-custom-group"
+  ]
+}
+```
 
 [back to APIs](#apis)
 
