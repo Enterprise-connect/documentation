@@ -76,7 +76,7 @@ Similar to using the basic token, authorization fields must provide the word 'be
 ---
 
 ## Accounts
-Below you will find an explanation of all the endpoint available in the 'Accounts' API family.
+Below you will find an explanation of all the endpoint available in the 'Accounts' API family. When you visit the Service URI in your browser, you will see we have ['Swagger'](https://swagger.io/) support which explains the usage there as well.
 
 ### POST /admin/accounts/{group-id}/add 
 > Generate an EC system account
@@ -127,7 +127,7 @@ curl -X POST \
 ---
 ---
 
-#### POST /admin/accounts/{group-id}/add/{agent-id} 
+### POST /admin/accounts/{group-id}/add/{agent-id} 
 > Attach an existing agent id to an exiting EC system account
 
 ---
@@ -164,12 +164,30 @@ curl -X POST \
 ---
 ---
 
-#### DELETE /admin/accounts/{group-id} 
+### DELETE /admin/accounts/{group-id} 
 > Delete the EC system account
 
 ---
 
-Use absolutely no pressure. Just like an angel's wing. Isn't it fantastic that you can change your mind and create all these happy things? Just use the old one inch brush.
+You can use this to delete a group and all of its IDs. You cannot delete the default group.
+
+
+*example request*
+```bash
+curl -X DELETE \
+--header 'Accept: application/json' \
+--header 'Authorization: basic YWRtaW46cGFzc3dvcmQ=' \
+'https://4988a094-66af-47ff-bbdd-d894870272bf.run.aws-usw02-pr.ice.predix.io/v1/admin/accounts/some-custom-group'
+```
+
+*example response/output* **don't worry this is normal**
+```json
+{
+  "status": "failed authentication"
+}
+```
+
+**It's normal to get a 404 and 'failed authentication' message. You can try performing a GET on the deleted group to 'prove' it's gone, or hit the /list API to see that it's not included there**
 
 [back to APIs](#apis)
 
@@ -178,7 +196,7 @@ Use absolutely no pressure. Just like an angel's wing. Isn't it fantastic that y
 ---
 ---
 
-#### GET /admin/accounts/{group-id} 
+### GET /admin/accounts/{group-id} 
 > Get the EC system account
 
 ---
@@ -192,7 +210,7 @@ Let your imagination be your guide. See how easy it is to create a little tree r
 ---
 ---
 
-#### POST /admin/accounts/{group-id} 
+### POST /admin/accounts/{group-id} 
 > Create a pair of EC system accounts and assigned to the indicated group.
 
 ---
@@ -222,7 +240,7 @@ curl -X POST \
 ---
 ---
 
-#### PUT /admin/accounts/{group-id} 
+### PUT /admin/accounts/{group-id} 
 > Update the EC Service settings in the account
 
 ---
@@ -236,7 +254,7 @@ Brown is such a nice color. Clouds are free they come and go as they please. The
 ---
 ---
 
-#### GET /admin/accounts/list 
+### GET /admin/accounts/list 
 > Get the list of account available for agent Ids
 
 ---
@@ -250,7 +268,7 @@ Only God can make a tree - but you can paint one. All kinds of happy little spla
 ---
 ---
 
-#### GET /admin/accounts/validate 
+### GET /admin/accounts/validate 
 > Validate the agent ids if both are in a same group
 
 ---
