@@ -82,7 +82,7 @@ Similar to using the basic token, authorization fields must provide the word 'be
 
 ---
 
-This will add an additional ID for the specified group. Here is an example, valid `curl` command for reference:
+Here you can add a new, randomly generated ID to the specified group. Here is an example, valid `curl` command for reference:
 
 *for default group...*
 ```bash
@@ -127,6 +127,8 @@ curl -X POST \
 > Attach an existing agent id to an exiting EC system account
 
 ---
+
+
 
 [back to APIs](#apis)
 
