@@ -315,7 +315,25 @@ curl \
 
 ---
 
-It's important to me that you're happy. All you have to do is let your imagination go wild. The light is your friend. Preserve it. I was blessed with a very steady hand; and it comes in very handy when you're doing these little delicate things. This is probably the greatest thing to happen in my life - to be able to share this with you. Sometimes you learn more from your mistakes than you do from your masterpieces.
+Here you can check if two IDs belong to the same group. It will return the name of the group they belong to and a 200 response code if the IDs are validated.
+
+*example request*
+```bash
+curl \
+--header 'Accept: application/json' \
+--header 'Authorization: basic YWRtaW46cGFzc3dvcmQ=' \
+--header 'predix-zone-id: 4988a094-66af-47ff-bbdd-d894870272bf' \
+'https://4988a094-66af-47ff-bbdd-d894870272bf.run.aws-usw02-pr.ice.predix.io/v1/admin/accounts/validate?agtId1=3zOjfn&agtId2=0iAkp5'
+```
+
+*example response/output*
+```json
+{
+  "groupIds": [
+    "4988a094-66af-47ff-bbdd-d894870272bf"
+  ]
+}
+```
 
 [back to APIs](#apis)
 
