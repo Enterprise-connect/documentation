@@ -74,7 +74,7 @@ Similar to using the basic token, authorization fields must provide the word 'be
 ---
 
 ## Accounts
-Below you will find an explanation of all the endpoint available in the 'Accounts' API family. When you visit the Service URI in your browser, you will see we have ['Swagger'](https://swagger.io/) support which explains the usage there as well.
+Below you will find an explanation of all the endpoint available in the 'Accounts' API family. When you visit the Service URI in your browser, you will see we have ['Swagger'](https://swagger.io/) support which explains the usage there as well. **We recommend allowing 24 hours to elapse before using any groups or IDs generated in a production environment**
 
 * [Generate Additional IDs](#post-adminaccountsgroup-idadd)
 * [Create a Group](#post-adminaccountsgroup-id)
