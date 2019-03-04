@@ -36,7 +36,6 @@ The [Accounts APIs](#accounts) provide ways to manage and understand these group
 ## APIs
 The APIs available can be found by visiting the Service URI that is found in the [EC Service credentials](./service-credentials.md). They have Swagger support, but are also explained below.
 
-* [Credentials](#credentials)
 * [Accounts](#accounts)
 
 ### Credentials
