@@ -17,9 +17,9 @@ This page is intended to explain the Enterprise Connect 'Agent', a [GoLang](http
 ---
 
 ## Gateway
-The EC agent binary, running as a Gateway, is widely considered to be the 'core' of Enterprise Connect, so much so that many users actually believe the Gateway **is** the Service itself, but that is actually not the case. 
+The EC agent binary, running as a Gateway, is widely considered to be the 'core' of Enterprise Connect. Many users actually believe the Gateway **is** the Service itself, but that is actually not the case. 
 
-Arguably the most imporant aspect of understanding, the EC Gateway operates as a hub, *with a publicly available URL*. Without this, the EC Client and EC Server would have no way of referring to one another, being separated by the networks. If they could, you would not need EC! When an EC Client goes to make a connection (via secure web-socket to the EC Gateway) to a particular EC Server, the EC Gateway will use details about both, and verify the validity of these connections with the EC Service APIs. It makes sure that no connections are made using an EC Service that do not provide the most basic identification and authorizations. 
+EC Gateway operates as a hub with a publicly available URL. Without this, the EC Client and EC Server would have no way of referring to one another. If they could, you would not need EC! When an EC Client goes to make a connection (via secure web-socket to the EC Gateway) to a particular EC Server, the EC Gateway will use details about both, and verify the validity of these connections with the EC Service APIs. It makes sure that no connections are made using an EC Service that do not provide the most basic identification and authorizations. 
 
 
 ### Health
