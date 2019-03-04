@@ -163,7 +163,7 @@ Let your imagination be your guide. See how easy it is to create a little tree r
 
 ---
 
-La- da- da- da- dah. Just be happy. There is immense joy in just watching - watching all the little creatures in nature. I guess that would be considered a UFO. A big cotton ball in the sky. Just let this happen. We just let this flow right out of our minds. With something so strong, a little bit can go a long way.
+Here you can create a new group with a name of your choosing, the group will come with two randomly generated IDs for use with an initial EC Agent Client and EC Agent Server. Here is an example on how to use it:
 
 [back to APIs](#apis)
 
