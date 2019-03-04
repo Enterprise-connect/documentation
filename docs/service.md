@@ -132,9 +132,11 @@ curl -X POST \
 
 ---
 
-Here you can make an ID present in one group, available in another.
+~~Here you can make an ID present in one group, available in another.~~
 
-*example request*
+This API is currently behaving badly.
+
+<!-- *example request*
 ```bash
 curl -X POST \
 --header 'Content-Type: application/json' \
@@ -155,7 +157,7 @@ curl -X POST \
     ]
   }
 }
-```
+``` -->
 
 [back to APIs](#apis)
 
