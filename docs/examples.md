@@ -23,7 +23,7 @@ The examples section is under construction! This page will will contain snippets
 
 ### Python
 
-> Retrying the EC Client http request to handle exceptions in Python
+> [Retrying the EC Client http request to handle exceptions in Python](https://gist.github.com/philipwofford/8e0c37694b2cb0d5962bb0cb102cece8)
 ```python
 from time import sleep
     EC_REQUEST_BREAK = 5
@@ -39,11 +39,11 @@ from time import sleep
 
             return
         
-        #requests exception handling
+        # requests exception handling
         except requests.exceptions.RequestException as e:
             # your code for EC Client failure
 
-            #put the thread to sleep for 5 sec before the next try
+            # put the thread to sleep for 5 sec before the next try
             sleep(EC_REQUEST_BREAK)
 ```
 
