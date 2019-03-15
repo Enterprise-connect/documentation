@@ -2,12 +2,12 @@
 
 To expedite the resolution of your issue, we ask that you please take a moment to [file a ticket with Predix support](https://www.predix.io/support/), as we do not have a FTE for support. The less time engineers spend on support, the faster we can fix bugs and bring new features that users request! In the ticket, please include the following items to ensure the fastest resolution possible:
 
-- Server logs including Agent version (Agent versions are always shown at start-up, may require restart of Agent to view)
-- The Server script used
-- Gateway logs including Agent version
-- The Gateway script used
-- Client logs including Agent version
-- The Client script used
+- Server logs including Agent [version](./versions.md) (Agent versions are always shown at start-up, may require restart of Agent to view)
+- The Server [script](../reference/ec.sh) used
+- Gateway logs including Agent [version](./versions.md) 
+- The Gateway [script](../reference/ec.sh)  used
+- Client logs including Agent [version](./versions.md) 
+- The Client [script](../reference/ec.sh)  used
 - JSON from the Service URL /v1/info/ (be sure to include the trailing / in the URL)
 - EC Gateway application URL
 
@@ -19,7 +19,7 @@ There are some tools readily available to users to monitor various aspects of th
 ### Gateway Health Check
 > https://your-gateway-app-url/health
 
-This is going to show you the version of the Gateway, the current Sessions (Servers/Clients currently transmitting data), the active SuperConnections (EC Servers correctly connected to the Gateway), ClientPool, and various memory data. This can be curled and returns a JSON which can be parsed for advanced, automated/program-based monitoring.å
+This is going to show you the [version](./versions.md) of the Gateway, the current Sessions (Servers/Clients currently transmitting data), the active SuperConnections (EC Servers correctly connected to the Gateway), ClientPool, and various memory data. This can be curled and returns a JSON which can be parsed for advanced, automated/program-based monitoring.å
 
 ### EC Service URI
 > You can find this in your [Service Key](./service-credentials.md#service-key)
