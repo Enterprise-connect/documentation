@@ -28,3 +28,5 @@ In your browser, you can navigate here and click on API Docs to gain access to a
 
 ### Join the EC Usergroup Flowdock: Come join the discussion!
 The [EC Usergroup Flowdock](https://www.flowdock.com/invitations/44765fcbae5a36d0eff83c9536f87223044ad748) is a great place to discuss with other users and the EC team your successes, as well as your struggles. The EC team do their best to monitor and answer questions in “real time” here, and we use this and other feedback to prioritize our agile development. It’s a great place to network with other EC Users. Perhaps you are developing a custom solution which leverages EC – this is a great place to share your progress and to also find peer assistance with bridging gaps. ***More dialogue = more ideas = more solutions***.
+
+[documentation home](https://enterprise-connect.github.io/documentation/) 
