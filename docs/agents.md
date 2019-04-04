@@ -154,7 +154,7 @@ You may find these files helpful in deploying and running agents (may download a
 - Consider using GitHub to make configuration changes in deployed agents
 - We debug EC problems with logs in this order: EC Client, EC Gateway, EC Server. There is no database of deployed agent locations
 - 'Messing with' proxies inside of an EC Agent script could produce bizarre behavior and connectivity issues	
-```
+
 
 [back to top](#agents)
 
