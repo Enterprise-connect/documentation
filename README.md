@@ -18,6 +18,7 @@ If you find any information lacking, unclear, or *just plain wrong*, please open
 * [Troubleshooting](docs/troubleshooting.md)
 * [Upgrading Services vs Agents](docs/upgrades.md)
 * [Versions](docs/versions.md)
+* [AWS Gateway](docs/awsgateway.md)
 
 Any files/pages with 'WIP' appearing near the top are missing information that currently exists elsewhere and will be added in the near future once reviewed and revised as necessary. All files are inherently a 'work in progress' otherwise.
 
